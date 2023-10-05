@@ -2,26 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  .outline {
+    @apply font-normal text-[0.512rem] leading-3 font-[manrope];
+  }
+  .subtext {
+    @apply font-normal text-[0.64rem] leading-[14px] font-[manrope];
+  }
+  .subtitle {
+    @apply font-medium text-[0.8rem] leading-4 font-[manrope];
+  }
+  .descriptions {
+    @apply font-normal text-[1rem] leading-[18px] font-[manrope];
+  }
+  .title {
+    @apply font-semibold text-[1rem] leading-[18px] font-[manrope];
+  }
+  .heading6 {
+    @apply font-semibold text-[1.25rem] leading-6 font-[manrope];
+  }
+  .heading5 {
+    @apply font-semibold text-[1.563rem] leading-7 font-[manrope];
+  }
+  .heading4 {
+    @apply font-medium text-[1.953rem] leading-9 font-[manrope];
+  }
+  .heading3 {
+    @apply font-medium text-[2.441rem] leading-[48px] font-[manrope];
+  }
+  .heading2 {
+    @apply font-medium text-[3.052rem] leading-[56px] font-[manrope];
+  }
+  .heading1 {
+    @apply font-medium text-[3.815rem] leading-[72px] font-[manrope];
+  }
+  body {
+    @apply bg-black-100 overflow-x-hidden;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@font-face {
+  font-family: "manrope";
+  src: url(../fonts/Manrope-Regular.ttf);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background: none !important;
 }
