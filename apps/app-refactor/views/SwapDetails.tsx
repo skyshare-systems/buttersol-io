@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import ApproxEqualIcon from "public/icons/swap/approximately-equal-icon.svg";
 import GasIcon from "public/icons/swap/gas-icon.svg";
-import DropdownIcon from "public/icons/swap/dropdown-icon.svg";
+import DropdownIcon from "public/icons/swap/arrow-icon.svg";
 import DataDetails from "@/components/DataDetails";
 import { useDestinationData, useInitialData } from "@/lib/store/store";
 
@@ -36,7 +36,7 @@ const SwapDetails = () => {
             <h1 className="subtitle text-white-72">$ {54.81}</h1>
           </div>
           <DropdownIcon
-            className={`${showDetails && "rotate-180"}  w-full max-w-[16px]`}
+            className={`${!showDetails && "rotate-180"}  w-full max-w-[10px]`}
           />
         </div>
       </div>
