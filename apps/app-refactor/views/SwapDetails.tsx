@@ -28,7 +28,9 @@ const SwapDetails = () => {
                   {tokeninput} {tokenname} <ApproxEqualIcon /> {tokenInputOne}{" "}
                   {tokenNameOne}
                 </span>
-                <span className="subtext text-white-32">${0.79}</span>
+                <span className="subtext text-white-32">
+                  ${tokeninput / 50}
+                </span>
               </h1>
             </div>
 
