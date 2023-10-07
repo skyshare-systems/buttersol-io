@@ -64,11 +64,15 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="sticky top-0 flex justify-center items-center py-8">
+      <div className="sticky top-0 flex justify-center items-center py-8 z-[12]">
         <div className="flex flex-row justify-between items-center max-w-[90rem] grow px-4 xl:px-0">
-          <h1 className={`${sora.className} font-semibold text-2xl`}>
-            <span className="text-white-100">Butter</span>
-            <span className="text-primary-100">SOL</span>
+          <h1
+            className={`${sora.className} flex items-center font-semibold text-2xl`}
+          >
+            <span className="text-primary-100">B</span>
+            <span className="hidden sm:block text-primary-100">utter</span>
+            <span className="text-white-100">S</span>
+            <span className="hidden sm:block text-white-100">OL</span>
           </h1>
 
           <div className="hidden lg:flex items-center gap-2 bg-dark-72 p-1 rounded ">

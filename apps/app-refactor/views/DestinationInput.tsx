@@ -8,11 +8,13 @@ import BnbIcon from "public/icons/swap/network/bnb-icon.svg";
 import SolanaIcon from "public/icons/swap/network/solana-icon.svg";
 import NetworkIcon from "public/icons/swap/network-icon.svg";
 import TokenIcon from "public/icons/swap/token/token-icon.svg";
+import { useDestinationData } from "@/lib/store/store";
 
 const DestinationInput = () => {
-  const [token1, setToken1] = useState<any>("");
   const [selectNetwork, setSelectNetwork] = useState<string>("");
-  const [selectToken, setSelectToken] = useState<string>("");
+  const { tokeninput, tokenname, setData } = useDestinationData(
+    (state) => state
+  );
 
   const networkdata = [
     {
@@ -45,8 +47,8 @@ const DestinationInput = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-white-8 p-4">
-      <div className="flex flex-row items-center gap-2 p-2 bg-dark-32 rounded-lg">
+    <div className="flex flex-col gap-4 rounded-2xl border border-white-8 bg-white-4 sm:bg-transparent p-4">
+      <div className="flex flex-col sm:flex-row items-center gap-2 p-2 bg-dark-32 rounded-lg">
         <DropdownReusable
           datadropdown={networkdata}
           selectData={selectNetwork}
@@ -57,29 +59,26 @@ const DestinationInput = () => {
         />
         <DropdownReusable
           datadropdown={tokendata}
-          selectData={selectToken}
-          setSelectData={setSelectToken}
+          selectData={tokenname}
+          setSelectData={setData}
           title={"initial-token"}
           placeholder={"Token"}
           icon={<TokenIcon className="w-full max-w-[1rem]" />}
         />
       </div>
 
-      <div className="flex flex-row gap-2 items-center">
+      <div className="flex flex-row gap-2 items-center px-2">
         <Input
           id={"token1"}
           placeholder={"0.00"}
-          value={token1}
-          disabled
+          value={tokeninput}
+          // disabled
           onChange={(
             value: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-          ) => setToken1(value ?? "")}
+          ) => setData(tokenname, value)}
         />
-        {/* <button className="subtitle uppercase text-secondary-100 px-4 py-2 rounded-lg border border-secondary-32 bg-secondary-12">
-          max
-        </button> */}
       </div>
-      <TokenBalance dollars={0.0} balance={0.0} />
+      <TokenBalance dollars={0.0} balance={0.0} token={tokenname} />
     </div>
   );
 };

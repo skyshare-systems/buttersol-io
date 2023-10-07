@@ -10,13 +10,13 @@
     @apply font-normal text-[0.64rem] leading-[14px] font-[manrope];
   }
   .subtitle {
-    @apply font-medium text-[0.8rem] leading-4 font-[manrope];
+    @apply font-bold text-[0.8rem] leading-4 font-[manrope];
   }
   .descriptions {
     @apply font-normal text-[1rem] leading-[18px] font-[manrope];
   }
   .title {
-    @apply font-semibold text-[1rem] leading-[18px] font-[manrope];
+    @apply font-bold text-[1rem] leading-[18px] font-[manrope];
   }
   .heading6 {
     @apply font-semibold text-[1.25rem] leading-6 font-[manrope];
@@ -38,6 +38,9 @@
   }
   body {
     @apply bg-black-100 overflow-x-hidden;
+  }
+  .bg-transparent {
+    background-color: "transparent";
   }
 }
 

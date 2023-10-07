@@ -6,7 +6,6 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@nextui-org/react";
-import SolanaIcon from "public/icons/swap/network/solana-icon.svg";
 
 interface IDropdown {
   datadropdown: any;
@@ -28,7 +27,11 @@ export default function DropdownReusable({
   const [selectedIcon, setSelectedIcon] = useState<any>(null);
 
   function handleClick(name: string, icon: any) {
-    setSelectData(name);
+    if (placeholder === "Token") {
+      setSelectData(name, "");
+    } else {
+      setSelectData(name);
+    }
     setSelectedIcon(icon);
   }
   return (
