@@ -9,3 +9,13 @@ export interface IDestinationData {
   token1: any;
   setInitialData: (token1: any, tokeninput1: any) => void;
 }
+
+export interface INetwork {
+  networkname: any;
+  setNetwork: (networkname: any) => void;
+}
+
+export interface IIsOpen {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}

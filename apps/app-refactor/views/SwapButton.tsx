@@ -3,10 +3,27 @@ import React, { useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import useMounted from "@/hooks/useMounted";
 import WarningIcon from "public/icons/swap/warning-icon.svg";
+import {
+  useDestinationData,
+  useDestinationNetwork,
+  useModal,
+} from "@/lib/store/store";
 
 const SwapButton = () => {
   const [isApprove, setIsApprove] = useState<boolean>(false);
   const { hasMounted } = useMounted();
+  const { networkname: destinationNetworkName } = useDestinationNetwork(
+    (state) => state
+  );
+  const { setIsOpen, isOpen } = useModal((state) => state);
+
+  function handleClick() {
+    if (destinationNetworkName === "Solana") {
+      setIsOpen(true);
+    } else {
+      alert("success");
+    }
+  }
 
   if (!hasMounted) {
     return (
@@ -68,9 +85,23 @@ const SwapButton = () => {
                   <>
                     <div className="w-full px-4 sm:px-0">
                       {isApprove ? (
-                        <button className="px-[18px] py-[19px] rounded-lg bg-primary-100 w-full title text-dark-100 font-bold hover:opacity-50 duration-150">
-                          Swap Now
-                        </button>
+                        <>
+                          {isOpen ? (
+                            <button
+                              onClick={() => alert("Success Swap")}
+                              className="px-[18px] py-[19px] rounded-lg bg-primary-100 w-full title text-dark-100 font-bold hover:opacity-50 duration-150"
+                            >
+                              Continue Swapping
+                            </button>
+                          ) : (
+                            <button
+                              onClick={handleClick}
+                              className="px-[18px] py-[19px] rounded-lg bg-primary-100 w-full title text-dark-100 font-bold hover:opacity-50 duration-150"
+                            >
+                              Swap Now
+                            </button>
+                          )}
+                        </>
                       ) : (
                         <button
                           onClick={() => setIsApprove(true)}
