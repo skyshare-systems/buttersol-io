@@ -1,9 +1,4 @@
 import React from "react";
-import { Archivo } from "next/font/google";
-
-const archivo = Archivo({
-  subsets: ["latin"],
-});
 
 interface InputProps {
   id: string;
@@ -37,7 +32,7 @@ const Input = ({
         id={id}
         name={id}
         type="number"
-        className={`${archivo.className} block w-full font-[manrope] heading5 text-white-100 bg-dark-100 py-2 outline-none bg-opacity-0`}
+        className={` block w-full font-[manrope] heading5 text-white-100 bg-dark-100 py-2 outline-none bg-opacity-0`}
         placeholder={placeholder}
         value={value}
         onChange={handleOnChange}

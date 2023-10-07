@@ -8,11 +8,16 @@ import BnbIcon from "public/icons/swap/network/bnb-icon.svg";
 import SolanaIcon from "public/icons/swap/network/solana-icon.svg";
 import NetworkIcon from "public/icons/swap/network-icon.svg";
 import TokenIcon from "public/icons/swap/token/token-icon.svg";
-import { useInitialData } from "@/lib/store/store";
+import {
+  useDestinationNetwork,
+  useInitialData,
+  useInitialNetwork,
+} from "@/lib/store/store";
 
 const InitialInput = () => {
-  const [selectNetwork, setSelectNetwork] = useState<string>("");
   const { tokeninput, tokenname, setData } = useInitialData((state) => state);
+  const { networkname: initNetworkName, setNetwork: setInitNetwork } =
+    useInitialNetwork((state) => state);
 
   const networkdata = [
     {
@@ -49,8 +54,8 @@ const InitialInput = () => {
       <div className="flex flex-col sm:flex-row items-center gap-2 p-2 bg-dark-32 rounded-lg">
         <DropdownReusable
           datadropdown={networkdata}
-          selectData={selectNetwork}
-          setSelectData={setSelectNetwork}
+          selectData={initNetworkName}
+          setSelectData={setInitNetwork}
           title={"initial-network"}
           placeholder={"Network"}
           icon={<NetworkIcon className="w-full max-w-[1rem]" />}
