@@ -2,10 +2,19 @@
 import React, { useState } from "react";
 import { Sora } from "next/font/google";
 import { ConnectWallet } from "./ConnectWallet";
+
 import HomeIcon from "public/icons/navbar/home-icon.svg";
+import HomeStrokeIcon from "public/icons/navbar/home-stroke-icon.svg";
+
 import TutorialIcon from "public/icons/navbar/tutorial-icon.svg";
+import TutorialSolidIcon from "public/icons/navbar/tutorial-solid-icon.svg";
+
 import AboutIcon from "public/icons/navbar/about-icon.svg";
+import AboutSolidIcon from "public/icons/navbar/about-solid-icon.svg";
+
 import ContactUsIcon from "public/icons/navbar/contact-us-icon.svg";
+import ContactUsSolidIcon from "public/icons/navbar/contact-us-solid-icon.svg";
+
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
@@ -20,43 +29,39 @@ const Navbar = () => {
   const navigation = [
     {
       name: "Home",
-      icon: (
-        <HomeIcon
-          className={`${selectedHeader === "/" ? "opacity-100" : "opacity-50"}`}
-        />
-      ),
+      icon: <>{selectedHeader === "/" ? <HomeIcon /> : <HomeStrokeIcon />}</>,
       linkUrl: "/",
     },
     {
       name: "Tutorial",
       icon: (
-        <TutorialIcon
-          className={`${
-            selectedHeader === "/#tutorial" ? "opacity-100" : "opacity-50"
-          }`}
-        />
+        <>
+          {selectedHeader === "/#tutorial" ? (
+            <TutorialSolidIcon />
+          ) : (
+            <TutorialIcon />
+          )}
+        </>
       ),
       linkUrl: "/#tutorial",
     },
     {
       name: "About",
       icon: (
-        <AboutIcon
-          className={`${
-            selectedHeader === "/#about" ? "opacity-100" : "opacity-50"
-          }`}
-        />
+        <>{selectedHeader === "/#about" ? <AboutSolidIcon /> : <AboutIcon />}</>
       ),
       linkUrl: "/#about",
     },
     {
       name: "Contact Us",
       icon: (
-        <ContactUsIcon
-          className={`${
-            selectedHeader === "/#contact-us" ? "opacity-100" : "opacity-50"
-          }`}
-        />
+        <>
+          {selectedHeader === "/#contact-us" ? (
+            <ContactUsSolidIcon />
+          ) : (
+            <ContactUsIcon />
+          )}
+        </>
       ),
       linkUrl: "/#contact-us",
     },
