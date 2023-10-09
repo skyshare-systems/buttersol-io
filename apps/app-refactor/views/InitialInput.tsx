@@ -8,11 +8,8 @@ import BnbIcon from "public/icons/swap/network/bnb-icon.svg";
 import SolanaIcon from "public/icons/swap/network/solana-icon.svg";
 import NetworkIcon from "public/icons/swap/network-icon.svg";
 import TokenIcon from "public/icons/swap/token/token-icon.svg";
-import {
-  useDestinationNetwork,
-  useInitialData,
-  useInitialNetwork,
-} from "@/lib/store/store";
+import USDTIcon from "public/icons/swap/token/usdt-icon.svg";
+import { useInitialData, useInitialNetwork } from "@/lib/store/store";
 
 const InitialInput = () => {
   const { tokeninput, tokenname, setData } = useInitialData((state) => state);
@@ -46,6 +43,10 @@ const InitialInput = () => {
     {
       name: "SOL",
       icon: <SolanaIcon className="w-full max-w-[24px]" />,
+    },
+    {
+      name: "USDT",
+      icon: <USDTIcon className="w-full max-w-[24px]" />,
     },
   ];
 
