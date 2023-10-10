@@ -9,14 +9,19 @@ import SolanaIcon from "public/icons/swap/network/solana-icon.svg";
 import NetworkIcon from "public/icons/swap/network-icon.svg";
 import TokenIcon from "public/icons/swap/token/token-icon.svg";
 import { useDestinationData, useDestinationNetwork } from "@/lib/store/store";
+import { useAccount } from "wagmi";
 
 const DestinationInput = () => {
-  const { tokeninput, tokenname, setData } = useDestinationData(
+  const { tokeninput, tokenname, tokenIcon, setData } = useDestinationData(
     (state) => state
   );
+
+  const { isConnected } = useAccount();
+
   const {
     networkname: destinationNetworkName,
     setNetwork: setDestinationNetwork,
+    networkicon: networkDestinationIcon,
   } = useDestinationNetwork((state) => state);
 
   const networkdata = [
@@ -58,7 +63,8 @@ const DestinationInput = () => {
           setSelectData={setDestinationNetwork}
           title={"initial-network"}
           placeholder={"Network"}
-          icon={<NetworkIcon className="w-full max-w-[1rem]" />}
+          icon={networkDestinationIcon}
+          disable={isConnected === true ? false : true}
         />
         <DropdownReusable
           datadropdown={tokendata}
@@ -66,7 +72,8 @@ const DestinationInput = () => {
           setSelectData={setData}
           title={"initial-token"}
           placeholder={"Token"}
-          icon={<TokenIcon className="w-full max-w-[1rem]" />}
+          icon={tokenIcon}
+          disable={destinationNetworkName !== "" ? false : true}
         />
       </div>
 
@@ -78,7 +85,7 @@ const DestinationInput = () => {
           // disabled
           onChange={(
             value: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-          ) => setData(tokenname, value)}
+          ) => setData(tokenname, value, tokenIcon)}
         />
       </div>
       <TokenBalance dollars={0.0} balance={0.0} token={tokenname} />

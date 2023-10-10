@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import CancelIcon from "public/icons/swap/cancel-icon.svg";
 import WalletIcon from "public/icons/swap/wallet-icon-white.svg";
 import {
@@ -8,30 +8,42 @@ import {
   useInitialData,
   useInitialNetwork,
   useModal,
+  useSolanaAddress,
 } from "@/lib/store/store";
 import SwapDetails from "@/views/SwapDetails";
 import SwitchNetwork from "./SwitchNetwork";
 import InitialInput from "./InitialInput";
 import DestinationInput from "./DestinationInput";
+import useMounted from "@/hooks/useMounted";
+import SwapSkeleton from "@/components/SwapSkeleton";
 
-const SolanaSwap = () => {
+const ConfirmSwap = () => {
   const { isOpen, setIsOpen } = useModal((state) => state);
-  const { networkname: initNetworkName } = useInitialNetwork((state) => state);
-  const { tokeninput, tokenname } = useInitialData((state) => state);
+  const { hasMounted } = useMounted();
 
+  const { networkname: initNetworkName, networkicon: initNetworkIcon } =
+    useInitialNetwork((state) => state);
+  const { tokeninput, tokenname } = useInitialData((state) => state);
   const { tokeninput: tokenInputDestination, tokenname: tokenNameDestination } =
     useDestinationData((state) => state);
-  const { networkname: destinationNetworkName } = useDestinationNetwork(
+  const {
+    networkname: destinationNetworkName,
+    networkicon: destinationNetworkIcon,
+  } = useDestinationNetwork((state) => state);
+
+  const { solanaAddress, setSolanaAddress } = useSolanaAddress(
     (state) => state
   );
-
-  const [walletAddress, setWalletAddress] = useState("");
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const el = e.target as HTMLInputElement;
 
-    setWalletAddress(el.value);
+    setSolanaAddress(el.value);
   };
+
+  if (!hasMounted) {
+    return <SwapSkeleton />;
+  }
 
   return (
     <>
@@ -49,7 +61,7 @@ const SolanaSwap = () => {
           </div>
         </>
       ) : (
-        <div className="flex flex-col justify-center items-center gap-4 p-4 rounded-3xl bg-white-4 max-w-[404px] sm:min-w-[404px] grow w-full">
+        <div className="flex flex-col justify-center items-center gap-4 p-4 rounded-3xl bg-white-4 w-screen grow max-w-[404px] sm:min-w-[404px] mb-4 sm:mb-0">
           <div className="flex flex-wrap justify-between items-center gap-2 w-full p-2">
             <h1 className="title text-white-100">Confirm Swap</h1>
             <CancelIcon onClick={() => setIsOpen(false)} />
@@ -58,7 +70,10 @@ const SolanaSwap = () => {
             <div className=" flex flex-col sm:flex-row justify-between items-center gap-2">
               {/* init network  */}
               <div className="flex flex-col gap-2 p-3 border border-white-4 rounded-lg w-full">
-                <h1 className="subtitle text-white-100">{initNetworkName}</h1>
+                <h1 className="subtitle text-white-100 flex items-center gap-2">
+                  {initNetworkIcon}
+                  {initNetworkName}
+                </h1>
                 <div className="flex flex-col gap-1">
                   <h1 className="title flex items-center gap-2 text-white-100">
                     {tokeninput} {tokenname}
@@ -67,8 +82,8 @@ const SolanaSwap = () => {
               </div>
               {/* destination network  */}
               <div className="flex flex-col gap-2 p-3 border border-white-4 rounded-lg w-full">
-                <h1 className="subtitle text-white-100">
-                  {destinationNetworkName}
+                <h1 className="subtitle text-white-100 flex items-center gap-2">
+                  {destinationNetworkIcon} {destinationNetworkName}
                 </h1>
                 <div className="flex flex-col gap-1">
                   <h1 className="title flex items-center gap-2 text-white-100">
@@ -77,18 +92,24 @@ const SolanaSwap = () => {
                 </div>
               </div>
             </div>
-            <h1 className="subtext text-white-50">Input destination address</h1>
-            <div className="p-3 flex flex-row gap-2 items-center border border-white-8 bg-white-4 rounded-lg">
-              <WalletIcon />
-              <input
-                id={"wallet-address"}
-                type="text"
-                placeholder={"Your solana wallet address"}
-                value={walletAddress}
-                className={` block w-full font-[manrope] description text-white-100 bg-dark-100 outline-none bg-opacity-0`}
-                onChange={handleOnChange}
-              />
-            </div>
+            {destinationNetworkName === "Solana" && (
+              <>
+                <h1 className="subtext text-white-50">
+                  Input destination address
+                </h1>
+                <div className="p-3 flex flex-row gap-2 items-center border border-white-8 bg-white-4 rounded-lg">
+                  <WalletIcon />
+                  <input
+                    id={"wallet-address"}
+                    type="text"
+                    placeholder={"Your solana wallet address"}
+                    value={solanaAddress}
+                    className={` block w-full font-[manrope] description text-white-100 bg-dark-100 outline-none bg-opacity-0`}
+                    onChange={handleOnChange}
+                  />
+                </div>
+              </>
+            )}
           </div>
           <SwapDetails />
         </div>
@@ -97,4 +118,4 @@ const SolanaSwap = () => {
   );
 };
 
-export default SolanaSwap;
+export default ConfirmSwap;

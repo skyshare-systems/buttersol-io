@@ -2,19 +2,26 @@
 import DropdownReusable from "@/components/Dropdown";
 import Input from "@/components/Input";
 import TokenBalance from "@/components/TokenBalance";
-import React, { useState } from "react";
+import React from "react";
 import EthIcon from "public/icons/swap/network/eth-icon.svg";
 import BnbIcon from "public/icons/swap/network/bnb-icon.svg";
 import SolanaIcon from "public/icons/swap/network/solana-icon.svg";
-import NetworkIcon from "public/icons/swap/network-icon.svg";
-import TokenIcon from "public/icons/swap/token/token-icon.svg";
 import USDTIcon from "public/icons/swap/token/usdt-icon.svg";
 import { useInitialData, useInitialNetwork } from "@/lib/store/store";
+import { useAccount } from "wagmi";
 
 const InitialInput = () => {
-  const { tokeninput, tokenname, setData } = useInitialData((state) => state);
-  const { networkname: initNetworkName, setNetwork: setInitNetwork } =
-    useInitialNetwork((state) => state);
+  const { tokeninput, tokenname, tokenIcon, setData } = useInitialData(
+    (state) => state
+  );
+
+  const { isConnected } = useAccount();
+
+  const {
+    networkname: initNetworkName,
+    networkicon: initNetworkIcon,
+    setNetwork: setInitNetwork,
+  } = useInitialNetwork((state) => state);
 
   const networkdata = [
     {
@@ -59,7 +66,8 @@ const InitialInput = () => {
           setSelectData={setInitNetwork}
           title={"initial-network"}
           placeholder={"Network"}
-          icon={<NetworkIcon className="w-full max-w-[1rem]" />}
+          icon={initNetworkIcon}
+          disable={isConnected === true ? false : true}
         />
         <DropdownReusable
           datadropdown={tokendata}
@@ -67,7 +75,8 @@ const InitialInput = () => {
           setSelectData={setData}
           title={"initial-token"}
           placeholder={"Token"}
-          icon={<TokenIcon className="w-full max-w-[1rem]" />}
+          icon={tokenIcon}
+          disable={initNetworkName !== "" ? false : true}
         />
       </div>
 
@@ -78,7 +87,8 @@ const InitialInput = () => {
           value={tokeninput}
           onChange={(
             value: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-          ) => setData(tokenname, value)}
+          ) => setData(tokenname, value, tokenIcon)}
+          disabled={tokenname !== "" ? false : true}
         />
         <button className="subtitle uppercase text-secondary-100 px-4 py-2 rounded-lg border border-secondary-32 bg-secondary-12">
           max
