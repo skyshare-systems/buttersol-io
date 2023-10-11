@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Sora } from "next/font/google";
+// import { Sora } from "next/font/google";
 import { ConnectWallet } from "./ConnectWallet";
 
 import HomeIcon from "public/icons/navbar/home-icon.svg";
@@ -18,9 +18,9 @@ import ContactUsSolidIcon from "public/icons/navbar/contact-us-solid-icon.svg";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
-const sora = Sora({
-  subsets: ["latin"],
-});
+// const sora = Sora({
+//   subsets: ["latin"],
+// });
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -69,10 +69,10 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="sticky top-0 flex justify-center items-center py-8 z-[12]">
-        <div className="flex flex-row justify-between items-center max-w-[90rem] grow px-4 xl:px-0">
+      <div className="fixed top-0 flex justify-center items-center py-8 w-full z-[11]">
+        <div className="relative flex flex-row justify-between items-center max-w-[90rem] grow px-4 xl:px-0 ">
           <h1
-            className={`${sora.className} flex items-center font-semibold text-2xl`}
+            className={`flex items-center font-semibold text-2xl relative z-[11]`}
           >
             <span className="text-primary-100">B</span>
             <span className="hidden sm:block text-primary-100">utter</span>
@@ -80,7 +80,7 @@ const Navbar = () => {
             <span className="hidden sm:block text-white-100">OL</span>
           </h1>
 
-          <div className="hidden lg:flex items-center gap-2 bg-dark-72 p-1 rounded ">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center gap-2 bg-dark-72 p-1 rounded z-[11]">
             {navigation.map((data, index) => {
               return (
                 <a
@@ -115,7 +115,9 @@ const Navbar = () => {
               );
             })}
           </div>
-          <ConnectWallet />
+          <div className="sticky z-[13]">
+            <ConnectWallet />
+          </div>
         </div>
       </div>
     </>

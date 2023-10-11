@@ -78,3 +78,7 @@ input:-webkit-autofill:active {
 input:-webkit-autofill {
   -webkit-text-fill-color: white !important;
 }
+
+.glow-button {
+  filter: drop-shadow(#fbe94b 0rem 0rem 0.5rem);
+}

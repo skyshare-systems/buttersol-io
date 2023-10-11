@@ -7,8 +7,8 @@ import {
   useDestinationNetwork,
   useInitialData,
   useInitialNetwork,
-  useModal,
   useSolanaAddress,
+  useView,
 } from "@/lib/store/store";
 import SwapDetails from "@/views/SwapDetails";
 import SwitchNetwork from "./SwitchNetwork";
@@ -18,7 +18,7 @@ import useMounted from "@/hooks/useMounted";
 import SwapSkeleton from "@/components/SwapSkeleton";
 
 const ConfirmSwap = () => {
-  const { isOpen, setIsOpen } = useModal((state) => state);
+  const { step, setStep } = useView((state) => state);
   const { hasMounted } = useMounted();
 
   const { networkname: initNetworkName, networkicon: initNetworkIcon } =
@@ -47,7 +47,7 @@ const ConfirmSwap = () => {
 
   return (
     <>
-      {!isOpen ? (
+      {step === 1 ? (
         <>
           <div
             className={`flex flex-col justify-center items-center p-4 gap-4 backdrop-blur-sm rounded-3xl bg-opacity-0 sm:bg-white-4 max-w-[404px] grow`}
@@ -64,7 +64,7 @@ const ConfirmSwap = () => {
         <div className="flex flex-col justify-center items-center gap-4 p-4 rounded-3xl bg-white-4 w-screen grow max-w-[404px] sm:min-w-[404px] mb-4 sm:mb-0">
           <div className="flex flex-wrap justify-between items-center gap-2 w-full p-2">
             <h1 className="title text-white-100">Confirm Swap</h1>
-            <CancelIcon onClick={() => setIsOpen(false)} />
+            <CancelIcon onClick={() => setStep(2)} />
           </div>
           <div className="flex flex-col w-full gap-4 p-4 border border-white-8 rounded-2xl">
             <div className=" flex flex-col sm:flex-row justify-between items-center gap-2">

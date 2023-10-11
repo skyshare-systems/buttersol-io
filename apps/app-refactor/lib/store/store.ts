@@ -1,5 +1,12 @@
 import { create } from "zustand";
-import { IIsOpen, INetwork, ISolanaAddress, ITokenData } from "../interface";
+import {
+  IGuideSwap,
+  INetwork,
+  INotification,
+  ISolanaAddress,
+  IStep,
+  ITokenData,
+} from "../interface";
 
 export const useInitialData = create<ITokenData>((set) => ({
   tokeninput: "",
@@ -35,10 +42,10 @@ export const useDestinationNetwork = create<INetwork>((set) => ({
   },
 }));
 
-export const useModal = create<IIsOpen>((set) => ({
-  isOpen: false,
-  setIsOpen: (isOpen) => {
-    set((state) => ({ ...state, isOpen }));
+export const useView = create<IStep>((set) => ({
+  step: 1,
+  setStep: (step) => {
+    set((state) => ({ ...state, step }));
   },
 }));
 
@@ -46,5 +53,19 @@ export const useSolanaAddress = create<ISolanaAddress>((set) => ({
   solanaAddress: "",
   setSolanaAddress: (solanaAddress) => {
     set((state) => ({ ...state, solanaAddress }));
+  },
+}));
+
+export const useNotificationSwap = create<INotification>((set) => ({
+  isShowModal: false,
+  setIsShowModal: (isShowModal) => {
+    set((state) => ({ ...state, isShowModal }));
+  },
+}));
+
+export const useGuideSwap = create<IGuideSwap>((set) => ({
+  stepGuide: 0,
+  setStepGuide: (stepGuide) => {
+    set((state) => ({ ...state, stepGuide }));
   },
 }));

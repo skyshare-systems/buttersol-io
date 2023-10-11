@@ -10,12 +10,22 @@ export interface INetwork {
   setNetwork: (networkname: any, networkicon: any) => void;
 }
 
-export interface IIsOpen {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+export interface IStep {
+  step: number;
+  setStep: (step: number) => void;
 }
 
 export interface ISolanaAddress {
   solanaAddress: any;
   setSolanaAddress: (solanaAddress: any) => void;
+}
+
+export interface INotification {
+  isShowModal: boolean;
+  setIsShowModal: (isShowModal: boolean) => void;
+}
+
+export interface IGuideSwap {
+  stepGuide: number;
+  setStepGuide: (stepGuide: number) => void;
 }

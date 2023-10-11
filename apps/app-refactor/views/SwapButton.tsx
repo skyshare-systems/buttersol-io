@@ -6,8 +6,9 @@ import WarningIcon from "public/icons/swap/warning-icon.svg";
 import {
   useDestinationNetwork,
   useInitialData,
-  useModal,
+  useNotificationSwap,
   useSolanaAddress,
+  useView,
 } from "@/lib/store/store";
 import ButtonSkeleton from "@/components/ButtonSkeleton";
 
@@ -15,15 +16,22 @@ const SwapButton = () => {
   const [isApprove, setIsApprove] = useState<boolean>(false);
   const { hasMounted } = useMounted();
 
-  const { setIsOpen, isOpen } = useModal((state) => state);
+  const { step, setStep } = useView((state) => state);
   const { tokeninput } = useInitialData((state) => state);
   const { solanaAddress } = useSolanaAddress((state) => state);
   const { networkname: destinationNetworkName } = useDestinationNetwork(
     (state) => state
   );
 
+  const { setIsShowModal } = useNotificationSwap((state) => state);
+
   function handleClick() {
-    setIsOpen(true);
+    setStep(2);
+  }
+
+  function handleConfirm() {
+    setStep(3);
+    setIsShowModal(true);
   }
 
   if (!hasMounted) {
@@ -80,9 +88,9 @@ const SwapButton = () => {
                   <>
                     {isApprove ? (
                       <>
-                        {isOpen ? (
+                        {step === 2 && (
                           <button
-                            onClick={() => alert("Success Swap")}
+                            onClick={() => handleConfirm()}
                             disabled={
                               destinationNetworkName === "Solana"
                                 ? solanaAddress === ""
@@ -99,7 +107,8 @@ const SwapButton = () => {
                           >
                             Continue Swapping
                           </button>
-                        ) : (
+                        )}
+                        {step === 1 && (
                           <div className="w-full px-4 sm:px-0">
                             <button
                               onClick={handleClick}
