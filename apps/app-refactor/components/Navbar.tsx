@@ -15,6 +15,9 @@ import AboutSolidIcon from "public/icons/navbar/about-solid-icon.svg";
 import ContactUsIcon from "public/icons/navbar/contact-us-icon.svg";
 import ContactUsSolidIcon from "public/icons/navbar/contact-us-solid-icon.svg";
 
+import ButterIcon from "public/icons/navbar/butter-logo.svg";
+import ButterText from "public/icons/navbar/butter-text-logo.svg";
+
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
@@ -74,10 +77,8 @@ const Navbar = () => {
           <h1
             className={`flex items-center font-semibold text-2xl relative z-[11]`}
           >
-            <span className="text-primary-100">B</span>
-            <span className="hidden sm:block text-primary-100">utter</span>
-            <span className="text-white-100">S</span>
-            <span className="hidden sm:block text-white-100">OL</span>
+            <ButterIcon className="w-full max-w-[36px]" />
+            <ButterText className="w-full max-w-[90px] hidden sm:block" />
           </h1>
 
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center gap-2 bg-dark-72 p-1 rounded z-[11]">
