@@ -5,6 +5,7 @@ import useMounted from "@/hooks/useMounted";
 import WarningIcon from "public/icons/swap/warning-icon.svg";
 import {
   useDestinationNetwork,
+  useGuideSwap,
   useInitialData,
   useNotificationSwap,
   useSolanaAddress,
@@ -22,11 +23,13 @@ const SwapButton = () => {
   const { networkname: destinationNetworkName } = useDestinationNetwork(
     (state) => state
   );
+  const { stepGuide, setStepGuide } = useGuideSwap((state) => state);
 
   const { setIsShowModal } = useNotificationSwap((state) => state);
 
   function handleClick() {
     setStep(2);
+    if (stepGuide === 10) setStepGuide(11);
   }
 
   function handleConfirm() {

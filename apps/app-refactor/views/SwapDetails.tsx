@@ -4,10 +4,14 @@ import ApproxEqualIcon from "public/icons/swap/approximately-equal-icon.svg";
 import GasIcon from "public/icons/swap/gas-icon.svg";
 import DropdownIcon from "public/icons/swap/arrow-icon.svg";
 import DataDetails from "@/components/DataDetails";
-import { useDestinationData, useInitialData } from "@/lib/store/store";
+import {
+  useDestinationData,
+  useInitialData,
+  useShowDetails,
+} from "@/lib/store/store";
 
 const SwapDetails = () => {
-  const [showDetails, setShowDetails] = useState<boolean>(false);
+  const { showDetails, setShowDetails } = useShowDetails((state) => state);
   const { tokeninput, tokenname } = useInitialData((state) => state);
   const { tokeninput: tokenInputOne, tokenname: tokenNameOne } =
     useDestinationData((state) => state);

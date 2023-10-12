@@ -29,3 +29,8 @@ export interface IGuideSwap {
   stepGuide: number;
   setStepGuide: (stepGuide: number) => void;
 }
+
+export interface IShowDetails {
+  showDetails: boolean;
+  setShowDetails: (showDetails: boolean) => void;
+}

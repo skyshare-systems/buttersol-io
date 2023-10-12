@@ -3,6 +3,7 @@ import {
   IGuideSwap,
   INetwork,
   INotification,
+  IShowDetails,
   ISolanaAddress,
   IStep,
   ITokenData,
@@ -67,5 +68,12 @@ export const useGuideSwap = create<IGuideSwap>((set) => ({
   stepGuide: 0,
   setStepGuide: (stepGuide) => {
     set((state) => ({ ...state, stepGuide }));
+  },
+}));
+
+export const useShowDetails = create<IShowDetails>((set) => ({
+  showDetails: false,
+  setShowDetails: (showDetails) => {
+    set((state) => ({ ...state, showDetails }));
   },
 }));

@@ -64,7 +64,10 @@ const ConfirmSwap = () => {
         <div className="flex flex-col justify-center items-center gap-4 p-4 rounded-3xl bg-white-4 w-screen grow max-w-[404px] sm:min-w-[404px] mb-4 sm:mb-0">
           <div className="flex flex-wrap justify-between items-center gap-2 w-full p-2">
             <h1 className="title text-white-100">Confirm Swap</h1>
-            <CancelIcon onClick={() => setStep(2)} />
+            <CancelIcon
+              onClick={() => setStep(1)}
+              className="cursor-pointer z-[12]"
+            />
           </div>
           <div className="flex flex-col w-full gap-4 p-4 border border-white-8 rounded-2xl">
             <div className=" flex flex-col sm:flex-row justify-between items-center gap-2">
