@@ -37,7 +37,7 @@ export const ConnectWallet = () => {
     setSolanaAddress("");
     setShowDetails(false);
     setStep(1);
-    console.log(stepGuide);
+    // console.log(stepGuide);
   }, [isConnected]);
 
   return (
