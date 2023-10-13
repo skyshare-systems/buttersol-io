@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import React, { useEffect, useState } from "react";
 import SwapButton from "@/views/SwapButton";
 import NotificationSwap from "./NotificationSwap";
@@ -8,16 +8,16 @@ import detectEthereumProvider from "@metamask/detect-provider";
 import NoWalletExtension from "./NoWalletExtension";
 
 const Swap = () => {
-  const [showSwap, setShowSwap] = useState<boolean>(false);
+  // const [showSwap, setShowSwap] = useState<boolean>(false);
 
-  detectEthereumProvider().then((provider) => {
-    if (provider && provider.isMetaMask) {
-      // connect btn is initially disabled
-      setShowSwap(true);
-    } else {
-      setShowSwap(false);
-    }
-  });
+  // detectEthereumProvider().then((provider) => {
+  //   if (provider && provider.isMetaMask) {
+  //     // connect btn is initially disabled
+  //     setShowSwap(true);
+  //   } else {
+  //     setShowSwap(false);
+  //   }
+  // });
 
   return (
     <>
