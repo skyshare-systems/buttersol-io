@@ -7,6 +7,7 @@ import {
 } from "@/lib/store/store";
 import React, { useEffect } from "react";
 import { useAccount } from "wagmi";
+import Switch from "public/icons/swap/switch-icon.svg";
 
 const GuideStepSeven = () => {
   const { isConnected } = useAccount();
@@ -27,18 +28,22 @@ const GuideStepSeven = () => {
           }
         />
 
-        {/* <div className="p-4 rounded-lg border border-secondary-100 bg-white-4 flex flex-col w-full">
+        <div className="p-4 rounded-lg border border-secondary-100 bg-white-4 flex flex-col w-full">
           <h1 className="subtext text-secondary-100">Tip:</h1>
           <h1 className="text-white-100 gap-2 w-full">
-            <span className="descriptions">You can click</span>
-            <span className="px-2 py-1 rounded-[4px] border-[0.5px] text-secondary-100 border-secondary-32 bg-secondary-12 font-bold text-[6.4px] font-[manrope] mx-2">
-              Max
+            <span className="descriptions flex items-center gap-1">
+              You can click
+              <div className="p-1 border-[0.5px] border-white-8 bg-dark-100 rounded-full">
+                <Switch className="" />
+              </div>
+              when you want to
             </span>
+
             <span className="descriptions">
-              when you want to use your maximum wallet balance.
+              swap Initial Network and Token to Destination Network and Token.
             </span>
           </h1>
-        </div> */}
+        </div>
 
         <div className="flex justify-between items-center">
           <button

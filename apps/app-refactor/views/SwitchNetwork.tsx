@@ -47,11 +47,6 @@ const SwitchNetwork = () => {
     setDestinationNetwork(tempSwitchNameNetwork, tempSwitchIconNetwork);
   }, [chain?.id]);
 
-  // function handleClick() {
-  //   console.log("Testing Init Networkname: " + initNetworkName);
-  //   console.log("Testing Destination Network Name: " + destinationNetworkName);
-  // }
-
   return (
     <>
       <div

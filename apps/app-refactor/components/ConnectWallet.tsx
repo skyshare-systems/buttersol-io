@@ -25,7 +25,7 @@ export const ConnectWallet = () => {
   const { setNetwork: setDestinationNetwork } = useDestinationNetwork(
     (state) => state
   );
-  const { setStepGuide } = useGuideSwap((state) => state);
+  const { stepGuide } = useGuideSwap((state) => state);
   const { setSolanaAddress } = useSolanaAddress((state) => state);
   const { setShowDetails } = useShowDetails((state) => state);
   const { isConnected } = useAccount();
@@ -37,7 +37,7 @@ export const ConnectWallet = () => {
     setSolanaAddress("");
     setShowDetails(false);
     setStep(1);
-    setStepGuide(0);
+    console.log(stepGuide);
   }, [isConnected]);
 
   return (

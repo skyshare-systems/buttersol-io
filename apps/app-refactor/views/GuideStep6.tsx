@@ -16,7 +16,8 @@ const GuideStepSix = () => {
 
   useEffect(() => {
     if (tokeninput !== "") setStepGuide(7);
-  }, [tokeninput]);
+    if (tokenname === "") setStepGuide(4);
+  }, [tokeninput, tokenname]);
 
   return (
     <div

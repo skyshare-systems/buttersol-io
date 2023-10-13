@@ -11,7 +11,7 @@ const GuideStepOne = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-full h-full bg-dark-50 backdrop-blur  b z-[11] hidden lg:block" />
+      <div className="fixed top-0 left-0 w-full h-full bg-dark-50 backdrop-blur  z-[11] hidden lg:block" />
       <div className="absolute top-0 right-0 z-[13] glow-button hidden lg:block">
         <ConnectWallet />
       </div>
