@@ -1,21 +1,46 @@
 export interface ITokenData {
   tokeninput: any;
   tokenname: any;
-  setData: (tokenname: any, tokeninput: any) => void;
+  tokenIcon: any;
+  setData: (tokenname: any, tokeninput: any, tokenIcon: any) => void;
 }
-
-export interface IDestinationData {
-  tokeninput1: any;
-  token1: any;
-  setInitialData: (token1: any, tokeninput1: any) => void;
-}
-
 export interface INetwork {
   networkname: any;
-  setNetwork: (networkname: any) => void;
+  networkicon: any;
+  setNetwork: (networkname: any, networkicon: any) => void;
 }
 
-export interface IIsOpen {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+export interface IStep {
+  step: number;
+  setStep: (step: number) => void;
+}
+
+export interface ISolanaAddress {
+  solanaAddress: any;
+  setSolanaAddress: (solanaAddress: any) => void;
+}
+
+export interface INotification {
+  isShowModal: boolean;
+  setIsShowModal: (isShowModal: boolean) => void;
+}
+
+export interface IGuideSwap {
+  stepGuide: number;
+  setStepGuide: (stepGuide: number) => void;
+}
+
+export interface IPhantomGuide {
+  stepPhantomGuide: number;
+  setStepPhantomGuide: (stepPhantomGuide: number) => void;
+}
+
+export interface IShowDetails {
+  showDetails: boolean;
+  setShowDetails: (showDetails: boolean) => void;
+}
+
+export interface IApprove {
+  isApprove: boolean;
+  setIsApprove: (isApprove: boolean) => void;
 }

@@ -4,35 +4,45 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import useMounted from "@/hooks/useMounted";
 import WarningIcon from "public/icons/swap/warning-icon.svg";
 import {
-  useDestinationData,
+  useApprove,
   useDestinationNetwork,
-  useModal,
+  useGuideSwap,
+  useInitialData,
+  useNotificationSwap,
+  useSolanaAddress,
+  useView,
 } from "@/lib/store/store";
+import ButtonSkeleton from "@/components/ButtonSkeleton";
 
 const SwapButton = () => {
-  const [isApprove, setIsApprove] = useState<boolean>(false);
+  const { isApprove, setIsApprove } = useApprove((state) => state);
   const { hasMounted } = useMounted();
+
+  const { step, setStep } = useView((state) => state);
+  const { tokeninput } = useInitialData((state) => state);
+  const { solanaAddress } = useSolanaAddress((state) => state);
   const { networkname: destinationNetworkName } = useDestinationNetwork(
     (state) => state
   );
-  const { setIsOpen, isOpen } = useModal((state) => state);
+  const { stepGuide, setStepGuide } = useGuideSwap((state) => state);
+
+  const { setIsShowModal } = useNotificationSwap((state) => state);
 
   function handleClick() {
-    if (destinationNetworkName === "Solana") {
-      setIsOpen(true);
-    } else {
-      alert("success");
+    setStep(2);
+    if (stepGuide === 10) setStepGuide(11);
+  }
+
+  function handleConfirm() {
+    setStep(3);
+    setIsShowModal(true);
+    if (stepGuide === 11) {
+      setStepGuide(12);
     }
   }
 
   if (!hasMounted) {
-    return (
-      <div className="w-full px-4 sm:px-0">
-        <button className="px-[18px] py-[19px] rounded-lg bg-white-16 w-full title text-white-100 font-bold hover:opacity-50 duration-150">
-          Loading...
-        </button>
-      </div>
-    );
+    return <ButtonSkeleton />;
   }
   return (
     <>
@@ -83,34 +93,59 @@ const SwapButton = () => {
                 }
                 return (
                   <>
-                    <div className="w-full px-4 sm:px-0">
-                      {isApprove ? (
-                        <>
-                          {isOpen ? (
-                            <button
-                              onClick={() => alert("Success Swap")}
-                              className="px-[18px] py-[19px] rounded-lg bg-primary-100 w-full title text-dark-100 font-bold hover:opacity-50 duration-150"
-                            >
-                              Continue Swapping
-                            </button>
-                          ) : (
+                    {isApprove ? (
+                      <>
+                        {step === 2 && (
+                          <button
+                            onClick={() => handleConfirm()}
+                            disabled={
+                              destinationNetworkName === "Solana"
+                                ? solanaAddress === ""
+                                  ? true
+                                  : false
+                                : false
+                            }
+                            className={`px-[18px] py-[19px] rounded-lg ${
+                              destinationNetworkName === "Solana" &&
+                              solanaAddress === ""
+                                ? "bg-white-4 text-white-50 cursor-not-allowed"
+                                : "bg-primary-100 text-dark-100 cursor-pointer hover:opacity-50"
+                            }  w-full title font-bold duration-150`}
+                          >
+                            Continue Swapping
+                          </button>
+                        )}
+                        {step === 1 && (
+                          <div className="w-full px-4 sm:px-0">
                             <button
                               onClick={handleClick}
-                              className="px-[18px] py-[19px] rounded-lg bg-primary-100 w-full title text-dark-100 font-bold hover:opacity-50 duration-150"
+                              disabled={tokeninput <= 0 ? true : false}
+                              className={`px-[18px] py-[19px] rounded-lg ${
+                                tokeninput <= 0
+                                  ? "bg-white-4 text-white-50 cursor-not-allowed"
+                                  : "bg-primary-100 text-dark-100 cursor-pointer hover:opacity-50"
+                              }  w-full title font-bold duration-150`}
                             >
                               Swap Now
                             </button>
-                          )}
-                        </>
-                      ) : (
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <div className="w-full px-4 sm:px-0">
                         <button
                           onClick={() => setIsApprove(true)}
-                          className="px-[18px] py-[19px] rounded-lg bg-white-100 w-full title text-dark-100 font-bold hover:opacity-50 duration-150"
+                          disabled={tokeninput <= 0 ? true : false}
+                          className={`px-[18px] py-[19px] rounded-lg ${
+                            tokeninput <= 0
+                              ? "bg-white-4 text-white-50 cursor-not-allowed"
+                              : "bg-white-100 text-dark-100 cursor-pointer hover:opacity-50"
+                          } w-full title font-bold duration-150`}
                         >
                           Approve Wallet
                         </button>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </>
                 );
               })()}

@@ -32,7 +32,9 @@ const Input = ({
         id={id}
         name={id}
         type="number"
-        className={` block w-full font-[manrope] heading5 text-white-100 bg-dark-100 py-2 outline-none bg-opacity-0`}
+        className={`${
+          disabled && "cursor-not-allowed"
+        } block w-full font-[manrope] heading5 text-white-100 bg-dark-100 py-2 outline-none bg-opacity-0`}
         placeholder={placeholder}
         value={value}
         onChange={handleOnChange}

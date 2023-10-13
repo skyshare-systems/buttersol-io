@@ -2,8 +2,44 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import WalletIcon from "@/components/WalletIcon";
 import WarningIcon from "public/icons/swap/warning-icon.svg";
+import { useEffect } from "react";
+import {
+  useDestinationData,
+  useDestinationNetwork,
+  useGuideSwap,
+  useInitialData,
+  useInitialNetwork,
+  useShowDetails,
+  useSolanaAddress,
+  useTempInitNetwork,
+  useView,
+} from "@/lib/store/store";
+import { useAccount } from "wagmi";
 
 export const ConnectWallet = () => {
+  const { setStep } = useView((state) => state);
+  // Init Data
+  const { setData: setInitData } = useInitialData((state) => state);
+  // Destination Data
+  const { setData: setDestinationData } = useDestinationData((state) => state);
+  const { setNetwork: setDestinationNetwork } = useDestinationNetwork(
+    (state) => state
+  );
+  const { stepGuide } = useGuideSwap((state) => state);
+  const { setSolanaAddress } = useSolanaAddress((state) => state);
+  const { setShowDetails } = useShowDetails((state) => state);
+  const { isConnected } = useAccount();
+
+  useEffect(() => {
+    setInitData("", "", "");
+    setDestinationData("", "", "");
+    setDestinationNetwork("", "");
+    setSolanaAddress("");
+    setShowDetails(false);
+    setStep(1);
+    // console.log(stepGuide);
+  }, [isConnected]);
+
   return (
     <ConnectButton.Custom>
       {({

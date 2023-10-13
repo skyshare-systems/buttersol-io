@@ -1,107 +1,51 @@
-"use client";
-import React, { useState } from "react";
-import InitialInput from "./InitialInput";
-import DestinationInput from "./DestinationInput";
-import SwapButton from "./SwapButton";
-import SwitchNetwork from "./SwitchNetwork";
-import SwapDetails from "./SwapDetails";
-import {
-  useDestinationData,
-  useDestinationNetwork,
-  useInitialData,
-  useInitialNetwork,
-  useModal,
-} from "@/lib/store/store";
-import CancelIcon from "public/icons/swap/cancel-icon.svg";
-import WalletIcon from "public/icons/swap/wallet-icon-white.svg";
+// "use client";
+import React, { useEffect, useState } from "react";
+import SwapButton from "@/views/SwapButton";
+import NotificationSwap from "./NotificationSwap";
+import GuideMeButton from "./GuideMeButton";
+import GuideSwap from "./GuideSwap";
+import detectEthereumProvider from "@metamask/detect-provider";
+import NoWalletExtension from "./NoWalletExtension";
 
 const Swap = () => {
-  const { isOpen, setIsOpen } = useModal((state) => state);
-  const { networkname: initNetworkName } = useInitialNetwork((state) => state);
-  const { tokeninput, tokenname } = useInitialData((state) => state);
+  // const [showSwap, setShowSwap] = useState<boolean>(false);
 
-  const { tokeninput: tokenInputDestination, tokenname: tokenNameDestination } =
-    useDestinationData((state) => state);
-  const { networkname: destinationNetworkName } = useDestinationNetwork(
-    (state) => state
-  );
-
-  const [walletAddress, setWalletAddress] = useState("");
-
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const el = e.target as HTMLInputElement;
-
-    setWalletAddress(el.value);
-  };
+  // detectEthereumProvider().then((provider) => {
+  //   if (provider && provider.isMetaMask) {
+  //     // connect btn is initially disabled
+  //     setShowSwap(true);
+  //   } else {
+  //     setShowSwap(false);
+  //   }
+  // });
 
   return (
-    <div className="flex justify-center items-center my-16 px-4 xl:px-0">
-      <div className="flex flex-col justify-center items-center gap-0 sm:gap-4">
-        {/* Refactor Later  */}
-
-        {!isOpen ? (
-          <>
-            <div
-              className={`flex flex-col justify-center items-center p-4 gap-4 backdrop-blur-sm rounded-3xl bg-opacity-0 sm:bg-white-4 max-w-[404px] grow`}
-            >
-              <div className="relative flex flex-col gap-2 w-full">
-                <SwitchNetwork />
-                <InitialInput />
-                <DestinationInput />
-              </div>
-              <SwapDetails />
-            </div>
-          </>
-        ) : (
-          <div className="flex flex-col justify-center items-center gap-4 p-4 rounded-3xl bg-white-4 max-w-[404px] sm:min-w-[404px] grow w-full">
-            <div className="flex flex-wrap justify-between items-center gap-2 w-full p-2">
-              <h1 className="title text-white-100">Confirm Swap</h1>
-              <CancelIcon onClick={() => setIsOpen(false)} />
-            </div>
-            <div className="flex flex-col w-full gap-4 p-4 border border-white-8 rounded-2xl">
-              <div className=" flex flex-col sm:flex-row justify-between items-center gap-2">
-                {/* init network  */}
-                <div className="flex flex-col gap-2 p-3 border border-white-4 rounded-lg w-full">
-                  <h1 className="subtitle text-white-100">{initNetworkName}</h1>
-                  <div className="flex flex-col gap-1">
-                    <h1 className="title flex items-center gap-2 text-white-100">
-                      {tokeninput} {tokenname}
-                    </h1>
-                  </div>
-                </div>
-                {/* destination network  */}
-                <div className="flex flex-col gap-2 p-3 border border-white-4 rounded-lg w-full">
-                  <h1 className="subtitle text-white-100">
-                    {destinationNetworkName}
-                  </h1>
-                  <div className="flex flex-col gap-1">
-                    <h1 className="title flex items-center gap-2 text-white-100">
-                      {tokenInputDestination} {tokenNameDestination}
-                    </h1>
-                  </div>
-                </div>
-              </div>
-              <h1 className="subtext text-white-50">
-                Input destination address
-              </h1>
-              <div className="p-3 flex flex-row gap-2 items-center border border-white-8 bg-white-4 rounded-lg">
-                <WalletIcon />
-                <input
-                  id={"wallet-address"}
-                  type="text"
-                  placeholder={"Your solana wallet address"}
-                  value={walletAddress}
-                  className={` block w-full font-[manrope] description text-white-100 bg-dark-100 outline-none bg-opacity-0`}
-                  onChange={handleOnChange}
-                />
-              </div>
-            </div>
-            <SwapDetails />
+    <>
+      <div className="flex justify-center items-center w-full">
+        <GuideMeButton />
+        <div className="relative flex justify-center items-center sm:pb-40 py-24 sm:mt-8 sm:py-32 px-4 xl:px-0 max-w-[90rem] grow">
+          <div className="flex flex-col justify-center items-center gap-0 sm:gap-4">
+            <NotificationSwap />
+            <SwapButton />
           </div>
-        )}
-        <SwapButton />
+          <GuideSwap />
+        </div>
       </div>
-    </div>
+      {/* {showSwap ? (
+        <div className="flex justify-center items-center w-full">
+          <GuideMeButton />
+          <div className="relative flex justify-center items-center sm:pb-40 py-24 sm:mt-8 sm:py-32 px-4 xl:px-0 max-w-[90rem] grow">
+            <div className="flex flex-col justify-center items-center gap-0 sm:gap-4">
+              <NotificationSwap />
+              <SwapButton />
+            </div>
+            <GuideSwap />
+          </div>
+        </div>
+      ) : (
+        <NoWalletExtension />
+      )} */}
+    </>
   );
 };
 
