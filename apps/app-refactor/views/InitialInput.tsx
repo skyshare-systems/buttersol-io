@@ -11,7 +11,7 @@ import {
   useInitialNetwork,
   useTempInitNetwork,
 } from "@/lib/store/store";
-import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
+import { useAccount, useNetwork } from "wagmi";
 import useTokenData from "@/hooks/useTokenData";
 
 const InitialInput = () => {
@@ -19,7 +19,6 @@ const InitialInput = () => {
     (state) => state
   );
   const { chain } = useNetwork();
-
   const { isConnected } = useAccount();
 
   const {
@@ -34,7 +33,6 @@ const InitialInput = () => {
   const { networkdata, TokenData } = useTokenData(tempInitNetworkName);
 
   useEffect(() => {
-    console.log(tempInitNetworkName);
     if (tempInitNetworkName === "Sepolia" || chain?.id === 11155111) {
       setInitNetwork("Sepolia", <EthIcon className="w-full max-w-[24px]" />);
       setTempInitNetwork("", "");
@@ -51,21 +49,7 @@ const InitialInput = () => {
       setInitNetwork("", "");
       setTempInitNetwork("", "");
     }
-  }, [chain?.id, isConnected, tempInitNetworkName]);
-
-  // useEffect(() => {
-  //   setData("", "", "");
-  //   switch (initNetworkName) {
-  //     case "Sepolia":
-  //       return switchNetwork?.(97);
-  //     case "Binance Smart Chain":
-  //       return switchNetwork?.(11155111);
-  //     case "Solana":
-  //       return console.log(chain?.id);
-  //     default:
-  //       return switchNetwork?.(chain?.id);
-  //   }
-  // }, [initNetworkName]);
+  }, [chain?.id, isConnected, tempInitNetworkName, initNetworkName]);
 
   return (
     <div className="flex flex-col gap-4 rounded-2xl border border-white-8 bg-white-4 sm:bg-transparent p-4">

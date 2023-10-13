@@ -38,7 +38,7 @@ export default function DropdownReusable({
     }
     if (placeholder !== "Token") {
       if (name === "Solana" && disableKeys) {
-        console.log("Solana");
+        // console.log("Solana");
       } else {
         setSelectData(name, icon);
       }

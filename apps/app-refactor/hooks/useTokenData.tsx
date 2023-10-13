@@ -4,19 +4,13 @@ import EthIcon from "public/icons/swap/network/eth-icon.svg";
 import BnbIcon from "public/icons/swap/network/bnb-icon.svg";
 import SolanaIcon from "public/icons/swap/network/solana-icon.svg";
 import USDTIcon from "public/icons/swap/token/usdt-icon.svg";
-import { useDestinationNetwork, useInitialData } from "@/lib/store/store";
+import { useInitialData } from "@/lib/store/store";
 import { useNetwork, useSwitchNetwork } from "wagmi";
 
-const useTokenData = (initNetworkName: string) => {
+const useTokenData = (tempInitNetworkName: string) => {
   const [networkArray, setNetworkArray] = useState<any[]>([]);
-  const { tokeninput, tokenname, tokenIcon, setData } = useInitialData(
-    (state) => state
-  );
-  const {
-    networkname: destinationNetworkName,
-    setNetwork: setDestinationNetwork,
-    networkicon: networkDestinationIcon,
-  } = useDestinationNetwork((state) => state);
+  const { setData } = useInitialData((state) => state);
+
   const { chain } = useNetwork();
   const { switchNetwork } = useSwitchNetwork();
 
@@ -86,30 +80,22 @@ const useTokenData = (initNetworkName: string) => {
 
     networkdata
       .filter((datafilter) => {
-        return initNetworkName !== datafilter.name;
+        return tempInitNetworkName !== datafilter.name;
       })
       .map((data) => {
         newArray.push(data);
       });
-
     setNetworkArray(newArray);
 
-    if (initNetworkName === destinationNetworkName) {
-      setDestinationNetwork("", "");
-    }
-
     setData("", "", "");
-    switch (initNetworkName) {
+
+    switch (tempInitNetworkName) {
       case "Sepolia":
         return switchNetwork?.(11155111);
       case "Binance Smart Chain":
         return switchNetwork?.(97);
-      case "Solana":
-        return console.log(chain?.id);
-      default:
-        return console.log(chain?.id);
     }
-  }, [initNetworkName]);
+  }, [tempInitNetworkName]);
 
   return { TokenData, networkdata, networkArray };
 };

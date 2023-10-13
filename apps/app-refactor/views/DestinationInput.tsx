@@ -26,11 +26,15 @@ const DestinationInput = () => {
   } = useDestinationNetwork((state) => state);
 
   const { networkname: initNetworkName } = useInitialNetwork((state) => state);
-  const { TokenData, networkArray } = useTokenData(initNetworkName);
+  const { TokenData, networkArray, networkdata } =
+    useTokenData(initNetworkName);
 
   useEffect(() => {
     setData("", "", "");
-  }, [destinationNetworkName]);
+    // if (initNetworkName === destinationNetworkName) {
+    //   setDestinationNetwork("", "");
+    // }
+  }, [destinationNetworkName, initNetworkName]);
 
   return (
     <div className="flex flex-col gap-4 rounded-2xl border border-white-8 bg-white-4 sm:bg-transparent p-4">
@@ -45,6 +49,7 @@ const DestinationInput = () => {
           disable={isConnected === true ? false : true}
           disableKeys={""}
         />
+
         <DropdownReusable
           datadropdown={TokenData(destinationNetworkName)}
           selectData={tokenname}
