@@ -3,11 +3,14 @@ import DropdownReusable from "@/components/Dropdown";
 import Input from "@/components/Input";
 import TokenBalance from "@/components/TokenBalance";
 import React, { useEffect } from "react";
-import EthIcon from "public/icons/swap/network/eth-icon.svg";
 import BnbIcon from "public/icons/swap/network/bnb-icon.svg";
-import SolanaIcon from "public/icons/swap/network/solana-icon.svg";
-import USDTIcon from "public/icons/swap/token/usdt-icon.svg";
-import { useInitialData, useInitialNetwork } from "@/lib/store/store";
+import EthIcon from "public/icons/swap/network/eth-icon.svg";
+
+import {
+  useInitialData,
+  useInitialNetwork,
+  useTempInitNetwork,
+} from "@/lib/store/store";
 import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
 import useTokenData from "@/hooks/useTokenData";
 
@@ -15,7 +18,6 @@ const InitialInput = () => {
   const { tokeninput, tokenname, tokenIcon, setData } = useInitialData(
     (state) => state
   );
-  const { switchNetwork } = useSwitchNetwork();
   const { chain } = useNetwork();
 
   const { isConnected } = useAccount();
@@ -26,21 +28,44 @@ const InitialInput = () => {
     setNetwork: setInitNetwork,
   } = useInitialNetwork((state) => state);
 
-  const { networkdata, TokenData } = useTokenData(initNetworkName);
+  const { networkname: tempInitNetworkName, setNetwork: setTempInitNetwork } =
+    useTempInitNetwork((state) => state);
+
+  const { networkdata, TokenData } = useTokenData(tempInitNetworkName);
 
   useEffect(() => {
-    setData("", "", "");
-    switch (initNetworkName) {
-      case "Sepolia":
-        return switchNetwork?.(97);
-      case "Binance Smart Chain":
-        return switchNetwork?.(11155111);
-      case "Solana":
-        return console.log(chain?.id);
-      default:
-        return switchNetwork?.(chain?.id);
+    console.log(tempInitNetworkName);
+    if (tempInitNetworkName === "Sepolia" || chain?.id === 11155111) {
+      setInitNetwork("Sepolia", <EthIcon className="w-full max-w-[24px]" />);
+      setTempInitNetwork("", "");
+    } else if (
+      tempInitNetworkName === "Binance Smart Chain" ||
+      chain?.id === 97
+    ) {
+      setInitNetwork(
+        "Binance Smart Chain",
+        <BnbIcon className="w-full max-w-[24px]" />
+      );
+      setTempInitNetwork("", "");
+    } else {
+      setInitNetwork("", "");
+      setTempInitNetwork("", "");
     }
-  }, [initNetworkName]);
+  }, [chain?.id, isConnected, tempInitNetworkName]);
+
+  // useEffect(() => {
+  //   setData("", "", "");
+  //   switch (initNetworkName) {
+  //     case "Sepolia":
+  //       return switchNetwork?.(97);
+  //     case "Binance Smart Chain":
+  //       return switchNetwork?.(11155111);
+  //     case "Solana":
+  //       return console.log(chain?.id);
+  //     default:
+  //       return switchNetwork?.(chain?.id);
+  //   }
+  // }, [initNetworkName]);
 
   return (
     <div className="flex flex-col gap-4 rounded-2xl border border-white-8 bg-white-4 sm:bg-transparent p-4">
@@ -48,7 +73,7 @@ const InitialInput = () => {
         <DropdownReusable
           datadropdown={networkdata}
           selectData={initNetworkName}
-          setSelectData={setInitNetwork}
+          setSelectData={setTempInitNetwork}
           title={"initial-network"}
           placeholder={"Network"}
           icon={initNetworkIcon}

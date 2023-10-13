@@ -2,12 +2,8 @@
 import DropdownReusable from "@/components/Dropdown";
 import Input from "@/components/Input";
 import TokenBalance from "@/components/TokenBalance";
-import React, { useEffect, useState } from "react";
-import EthIcon from "public/icons/swap/network/eth-icon.svg";
-import BnbIcon from "public/icons/swap/network/bnb-icon.svg";
-import SolanaIcon from "public/icons/swap/network/solana-icon.svg";
-import NetworkIcon from "public/icons/swap/network-icon.svg";
-import TokenIcon from "public/icons/swap/token/token-icon.svg";
+import React, { useEffect } from "react";
+
 import {
   useDestinationData,
   useDestinationNetwork,
@@ -43,19 +39,21 @@ const DestinationInput = () => {
           datadropdown={networkArray}
           selectData={destinationNetworkName}
           setSelectData={setDestinationNetwork}
-          title={"initial-network"}
+          title={"destination-network"}
           placeholder={"Network"}
           icon={networkDestinationIcon}
           disable={isConnected === true ? false : true}
+          disableKeys={""}
         />
         <DropdownReusable
           datadropdown={TokenData(destinationNetworkName)}
           selectData={tokenname}
           setSelectData={setData}
-          title={"initial-token"}
+          title={"destination-token"}
           placeholder={"Token"}
           icon={tokenIcon}
           disable={destinationNetworkName !== "" ? false : true}
+          disableKeys={""}
         />
       </div>
 

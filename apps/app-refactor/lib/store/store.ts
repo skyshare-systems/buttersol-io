@@ -37,6 +37,14 @@ export const useInitialNetwork = create<INetwork>((set) => ({
   },
 }));
 
+export const useTempInitNetwork = create<INetwork>((set) => ({
+  networkname: "",
+  networkicon: "",
+  setNetwork: (networkname, networkicon) => {
+    set((state) => ({ ...state, networkname, networkicon }));
+  },
+}));
+
 export const useDestinationNetwork = create<INetwork>((set) => ({
   networkname: "",
   networkicon: "",

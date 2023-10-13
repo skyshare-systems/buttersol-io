@@ -11,6 +11,7 @@ import {
   useInitialNetwork,
   useShowDetails,
   useSolanaAddress,
+  useTempInitNetwork,
   useView,
 } from "@/lib/store/store";
 import { useAccount } from "wagmi";
@@ -19,7 +20,6 @@ export const ConnectWallet = () => {
   const { setStep } = useView((state) => state);
   // Init Data
   const { setData: setInitData } = useInitialData((state) => state);
-  const { setNetwork: setInitNetwork } = useInitialNetwork((state) => state);
   // Destination Data
   const { setData: setDestinationData } = useDestinationData((state) => state);
   const { setNetwork: setDestinationNetwork } = useDestinationNetwork(
@@ -32,7 +32,6 @@ export const ConnectWallet = () => {
 
   useEffect(() => {
     setInitData("", "", "");
-    setInitNetwork("", "");
     setDestinationData("", "", "");
     setDestinationNetwork("", "");
     setSolanaAddress("");

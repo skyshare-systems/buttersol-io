@@ -76,14 +76,14 @@ const GuideStepTwo = () => {
                   <>
                     <span className="flex items-center gap-2 text-white-100">
                       <ETHIcon className="w-full max-w-[16px]" />
-                      Ethereum Sepolia Faucet {x.id}
+                      Ethereum Sepolia Faucet
                     </span>
                   </>
                 )}
                 {x.name === "Binance Smart Chain Testnet" && (
                   <span className="flex items-center gap-2 text-primary-100">
                     <BNBIcon />
-                    Binance Smartchain Testnet {x.id}
+                    Binance Smartchain Testnet
                   </span>
                 )}
                 <ArrowSideUp

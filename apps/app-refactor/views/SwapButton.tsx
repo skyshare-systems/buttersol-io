@@ -35,8 +35,10 @@ const SwapButton = () => {
 
   function handleConfirm() {
     setStep(3);
-    setStepGuide(12);
     setIsShowModal(true);
+    if (stepGuide === 11) {
+      setStepGuide(12);
+    }
   }
 
   if (!hasMounted) {

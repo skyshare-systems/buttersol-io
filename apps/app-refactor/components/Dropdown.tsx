@@ -60,9 +60,10 @@ export default function DropdownReusable({
                 icon
               ) : (
                 <>
-                  {placeholder === "Token" ? (
+                  {placeholder === "Token" && (
                     <TokenIcon className="w-full max-w-[1rem]" />
-                  ) : (
+                  )}
+                  {placeholder === "Network" && (
                     <NetworkIcon className="w-full max-w-[1rem]" />
                   )}
                 </>
@@ -97,7 +98,13 @@ export default function DropdownReusable({
                 ${placeholder === "Token" ? "pr-[4rem]" : "pr-[0]"}`}
                   onClick={() => handleClick(data.name, data.icon)}
                 >
-                  <div className="flex flex-row items-center gap-2 cursor-not-allowed">
+                  <div
+                    className={`flex flex-row items-center gap-2 ${
+                      disableKeys === data.name
+                        ? "cursor-not-allowed"
+                        : "cursor-pointer"
+                    }`}
+                  >
                     {data.icon} {data.name}
                   </div>
                 </DropdownItem>

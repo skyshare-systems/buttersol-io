@@ -7,6 +7,7 @@ import {
   useInitialNetwork,
   useShowDetails,
   useSolanaAddress,
+  useTempInitNetwork,
   useView,
 } from "@/lib/store/store";
 import React from "react";
@@ -28,10 +29,14 @@ const NotificationSwap = () => {
   const { setStepGuide } = useGuideSwap((state) => state);
   const { setSolanaAddress } = useSolanaAddress((state) => state);
   const { setShowDetails } = useShowDetails((state) => state);
+  const { setNetwork: setTempInitNetwork } = useTempInitNetwork(
+    (state) => state
+  );
 
   function handleSwapAgain() {
     setInitData("", "", "");
     setInitNetwork("", "");
+    setTempInitNetwork("", "");
     setDestinationData("", "", "");
     setDestinationNetwork("", "");
     setSolanaAddress("");
