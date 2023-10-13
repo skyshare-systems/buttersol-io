@@ -14,6 +14,7 @@ import GuideStepEight from "@/views/GuideStep8";
 import GuideStepNine from "@/views/GuideStep9";
 import GuideStepTen from "@/views/GuideStep10";
 import GuideStepEleven from "@/views/GuideStep11";
+import GuideStepTwelve from "./GuideStep12";
 
 const GuideSwap = () => {
   const { isConnected } = useAccount();
@@ -37,6 +38,7 @@ const GuideSwap = () => {
       {stepGuide === 9 && <GuideStepNine />}
       {stepGuide === 10 && <GuideStepTen />}
       {stepGuide === 11 && <GuideStepEleven />}
+      {stepGuide === 12 && <GuideStepTwelve />}
     </>
   );
 };

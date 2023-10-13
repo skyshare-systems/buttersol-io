@@ -1,10 +1,11 @@
 "use client";
 import {
+  useApprove,
   useDestinationNetwork,
   useGuideSwap,
   useInitialData,
 } from "@/lib/store/store";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAccount } from "wagmi";
 import TutorialStepIndicator from "@/components/TutorialStepIndicator";
 
@@ -13,6 +14,11 @@ const GuideStepNine = () => {
   const { stepGuide, setStepGuide } = useGuideSwap((state) => state);
   const { networkname } = useDestinationNetwork((state) => state);
   const { tokenname, tokeninput } = useInitialData((state) => state);
+  const { isApprove } = useApprove((state) => state);
+
+  useEffect(() => {
+    if (isApprove) setStepGuide(10);
+  }, [isApprove]);
 
   return (
     <div

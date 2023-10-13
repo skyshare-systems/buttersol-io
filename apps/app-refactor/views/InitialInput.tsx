@@ -2,18 +2,21 @@
 import DropdownReusable from "@/components/Dropdown";
 import Input from "@/components/Input";
 import TokenBalance from "@/components/TokenBalance";
-import React from "react";
+import React, { useEffect } from "react";
 import EthIcon from "public/icons/swap/network/eth-icon.svg";
 import BnbIcon from "public/icons/swap/network/bnb-icon.svg";
 import SolanaIcon from "public/icons/swap/network/solana-icon.svg";
 import USDTIcon from "public/icons/swap/token/usdt-icon.svg";
 import { useInitialData, useInitialNetwork } from "@/lib/store/store";
-import { useAccount } from "wagmi";
+import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
+import useTokenData from "@/hooks/useTokenData";
 
 const InitialInput = () => {
   const { tokeninput, tokenname, tokenIcon, setData } = useInitialData(
     (state) => state
   );
+  const { switchNetwork } = useSwitchNetwork();
+  const { chain } = useNetwork();
 
   const { isConnected } = useAccount();
 
@@ -23,39 +26,21 @@ const InitialInput = () => {
     setNetwork: setInitNetwork,
   } = useInitialNetwork((state) => state);
 
-  const networkdata = [
-    {
-      name: "Sepolia",
-      icon: <EthIcon className="w-full max-w-[24px]" />,
-    },
-    {
-      name: "Binance Smart Chain",
-      icon: <BnbIcon className="w-full max-w-[24px]" />,
-    },
-    {
-      name: "Solana",
-      icon: <SolanaIcon className="w-full max-w-[24px]" />,
-    },
-  ];
+  const { networkdata, TokenData } = useTokenData(initNetworkName);
 
-  const tokendata = [
-    {
-      name: "ETH",
-      icon: <EthIcon className="w-full max-w-[24px]" />,
-    },
-    {
-      name: "BNB",
-      icon: <BnbIcon className="w-full max-w-[24px]" />,
-    },
-    {
-      name: "SOL",
-      icon: <SolanaIcon className="w-full max-w-[24px]" />,
-    },
-    {
-      name: "USDT",
-      icon: <USDTIcon className="w-full max-w-[24px]" />,
-    },
-  ];
+  useEffect(() => {
+    setData("", "", "");
+    switch (initNetworkName) {
+      case "Sepolia":
+        return switchNetwork?.(97);
+      case "Binance Smart Chain":
+        return switchNetwork?.(11155111);
+      case "Solana":
+        return console.log(chain?.id);
+      default:
+        return switchNetwork?.(chain?.id);
+    }
+  }, [initNetworkName]);
 
   return (
     <div className="flex flex-col gap-4 rounded-2xl border border-white-8 bg-white-4 sm:bg-transparent p-4">
@@ -68,15 +53,17 @@ const InitialInput = () => {
           placeholder={"Network"}
           icon={initNetworkIcon}
           disable={isConnected === true ? false : true}
+          disableKeys={"Solana"}
         />
         <DropdownReusable
-          datadropdown={tokendata}
+          datadropdown={TokenData(initNetworkName)}
           selectData={tokenname}
           setSelectData={setData}
           title={"initial-token"}
           placeholder={"Token"}
           icon={tokenIcon}
           disable={initNetworkName !== "" ? false : true}
+          disableKeys={""}
         />
       </div>
 

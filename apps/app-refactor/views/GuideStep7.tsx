@@ -5,7 +5,7 @@ import {
   useGuideSwap,
   useInitialData,
 } from "@/lib/store/store";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAccount } from "wagmi";
 
 const GuideStepSeven = () => {
@@ -13,6 +13,10 @@ const GuideStepSeven = () => {
   const { stepGuide, setStepGuide } = useGuideSwap((state) => state);
   const { networkname } = useDestinationNetwork((state) => state);
   const { tokenname, tokeninput } = useInitialData((state) => state);
+
+  useEffect(() => {
+    if (tokeninput === "" && stepGuide === 7) setStepGuide(6);
+  }, [tokeninput]);
 
   return (
     <div className="absolute left-0 2xl:left-[11.5%] top-[45%] z-[12] hidden lg:block">

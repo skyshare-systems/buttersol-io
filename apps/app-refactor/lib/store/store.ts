@@ -1,8 +1,10 @@
 import { create } from "zustand";
 import {
+  IApprove,
   IGuideSwap,
   INetwork,
   INotification,
+  IPhantomGuide,
   IShowDetails,
   ISolanaAddress,
   IStep,
@@ -71,9 +73,23 @@ export const useGuideSwap = create<IGuideSwap>((set) => ({
   },
 }));
 
+export const usePhantomGuide = create<IPhantomGuide>((set) => ({
+  stepPhantomGuide: 0,
+  setStepPhantomGuide: (stepPhantomGuide) => {
+    set((state) => ({ ...state, stepPhantomGuide }));
+  },
+}));
+
 export const useShowDetails = create<IShowDetails>((set) => ({
   showDetails: false,
   setShowDetails: (showDetails) => {
     set((state) => ({ ...state, showDetails }));
+  },
+}));
+
+export const useApprove = create<IApprove>((set) => ({
+  isApprove: false,
+  setIsApprove: (isApprove) => {
+    set((state) => ({ ...state, isApprove }));
   },
 }));

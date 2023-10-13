@@ -4,6 +4,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import useMounted from "@/hooks/useMounted";
 import WarningIcon from "public/icons/swap/warning-icon.svg";
 import {
+  useApprove,
   useDestinationNetwork,
   useGuideSwap,
   useInitialData,
@@ -14,7 +15,7 @@ import {
 import ButtonSkeleton from "@/components/ButtonSkeleton";
 
 const SwapButton = () => {
-  const [isApprove, setIsApprove] = useState<boolean>(false);
+  const { isApprove, setIsApprove } = useApprove((state) => state);
   const { hasMounted } = useMounted();
 
   const { step, setStep } = useView((state) => state);
@@ -34,6 +35,7 @@ const SwapButton = () => {
 
   function handleConfirm() {
     setStep(3);
+    setStepGuide(12);
     setIsShowModal(true);
   }
 

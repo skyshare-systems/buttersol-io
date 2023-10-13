@@ -6,6 +6,7 @@ import ETHIcon from "public/icons/swap/network/eth-icon.svg";
 import BNBIcon from "public/icons/tutorial/binance-tutorial-icon.svg";
 import ArrowIcon from "public/icons/swap/arrow-icon.svg";
 import TutorialStepIndicator from "@/components/TutorialStepIndicator";
+import Link from "next/link";
 
 const GuideStepThree = () => {
   const { stepGuide, setStepGuide } = useGuideSwap((state) => state);
@@ -17,24 +18,28 @@ const GuideStepThree = () => {
         <div className="flex flex-col p-4 gap-4 rounded-2xl border border-white-16 bg-white-4 max-w-[320px] w-screen backdrop-blur-[32px]">
           <TutorialStepIndicator title={"Claim testnet tokens on faucets."} />
           <div className="flex flex-col gap-2">
-            <a
-              className={`p-2  flex justify-between items-center gap-2 rounded-lg group duration-150 bg-white-4 hover:bg-white-8 descriptions group`}
+            <Link
+              href="https://sepoliafaucet.com/?fbclid=IwAR18Pw45z3qVKANX_y1KXYRifrmxHov6ofmngMBAqv7ebYcxDIeHHHHYLl4"
+              target="_blank"
+              className={`p-2  flex justify-between items-center gap-2 rounded-lg group duration-150 bg-white-4 hover:bg-white-8 descriptions group cursor-pointer`}
             >
               <span className="flex items-center gap-2 text-white-100">
                 <ETHIcon className="w-full max-w-[16px]" />
                 Ethereum Faucet
               </span>
               <ArrowIcon className="rotate-90 w-full max-w-[12px] opacity-50 group-hover:opacity-100" />
-            </a>
-            <a
-              className={`p-2  flex justify-between items-center gap-2 rounded-lg group duration-150 bg-white-4 hover:bg-white-8 descriptions group`}
+            </Link>
+            <Link
+              href="https://testnet.bnbchain.org/faucet-smart?fbclid=IwAR1oIqamLxv_02U5lAiBuBpW7ALbJ3SyrYR9QxTzwHoQNhuau56gMto6AFY"
+              target="_blank"
+              className={`p-2  flex justify-between items-center gap-2 rounded-lg group duration-150 bg-white-4 hover:bg-white-8 descriptions group cursor-pointer`}
             >
               <span className="flex items-center gap-2 text-primary-100">
                 <BNBIcon className="w-full max-w-[16px]" />
                 Binance Smartchain Faucet
               </span>
               <ArrowIcon className="rotate-90 w-full max-w-[12px] opacity-50 group-hover:opacity-100" />
-            </a>
+            </Link>
           </div>
           <div className="flex justify-between items-center">
             <button

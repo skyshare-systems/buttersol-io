@@ -15,7 +15,6 @@ const GuideMeButton = () => {
     } else {
       setStepGuide(1);
     }
-    console.log(stepGuide);
   }
 
   return (

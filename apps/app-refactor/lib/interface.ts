@@ -30,7 +30,17 @@ export interface IGuideSwap {
   setStepGuide: (stepGuide: number) => void;
 }
 
+export interface IPhantomGuide {
+  stepPhantomGuide: number;
+  setStepPhantomGuide: (stepPhantomGuide: number) => void;
+}
+
 export interface IShowDetails {
   showDetails: boolean;
   setShowDetails: (showDetails: boolean) => void;
+}
+
+export interface IApprove {
+  isApprove: boolean;
+  setIsApprove: (isApprove: boolean) => void;
 }

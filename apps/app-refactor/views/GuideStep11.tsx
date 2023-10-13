@@ -16,7 +16,7 @@ const GuideStepEleven = () => {
 
   return (
     <div
-      className={`absolute left-0 2xl:left-[11.5%] bottom-[5%]  z-[12] hidden lg:block`}
+      className={`absolute left-0 2xl:left-[11.5%] -bottom-[9.5%]  z-[12] hidden lg:block`}
     >
       <div className="flex flex-col p-4 gap-4 rounded-2xl border border-white-16 bg-white-4 max-w-[320px]">
         <TutorialStepIndicator
@@ -24,6 +24,15 @@ const GuideStepEleven = () => {
             "Click Continue Swapping button to proceed with the transaction."
           }
         />
+
+        <div className="p-4 rounded-lg border border-secondary-100 bg-white-4 flex flex-col gap-2">
+          <h1 className="subtitle text-secondary-100">
+            For Solana Destination Network:
+          </h1>
+          <h1 className="descriptions text-white-100">
+            Input your Solana Wallet Address first to continue swapping
+          </h1>
+        </div>
 
         <div className="flex justify-between items-center">
           <button

@@ -5,7 +5,7 @@ import {
   useInitialData,
   useShowDetails,
 } from "@/lib/store/store";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAccount } from "wagmi";
 import DropdownIcon from "public/icons/swap/dropdown-icon.svg";
 import ArrowRightIcon from "public/icons/tutorial/arrow-right-icon.svg";
@@ -16,6 +16,10 @@ const GuideStepEight = () => {
   const { networkname } = useDestinationNetwork((state) => state);
   const { tokenname, tokeninput } = useInitialData((state) => state);
   const { showDetails } = useShowDetails((state) => state);
+
+  useEffect(() => {
+    if (showDetails) setStepGuide(9);
+  }, [showDetails, stepGuide]);
 
   return (
     <div
