@@ -15,7 +15,6 @@ const Swap = () => {
       // connect btn is initially disabled
       setShowSwap(true);
     } else {
-      console.log("Please install MetaMask!");
       setShowSwap(false);
     }
   });
