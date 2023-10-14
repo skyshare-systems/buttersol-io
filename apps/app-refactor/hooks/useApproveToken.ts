@@ -25,7 +25,7 @@ const useApproveToken = () => {
     address: tokenAddress0 ?? "",
     abi: TokenABI,
     functionName: "approve",
-    args: [spenderInitAddress, BigInt(String(ethers.MaxUint256))],
+    args: [spenderInitAddress, BigInt(String(ethers.constants.MaxUint256))],
   });
   const { writeAsync: approveToken } = useContractWrite(configApprove);
 
@@ -49,7 +49,7 @@ const useApproveToken = () => {
   };
 
   function checkAllowance() {
-    if (Number(ethers.formatEther(String(dataAllowance))) ?? 0 > 0) {
+    if (Number(ethers.utils.formatEther(String(dataAllowance))) ?? 0 > 0) {
       setIsApprove(true);
       // console.log(Number(ethers.formatEther(String(dataAllowance))) ?? 0);
       //   setAllowance(Number(ethers.formatEther(String(dataAllowance))) ?? 0);
