@@ -14,6 +14,7 @@ import {
 import ButtonSkeleton from "@/components/ButtonSkeleton";
 import SwapApproveButton from "./SwapApproveButton";
 import useApproveToken from "@/hooks/useApproveToken";
+import useButterSwap from "@/hooks/useButterSwap";
 
 const SwapButton = () => {
   const { isApprove } = useApprove((state) => state);
@@ -34,12 +35,24 @@ const SwapButton = () => {
   }
 
   function handleConfirm() {
-    setStep(3);
-    setIsShowModal(true);
-    if (stepGuide === 11) {
-      setStepGuide(12);
+    if (!isErrorSwap) {
+      writeButterSwap?.()
+        .then((res) => {
+          console.log(res);
+
+          setStep(3);
+          setIsShowModal(true);
+          if (stepGuide === 11) {
+            setStepGuide(12);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
+
+  const { isErrorSwap, writeButterSwap } = useButterSwap();
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -107,15 +120,16 @@ const SwapButton = () => {
                           <button
                             onClick={() => handleConfirm()}
                             disabled={
-                              destinationNetworkName === "Solana"
-                                ? solanaAddress === ""
-                                  ? true
-                                  : false
+                              (destinationNetworkName === "Solana" &&
+                                solanaAddress === "") ||
+                              isErrorSwap
+                                ? true
                                 : false
                             }
                             className={`px-[18px] py-[19px] rounded-lg ${
-                              destinationNetworkName === "Solana" &&
-                              solanaAddress === ""
+                              (destinationNetworkName === "Solana" &&
+                                solanaAddress === "") ||
+                              isErrorSwap
                                 ? "bg-white-4 text-white-50 cursor-not-allowed"
                                 : "bg-primary-100 text-dark-100 cursor-pointer hover:opacity-50"
                             }  w-full title font-bold duration-150`}
@@ -127,9 +141,9 @@ const SwapButton = () => {
                           <div className="w-full px-4 sm:px-0">
                             <button
                               onClick={handleClick}
-                              disabled={tokeninput <= 0 ? true : false}
+                              disabled={isErrorSwap ? true : false}
                               className={`px-[18px] py-[19px] rounded-lg ${
-                                tokeninput <= 0
+                                isErrorSwap
                                   ? "bg-white-4 text-white-50 cursor-not-allowed"
                                   : "bg-primary-100 text-dark-100 cursor-pointer hover:opacity-50"
                               }  w-full title font-bold duration-150`}

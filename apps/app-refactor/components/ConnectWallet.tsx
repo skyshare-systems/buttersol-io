@@ -9,8 +9,11 @@ import {
   useDestinationNetwork,
   useGuideSwap,
   useInitialData,
+  useInitialNetwork,
   useShowDetails,
   useSolanaAddress,
+  useTempInitNetwork,
+  useTempSwitchNetwork,
   useView,
 } from "@/lib/store/store";
 import { useAccount } from "wagmi";
@@ -19,6 +22,10 @@ export const ConnectWallet = () => {
   const { setStep } = useView((state) => state);
   // Init Data
   const { setData: setInitData } = useInitialData((state) => state);
+  const { setNetwork: setInitNetwork } = useInitialNetwork((state) => state);
+  const { setNetwork: setTempInitNetwork } = useTempInitNetwork(
+    (state) => state
+  );
   // Destination Data
   const { setData: setDestinationData } = useDestinationData((state) => state);
   const { setNetwork: setDestinationNetwork } = useDestinationNetwork(
@@ -26,16 +33,20 @@ export const ConnectWallet = () => {
   );
   const { setSolanaAddress } = useSolanaAddress((state) => state);
   const { setShowDetails } = useShowDetails((state) => state);
-  const { setIsApprove } = useApprove((state) => state);
+  const { setNetwork: setTempSwitchNetwork } = useTempSwitchNetwork(
+    (state) => state
+  );
   const { isConnected } = useAccount();
 
   useEffect(() => {
     setInitData("", "", "", "");
+    setInitNetwork("", "", "", "", "");
+    setTempInitNetwork("", "", "", "", "");
+    setTempSwitchNetwork("", "", "", "", "");
     setDestinationData("", "", "", "");
-    setDestinationNetwork("", "", "");
+    setDestinationNetwork("", "", "", "", "");
     setSolanaAddress("");
     setShowDetails(false);
-    setIsApprove(false);
     setStep(1);
     // console.log(stepGuide);
   }, [isConnected]);

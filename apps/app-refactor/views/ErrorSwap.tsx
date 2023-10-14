@@ -34,11 +34,11 @@ const ErrorSwap = () => {
   );
 
   function handleSwapAgain() {
-    setInitData("", "", "");
-    setInitNetwork("", "");
-    setTempInitNetwork("", "");
-    setDestinationData("", "", "");
-    setDestinationNetwork("", "");
+    setInitData("", "", "", "");
+    setInitNetwork("", "", "", "", "");
+    setTempInitNetwork("", "", "", "", "");
+    setDestinationData("", "", "", "");
+    setDestinationNetwork("", "", "", "", "");
     setSolanaAddress("");
     setShowDetails(false);
     setStep(1);

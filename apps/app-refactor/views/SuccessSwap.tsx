@@ -40,11 +40,11 @@ const SuccessSwap = () => {
 
   function handleSwapAgain() {
     setInitData("", "", "", "");
-    setInitNetwork("", "", "");
-    setTempInitNetwork("", "", "");
-    setTempSwitchNetwork("", "", "");
+    setInitNetwork("", "", "", "", "");
+    setTempInitNetwork("", "", "", "", "");
+    setTempSwitchNetwork("", "", "", "", "");
     setDestinationData("", "", "", "");
-    setDestinationNetwork("", "", "");
+    setDestinationNetwork("", "", "", "", "");
     setSolanaAddress("");
     setShowDetails(false);
     setStep(1);

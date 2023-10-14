@@ -28,7 +28,7 @@ const DestinationInput = () => {
   const { networkname: initNetworkName } = useInitialNetwork((state) => state);
   const { TokenData, networkArray } = useTokenData(initNetworkName);
 
-  const { token1, getAmountOut } = useToken1Data();
+  useToken1Data();
 
   useEffect(() => {
     setData("", 0.0, "", "");
@@ -67,11 +67,11 @@ const DestinationInput = () => {
         <Input
           id={"token1"}
           placeholder={"0.00"}
-          value={token1}
+          value={tokeninput}
           disabled
           onChange={(
             value: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-          ) => setData(tokenname, getAmountOut, tokenIcon, tokenAddress)}
+          ) => setData(tokenname, tokeninput, tokenIcon, tokenAddress)}
         />
       </div>
       <TokenBalance dollars={0.0} balance={0.0} token={tokenname} />

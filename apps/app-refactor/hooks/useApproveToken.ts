@@ -40,18 +40,16 @@ const useApproveToken = () => {
     approveToken?.()
       .then((res) => {
         console.log(res);
-        setIsApprove(true);
       })
       .catch((err) => {
         console.log(err);
-        setIsApprove(false);
       });
   };
 
   function checkAllowance() {
     if (Number(ethers.utils.formatEther(String(dataAllowance))) ?? 0 > 0) {
       setIsApprove(true);
-      // console.log(Number(ethers.formatEther(String(dataAllowance))) ?? 0);
+      console.log(Number(ethers.utils.formatEther(String(dataAllowance))) ?? 0);
       //   setAllowance(Number(ethers.formatEther(String(dataAllowance))) ?? 0);
     } else {
       setIsApprove(false);
@@ -61,7 +59,14 @@ const useApproveToken = () => {
     }
   }
 
-  return { approveSpender, tokeninput, checkAllowance, allowance, isApprove };
+  return {
+    approveSpender,
+    tokeninput,
+    checkAllowance,
+    allowance,
+    isApprove,
+    setAllowance,
+  };
 };
 
 export default useApproveToken;

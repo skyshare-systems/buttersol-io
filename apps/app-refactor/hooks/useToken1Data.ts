@@ -16,7 +16,12 @@ const useToken1Data = () => {
 
   const { tokeninput: tokenInput0, tokenAddress: tokenAddress0 } =
     useInitialData((state) => state);
-  const { tokenAddress: tokenAddress1 } = useDestinationData((state) => state);
+  const {
+    tokenAddress: tokenAddress1,
+    tokenIcon,
+    tokenname,
+    setData,
+  } = useDestinationData((state) => state);
 
   const { data: getPair } = useContractRead({
     address: factoryAddress,
@@ -46,20 +51,22 @@ const useToken1Data = () => {
 
   function calculateToken1() {
     try {
-      // console.log(getAmountOut);
-
       const amount = ethers.utils.formatUnits(String(getAmountOut), 18);
 
       console.log(amount + " amount");
-      setToken1(amount);
+      setData(tokenname, amount, tokenIcon, tokenAddress1);
+      // setToken1(amount);
     } catch (err) {
-      setToken1(0);
+      setData(tokenname, "", tokenIcon, tokenAddress1);
+      // setToken1(0);
+      console.log(err);
     }
   }
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       if (tokenInput0 > 0) calculateToken1();
+      if (tokenInput0 <= 0) setData(tokenname, "", tokenIcon, tokenAddress1);
     }, 1000);
 
     return () => clearTimeout(delayDebounceFn);
