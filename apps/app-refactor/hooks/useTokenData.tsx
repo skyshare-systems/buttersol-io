@@ -18,10 +18,12 @@ const useTokenData = (tempInitNetworkName: string) => {
     {
       name: "ETH",
       icon: <EthIcon className="w-full max-w-[24px]" />,
+      address: "0xdc36F92a63A9a78B0175677F926dA3B2d01D745D",
     },
     {
       name: "USDT",
       icon: <USDTIcon className="w-full max-w-[24px]" />,
+      address: "0xf8Fa70AD19566C2D3D8c25717CdCbb257F5b59Ce",
     },
   ];
 
@@ -29,10 +31,12 @@ const useTokenData = (tempInitNetworkName: string) => {
     {
       name: "BNB",
       icon: <BnbIcon className="w-full max-w-[24px]" />,
+      address: "0x4A232629A6e7Db30C70750ff572284617824e0DB",
     },
     {
       name: "USDT",
       icon: <USDTIcon className="w-full max-w-[24px]" />,
+      address: "0x09d6Ca1C9B51436a464F8241726e7FDCC713183b",
     },
   ];
 
