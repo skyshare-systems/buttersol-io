@@ -15,14 +15,22 @@ const { chains, publicClient } = configureChains(
   [sepolia, bscTestnet],
   [
     // alchemyProvider({ apiKey: process.env.API_KEY ?? "" }),
-    // jsonRpcProvider({
-    //   rpc: (chain) =>
-    //     chain.id === 80001
-    //       ? {
-    //           http: `https://mumbai.rpc.thirdweb.com`,
-    //         }
-    //       : null,
-    // }),
+    jsonRpcProvider({
+      rpc: (chain) =>
+        chain.id === 97
+          ? {
+              http: `https://bsc-testnet.publicnode.com`,
+            }
+          : null,
+    }),
+    jsonRpcProvider({
+      rpc: (chain) =>
+        chain.id === 11155111
+          ? {
+              http: `https://eth-sepolia.g.alchemy.com/v2/s-hdjLqITCIC-0yx948QMzzi7v-43Sss`,
+            }
+          : null,
+    }),
     publicProvider(),
   ]
 );

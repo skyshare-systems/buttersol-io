@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import useMounted from "@/hooks/useMounted";
 import WarningIcon from "public/icons/swap/warning-icon.svg";
@@ -7,19 +7,19 @@ import {
   useApprove,
   useDestinationNetwork,
   useGuideSwap,
-  useInitialData,
   useNotificationSwap,
   useSolanaAddress,
   useView,
 } from "@/lib/store/store";
 import ButtonSkeleton from "@/components/ButtonSkeleton";
+import SwapApproveButton from "./SwapApproveButton";
+import useApproveToken from "@/hooks/useApproveToken";
 
 const SwapButton = () => {
-  const { isApprove, setIsApprove } = useApprove((state) => state);
+  const { isApprove } = useApprove((state) => state);
   const { hasMounted } = useMounted();
-
+  const { tokeninput, checkAllowance } = useApproveToken();
   const { step, setStep } = useView((state) => state);
-  const { tokeninput } = useInitialData((state) => state);
   const { solanaAddress } = useSolanaAddress((state) => state);
   const { networkname: destinationNetworkName } = useDestinationNetwork(
     (state) => state
@@ -40,6 +40,14 @@ const SwapButton = () => {
       setStepGuide(12);
     }
   }
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (tokeninput > 0) checkAllowance();
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [tokeninput]);
 
   if (!hasMounted) {
     return <ButtonSkeleton />;
@@ -133,17 +141,7 @@ const SwapButton = () => {
                       </>
                     ) : (
                       <div className="w-full px-4 sm:px-0">
-                        <button
-                          onClick={() => setIsApprove(true)}
-                          disabled={tokeninput <= 0 ? true : false}
-                          className={`px-[18px] py-[19px] rounded-lg ${
-                            tokeninput <= 0
-                              ? "bg-white-4 text-white-50 cursor-not-allowed"
-                              : "bg-white-100 text-dark-100 cursor-pointer hover:opacity-50"
-                          } w-full title font-bold duration-150`}
-                        >
-                          Approve Wallet
-                        </button>
+                        <SwapApproveButton />
                       </div>
                     )}
                   </>

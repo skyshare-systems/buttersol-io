@@ -4,14 +4,13 @@ import WalletIcon from "@/components/WalletIcon";
 import WarningIcon from "public/icons/swap/warning-icon.svg";
 import { useEffect } from "react";
 import {
+  useApprove,
   useDestinationData,
   useDestinationNetwork,
   useGuideSwap,
   useInitialData,
-  useInitialNetwork,
   useShowDetails,
   useSolanaAddress,
-  useTempInitNetwork,
   useView,
 } from "@/lib/store/store";
 import { useAccount } from "wagmi";
@@ -25,17 +24,18 @@ export const ConnectWallet = () => {
   const { setNetwork: setDestinationNetwork } = useDestinationNetwork(
     (state) => state
   );
-  const { stepGuide } = useGuideSwap((state) => state);
   const { setSolanaAddress } = useSolanaAddress((state) => state);
   const { setShowDetails } = useShowDetails((state) => state);
+  const { setIsApprove } = useApprove((state) => state);
   const { isConnected } = useAccount();
 
   useEffect(() => {
-    setInitData("", "", "");
-    setDestinationData("", "", "");
-    setDestinationNetwork("", "");
+    setInitData("", "", "", "");
+    setDestinationData("", "", "", "");
+    setDestinationNetwork("", "", "");
     setSolanaAddress("");
     setShowDetails(false);
+    setIsApprove(false);
     setStep(1);
     // console.log(stepGuide);
   }, [isConnected]);

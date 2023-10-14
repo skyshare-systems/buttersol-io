@@ -11,11 +11,11 @@ import {
 } from "@/lib/store/store";
 import { useAccount } from "wagmi";
 import useTokenData from "@/hooks/useTokenData";
+import useToken1Data from "@/hooks/useToken1Data";
 
 const DestinationInput = () => {
-  const { tokeninput, tokenname, tokenIcon, setData } = useDestinationData(
-    (state) => state
-  );
+  const { tokeninput, tokenname, tokenIcon, tokenAddress, setData } =
+    useDestinationData((state) => state);
 
   const { isConnected } = useAccount();
 
@@ -26,11 +26,12 @@ const DestinationInput = () => {
   } = useDestinationNetwork((state) => state);
 
   const { networkname: initNetworkName } = useInitialNetwork((state) => state);
-  const { TokenData, networkArray, networkdata } =
-    useTokenData(initNetworkName);
+  const { TokenData, networkArray } = useTokenData(initNetworkName);
+
+  const { token1, getAmountOut } = useToken1Data();
 
   useEffect(() => {
-    setData("", "", "");
+    setData("", 0.0, "", "");
     // if (initNetworkName === destinationNetworkName) {
     //   setDestinationNetwork("", "");
     // }
@@ -51,7 +52,7 @@ const DestinationInput = () => {
         />
 
         <DropdownReusable
-          datadropdown={TokenData(destinationNetworkName)}
+          datadropdown={TokenData(initNetworkName)}
           selectData={tokenname}
           setSelectData={setData}
           title={"destination-token"}
@@ -62,15 +63,15 @@ const DestinationInput = () => {
         />
       </div>
 
-      <div className="flex flex-row gap-2 items-center px-2">
+      <div className="flex flex-row gap-2 items-center px-2 text-white-100">
         <Input
           id={"token1"}
           placeholder={"0.00"}
-          value={tokeninput}
-          // disabled
+          value={token1}
+          disabled
           onChange={(
             value: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-          ) => setData(tokenname, value, tokenIcon)}
+          ) => setData(tokenname, getAmountOut, tokenIcon, tokenAddress)}
         />
       </div>
       <TokenBalance dollars={0.0} balance={0.0} token={tokenname} />
