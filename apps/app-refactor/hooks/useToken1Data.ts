@@ -37,14 +37,18 @@ const useToken1Data = () => {
     address: routerV2Address ?? "",
     abi: RouterV2ABI,
     functionName: "getAmountOut",
-    args: [tokenInput0, getReserve?.[0], getReserve?.[1]],
+    args: [
+      ethers.utils.parseEther(String(tokenInput0 ? tokenInput0 : 1)),
+      getReserve?.[0],
+      getReserve?.[1],
+    ],
   });
 
   function calculateToken1() {
     try {
       // console.log(getAmountOut);
 
-      const amount = ethers.formatUnits(String(getAmountOut), 18);
+      const amount = ethers.utils.formatUnits(String(getAmountOut), 18);
 
       console.log(amount + " amount");
       setToken1(amount);
