@@ -9,6 +9,7 @@ import {
   useShowDetails,
   useSolanaAddress,
   useTempInitNetwork,
+  useTempSwitchNetwork,
   useView,
 } from "@/lib/store/store";
 import React from "react";
@@ -33,12 +34,17 @@ const SuccessSwap = () => {
     (state) => state
   );
 
+  const { setNetwork: setTempSwitchNetwork } = useTempSwitchNetwork(
+    (state) => state
+  );
+
   function handleSwapAgain() {
-    setInitData("", "", "");
-    setInitNetwork("", "");
-    setTempInitNetwork("", "");
-    setDestinationData("", "", "");
-    setDestinationNetwork("", "");
+    setInitData("", "", "", "");
+    setInitNetwork("", "", "", "", "");
+    setTempInitNetwork("", "", "", "", "");
+    setTempSwitchNetwork("", "", "", "", "");
+    setDestinationData("", "", "", "");
+    setDestinationNetwork("", "", "", "", "");
     setSolanaAddress("");
     setShowDetails(false);
     setStep(1);

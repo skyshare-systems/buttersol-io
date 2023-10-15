@@ -4,6 +4,7 @@ import WalletIcon from "@/components/WalletIcon";
 import WarningIcon from "public/icons/swap/warning-icon.svg";
 import { useEffect } from "react";
 import {
+  useApprove,
   useDestinationData,
   useDestinationNetwork,
   useGuideSwap,
@@ -12,6 +13,7 @@ import {
   useShowDetails,
   useSolanaAddress,
   useTempInitNetwork,
+  useTempSwitchNetwork,
   useView,
 } from "@/lib/store/store";
 import { useAccount } from "wagmi";
@@ -20,20 +22,29 @@ export const ConnectWallet = () => {
   const { setStep } = useView((state) => state);
   // Init Data
   const { setData: setInitData } = useInitialData((state) => state);
+  const { setNetwork: setInitNetwork } = useInitialNetwork((state) => state);
+  const { setNetwork: setTempInitNetwork } = useTempInitNetwork(
+    (state) => state
+  );
   // Destination Data
   const { setData: setDestinationData } = useDestinationData((state) => state);
   const { setNetwork: setDestinationNetwork } = useDestinationNetwork(
     (state) => state
   );
-  const { stepGuide } = useGuideSwap((state) => state);
   const { setSolanaAddress } = useSolanaAddress((state) => state);
   const { setShowDetails } = useShowDetails((state) => state);
+  const { setNetwork: setTempSwitchNetwork } = useTempSwitchNetwork(
+    (state) => state
+  );
   const { isConnected } = useAccount();
 
   useEffect(() => {
-    setInitData("", "", "");
-    setDestinationData("", "", "");
-    setDestinationNetwork("", "");
+    setInitData("", "", "", "");
+    setInitNetwork("", "", "", "", "");
+    setTempInitNetwork("", "", "", "", "");
+    setTempSwitchNetwork("", "", "", "", "");
+    setDestinationData("", "", "", "");
+    setDestinationNetwork("", "", "", "", "");
     setSolanaAddress("");
     setShowDetails(false);
     setStep(1);

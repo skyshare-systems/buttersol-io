@@ -15,8 +15,15 @@ export const useInitialData = create<ITokenData>((set) => ({
   tokeninput: "",
   tokenname: "",
   tokenIcon: "",
-  setData: (tokenname, tokeninput, tokenIcon) => {
-    set((state) => ({ ...state, tokenname, tokeninput, tokenIcon }));
+  tokenAddress: "",
+  setData: (tokenname, tokeninput, tokenIcon, tokenAddress) => {
+    set((state) => ({
+      ...state,
+      tokenname,
+      tokeninput,
+      tokenIcon,
+      tokenAddress,
+    }));
   },
 }));
 
@@ -24,40 +31,111 @@ export const useDestinationData = create<ITokenData>((set) => ({
   tokeninput: "",
   tokenname: "",
   tokenIcon: "",
-  setData: (tokenname, tokeninput, tokenIcon) => {
-    set((state) => ({ ...state, tokenname, tokeninput, tokenIcon }));
+  tokenAddress: "",
+  setData: (tokenname, tokeninput, tokenIcon, tokenAddress) => {
+    set((state) => ({
+      ...state,
+      tokenname,
+      tokeninput,
+      tokenIcon,
+      tokenAddress,
+    }));
   },
 }));
 
 export const useInitialNetwork = create<INetwork>((set) => ({
   networkname: "",
   networkicon: "",
-  setNetwork: (networkname, networkicon) => {
-    set((state) => ({ ...state, networkname, networkicon }));
+  address: "",
+  factoryAddress: "",
+  routerV2Address: "",
+  setNetwork: (
+    networkname,
+    networkicon,
+    address,
+    factoryAddress,
+    routerV2Address
+  ) => {
+    set((state) => ({
+      ...state,
+      networkname,
+      networkicon,
+      address,
+      factoryAddress,
+      routerV2Address,
+    }));
   },
 }));
 
 export const useTempInitNetwork = create<INetwork>((set) => ({
   networkname: "",
   networkicon: "",
-  setNetwork: (networkname, networkicon) => {
-    set((state) => ({ ...state, networkname, networkicon }));
+  address: "",
+  factoryAddress: "",
+  routerV2Address: "",
+  setNetwork: (
+    networkname,
+    networkicon,
+    address,
+    factoryAddress,
+    routerV2Address
+  ) => {
+    set((state) => ({
+      ...state,
+      networkname,
+      networkicon,
+      address,
+      factoryAddress,
+      routerV2Address,
+    }));
   },
 }));
 
 export const useTempSwitchNetwork = create<INetwork>((set) => ({
   networkname: "",
   networkicon: "",
-  setNetwork: (networkname, networkicon) => {
-    set((state) => ({ ...state, networkname, networkicon }));
+  address: "",
+  factoryAddress: "",
+  routerV2Address: "",
+  setNetwork: (
+    networkname,
+    networkicon,
+    address,
+    factoryAddress,
+    routerV2Address
+  ) => {
+    set((state) => ({
+      ...state,
+      networkname,
+      networkicon,
+      address,
+      factoryAddress,
+      routerV2Address,
+    }));
   },
 }));
 
 export const useDestinationNetwork = create<INetwork>((set) => ({
   networkname: "",
   networkicon: "",
-  setNetwork: (networkname, networkicon) => {
-    set((state) => ({ ...state, networkname, networkicon }));
+  address: "",
+  factoryAddress: "",
+  routerV2Address: "",
+  setNetwork: (
+    networkname,
+    networkicon,
+    address,
+    factoryAddress,
+    routerV2Address
+  ) => {
+    set((state) => ({
+      ...state,
+      networkname,
+      networkicon,
+      address,
+      factoryAddress,
+      routerV2Address,
+    }));
   },
 }));
 

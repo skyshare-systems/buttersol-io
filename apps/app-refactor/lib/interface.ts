@@ -2,12 +2,27 @@ export interface ITokenData {
   tokeninput: any;
   tokenname: any;
   tokenIcon: any;
-  setData: (tokenname: any, tokeninput: any, tokenIcon: any) => void;
+  tokenAddress: any;
+  setData: (
+    tokenname: any,
+    tokeninput: any,
+    tokenIcon: any,
+    tokenAddress: any
+  ) => void;
 }
 export interface INetwork {
   networkname: any;
   networkicon: any;
-  setNetwork: (networkname: any, networkicon: any) => void;
+  address: any;
+  factoryAddress: any;
+  routerV2Address: any;
+  setNetwork: (
+    networkname: any,
+    networkicon: any,
+    address: any,
+    factoryAddress: any,
+    routerV2Address: any
+  ) => void;
 }
 
 export interface IStep {

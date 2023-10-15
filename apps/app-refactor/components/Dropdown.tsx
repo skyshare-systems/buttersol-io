@@ -8,8 +8,6 @@ import {
 } from "@nextui-org/react";
 import NetworkIcon from "public/icons/swap/network-icon.svg";
 import TokenIcon from "public/icons/swap/token/token-icon.svg";
-import { useInitialNetwork } from "@/lib/store/store";
-import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
 
 interface IDropdown {
   datadropdown: any;
@@ -32,15 +30,21 @@ export default function DropdownReusable({
   disable,
   disableKeys,
 }: IDropdown) {
-  function handleClick(name: string, icon: any) {
+  function handleClick(
+    name: string,
+    icon: any,
+    address: any,
+    factoryAddress: any,
+    routerV2Address: any
+  ) {
     if (placeholder === "Token") {
-      setSelectData(name, "", icon);
+      setSelectData(name, "", icon, address);
     }
     if (placeholder !== "Token") {
       if (name === "Solana" && disableKeys) {
         // console.log("Solana");
       } else {
-        setSelectData(name, icon);
+        setSelectData(name, icon, address, factoryAddress, routerV2Address);
       }
     }
   }
@@ -96,7 +100,15 @@ export default function DropdownReusable({
                   aria-disabled
                   className={`description text-white-50 w-full p-2 rounded-lg capitalize duration-150 hover:bg-white-4 
                 ${placeholder === "Token" ? "pr-[4rem]" : "pr-[0]"}`}
-                  onClick={() => handleClick(data.name, data.icon)}
+                  onClick={() =>
+                    handleClick(
+                      data.name,
+                      data.icon,
+                      data.address,
+                      data.factoryAddress,
+                      data.routerV2Address
+                    )
+                  }
                 >
                   <div
                     className={`flex flex-row items-center gap-2 ${

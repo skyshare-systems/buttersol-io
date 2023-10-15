@@ -13,7 +13,7 @@ import {
 const SwapDetails = () => {
   const { showDetails, setShowDetails } = useShowDetails((state) => state);
   const { tokeninput, tokenname } = useInitialData((state) => state);
-  const { tokeninput: tokenInputOne, tokenname: tokenNameOne } =
+  const { tokeninput: tokenvalue1, tokenname: tokenNameOne } =
     useDestinationData((state) => state);
 
   return (
@@ -29,7 +29,7 @@ const SwapDetails = () => {
             <div>
               <h1 className="flex flex-wrap gap-1 items-center w-full">
                 <span className="subtitle text-white-72 flex flex-wrap gap-1 items-center">
-                  {tokeninput} {tokenname} <ApproxEqualIcon /> {tokenInputOne}{" "}
+                  {tokeninput} {tokenname} <ApproxEqualIcon /> {tokenvalue1}{" "}
                   {tokenNameOne}
                 </span>
                 <span className="subtext text-white-32">

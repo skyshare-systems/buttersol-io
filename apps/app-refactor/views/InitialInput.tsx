@@ -13,11 +13,11 @@ import {
 } from "@/lib/store/store";
 import { useAccount, useNetwork } from "wagmi";
 import useTokenData from "@/hooks/useTokenData";
+import useToken1Data from "@/hooks/useToken1Data";
 
 const InitialInput = () => {
-  const { tokeninput, tokenname, tokenIcon, setData } = useInitialData(
-    (state) => state
-  );
+  const { tokeninput, tokenname, tokenIcon, tokenAddress, setData } =
+    useInitialData((state) => state);
   const { chain } = useNetwork();
   const { isConnected } = useAccount();
 
@@ -34,20 +34,29 @@ const InitialInput = () => {
 
   useEffect(() => {
     if (tempInitNetworkName === "Sepolia" || chain?.id === 11155111) {
-      setInitNetwork("Sepolia", <EthIcon className="w-full max-w-[24px]" />);
-      setTempInitNetwork("", "");
+      setInitNetwork(
+        "Sepolia",
+        <EthIcon className="w-full max-w-[24px]" />,
+        "0x28F491124FBd452dbcD2a5aA06d5985941d11dB0",
+        "0x7E0987E5b3a30e3f2828572Bb659A548460a3003",
+        "0xC532a74256D3Db42D0Bf7a0400fEFDbad7694008"
+      );
+      setTempInitNetwork("", "", "", "", "");
     } else if (
       tempInitNetworkName === "Binance Smart Chain" ||
       chain?.id === 97
     ) {
       setInitNetwork(
         "Binance Smart Chain",
-        <BnbIcon className="w-full max-w-[24px]" />
+        <BnbIcon className="w-full max-w-[24px]" />,
+        "0x144C2849e6eD7b0D9DC22485Fa1c54d830896021",
+        "0x46E9aD48575d08072E9A05a9BDE4F22973628A8E",
+        "0xDE2Db97D54a3c3B008a097B2260633E6cA7DB1AF"
       );
-      setTempInitNetwork("", "");
+      setTempInitNetwork("", "", "", "", "");
     } else {
-      setInitNetwork("", "");
-      setTempInitNetwork("", "");
+      setInitNetwork("", "", "", "", "");
+      setTempInitNetwork("", "", "", "", "");
     }
   }, [chain?.id, isConnected, tempInitNetworkName, initNetworkName]);
 
@@ -83,7 +92,7 @@ const InitialInput = () => {
           value={tokeninput}
           onChange={(
             value: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-          ) => setData(tokenname, value, tokenIcon)}
+          ) => setData(tokenname, value, tokenIcon, tokenAddress)}
           disabled={tokenname !== "" ? false : true}
         />
         <button className="subtitle uppercase text-secondary-100 px-4 py-2 rounded-lg border border-secondary-32 bg-secondary-12">

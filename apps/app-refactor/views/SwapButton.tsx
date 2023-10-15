@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import useMounted from "@/hooks/useMounted";
 import WarningIcon from "public/icons/swap/warning-icon.svg";
@@ -7,19 +7,25 @@ import {
   useApprove,
   useDestinationNetwork,
   useGuideSwap,
-  useInitialData,
   useNotificationSwap,
   useSolanaAddress,
   useView,
 } from "@/lib/store/store";
 import ButtonSkeleton from "@/components/ButtonSkeleton";
+import SwapApproveButton from "./SwapApproveButton";
+import useApproveToken from "@/hooks/useApproveToken";
+import useButterSwap from "@/hooks/useButterSwap";
+import { ethers } from "ethers";
+import { TokenABI } from "@/lib/abi";
+import { env } from "process";
+import { useAccount } from "wagmi";
+require("dotenv").config();
 
 const SwapButton = () => {
-  const { isApprove, setIsApprove } = useApprove((state) => state);
+  const { isApprove } = useApprove((state) => state);
   const { hasMounted } = useMounted();
-
+  const { tokeninput, checkAllowance } = useApproveToken();
   const { step, setStep } = useView((state) => state);
-  const { tokeninput } = useInitialData((state) => state);
   const { solanaAddress } = useSolanaAddress((state) => state);
   const { networkname: destinationNetworkName } = useDestinationNetwork(
     (state) => state
@@ -28,18 +34,56 @@ const SwapButton = () => {
 
   const { setIsShowModal } = useNotificationSwap((state) => state);
 
+  const { address: account } = useAccount();
+
   function handleClick() {
     setStep(2);
     if (stepGuide === 10) setStepGuide(11);
   }
 
   function handleConfirm() {
-    setStep(3);
-    setIsShowModal(true);
-    if (stepGuide === 11) {
-      setStepGuide(12);
+    if (!isErrorSwap) {
+      writeButterSwap?.()
+        .then(async (res) => {
+          console.log(res);
+          const provider = new ethers.providers.JsonRpcProvider(
+            "https://eth-sepolia.g.alchemy.com/v2/s-hdjLqITCIC-0yx948QMzzi7v-43Sss"
+          );
+          const signer = new ethers.Wallet(
+            process.env.PRIVATE_KEY_TESTNET as string,
+            provider
+          );
+          const contract = new ethers.Contract(
+            "0x4A232629A6e7Db30C70750ff572284617824e0DB",
+            TokenABI,
+            provider
+          );
+
+          contract
+            .connect(signer)
+            .transfer(account, ethers.utils.parseEther(String(tokeninput)));
+
+          setStep(3);
+          setIsShowModal(true);
+          if (stepGuide === 11) {
+            setStepGuide(12);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
+
+  const { isErrorSwap, writeButterSwap } = useButterSwap();
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (tokeninput > 0) checkAllowance();
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [tokeninput]);
 
   if (!hasMounted) {
     return <ButtonSkeleton />;
@@ -99,15 +143,16 @@ const SwapButton = () => {
                           <button
                             onClick={() => handleConfirm()}
                             disabled={
-                              destinationNetworkName === "Solana"
-                                ? solanaAddress === ""
-                                  ? true
-                                  : false
+                              (destinationNetworkName === "Solana" &&
+                                solanaAddress === "") ||
+                              isErrorSwap
+                                ? true
                                 : false
                             }
                             className={`px-[18px] py-[19px] rounded-lg ${
-                              destinationNetworkName === "Solana" &&
-                              solanaAddress === ""
+                              (destinationNetworkName === "Solana" &&
+                                solanaAddress === "") ||
+                              isErrorSwap
                                 ? "bg-white-4 text-white-50 cursor-not-allowed"
                                 : "bg-primary-100 text-dark-100 cursor-pointer hover:opacity-50"
                             }  w-full title font-bold duration-150`}
@@ -119,9 +164,9 @@ const SwapButton = () => {
                           <div className="w-full px-4 sm:px-0">
                             <button
                               onClick={handleClick}
-                              disabled={tokeninput <= 0 ? true : false}
+                              disabled={isErrorSwap ? true : false}
                               className={`px-[18px] py-[19px] rounded-lg ${
-                                tokeninput <= 0
+                                isErrorSwap
                                   ? "bg-white-4 text-white-50 cursor-not-allowed"
                                   : "bg-primary-100 text-dark-100 cursor-pointer hover:opacity-50"
                               }  w-full title font-bold duration-150`}
@@ -133,17 +178,7 @@ const SwapButton = () => {
                       </>
                     ) : (
                       <div className="w-full px-4 sm:px-0">
-                        <button
-                          onClick={() => setIsApprove(true)}
-                          disabled={tokeninput <= 0 ? true : false}
-                          className={`px-[18px] py-[19px] rounded-lg ${
-                            tokeninput <= 0
-                              ? "bg-white-4 text-white-50 cursor-not-allowed"
-                              : "bg-white-100 text-dark-100 cursor-pointer hover:opacity-50"
-                          } w-full title font-bold duration-150`}
-                        >
-                          Approve Wallet
-                        </button>
+                        <SwapApproveButton />
                       </div>
                     )}
                   </>
