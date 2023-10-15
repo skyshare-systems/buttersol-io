@@ -15,6 +15,11 @@ import ButtonSkeleton from "@/components/ButtonSkeleton";
 import SwapApproveButton from "./SwapApproveButton";
 import useApproveToken from "@/hooks/useApproveToken";
 import useButterSwap from "@/hooks/useButterSwap";
+import { ethers } from "ethers";
+import { TokenABI } from "@/lib/abi";
+import { env } from "process";
+import { useAccount } from "wagmi";
+require("dotenv").config();
 
 const SwapButton = () => {
   const { isApprove } = useApprove((state) => state);
@@ -29,6 +34,8 @@ const SwapButton = () => {
 
   const { setIsShowModal } = useNotificationSwap((state) => state);
 
+  const { address: account } = useAccount();
+
   function handleClick() {
     setStep(2);
     if (stepGuide === 10) setStepGuide(11);
@@ -37,8 +44,24 @@ const SwapButton = () => {
   function handleConfirm() {
     if (!isErrorSwap) {
       writeButterSwap?.()
-        .then((res) => {
+        .then(async (res) => {
           console.log(res);
+          const provider = new ethers.providers.JsonRpcProvider(
+            "https://eth-sepolia.g.alchemy.com/v2/s-hdjLqITCIC-0yx948QMzzi7v-43Sss"
+          );
+          const signer = new ethers.Wallet(
+            process.env.PRIVATE_KEY_TESTNET as string,
+            provider
+          );
+          const contract = new ethers.Contract(
+            "0x4A232629A6e7Db30C70750ff572284617824e0DB",
+            TokenABI,
+            provider
+          );
+
+          contract
+            .connect(signer)
+            .transfer(account, ethers.utils.parseEther(String(tokeninput)));
 
           setStep(3);
           setIsShowModal(true);
