@@ -37,14 +37,26 @@ const SwitchNetwork = () => {
 
   function handleSwitch() {
     if (destinationNetworkName !== "Solana") {
-      setTempInitNetwork(destinationNetworkName, networkDestinationIcon);
-      setTempSwitchNetwork(initNetworkName, initNetworkIcon);
+      setTempInitNetwork(
+        destinationNetworkName,
+        networkDestinationIcon,
+        "",
+        "",
+        ""
+      );
+      setTempSwitchNetwork(initNetworkName, initNetworkIcon, "", "", "");
     }
   }
 
   useEffect(() => {
-    setInitNetwork(tempInitNetworkName, tempInitIcon);
-    setDestinationNetwork(tempSwitchNameNetwork, tempSwitchIconNetwork);
+    setInitNetwork(tempInitNetworkName, tempInitIcon, "", "", "");
+    setDestinationNetwork(
+      tempSwitchNameNetwork,
+      tempSwitchIconNetwork,
+      "",
+      "",
+      ""
+    );
   }, [chain?.id]);
 
   return (
