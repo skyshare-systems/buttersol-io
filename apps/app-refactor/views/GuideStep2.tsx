@@ -13,6 +13,15 @@ import GuidePhantom2 from "@/views/GuidePhantom2";
 import GuidePhantom3 from "@/views/GuidePhantom3";
 import GuidePhantom4 from "@/views/GuidePhantom4";
 import GuidePhantom5 from "@/views/GuidePhantom5";
+import ImportToken from "@/lib/utils/ImportToken";
+
+import ImportETHWhite from "@/public/icons/guide-2/eth-import-white-icon.svg";
+import ImportBNBWhite from "@/public/icons/guide-2/bnb-import-white-icon.svg";
+import ImportUSDTWhite from "@/public/icons/guide-2/usdt-import-white-icon.svg";
+
+import ImportETHYellow from "@/public/icons/guide-2/eth-import-yellow-icon.svg";
+import ImportBNBYellow from "@/public/icons/guide-2/bnb-import-yellow-icon.svg";
+import ImportUSDTYellow from "@/public/icons/guide-2/usdt-import-yellow-icon.svg";
 
 const GuideStepTwo = () => {
   const { chain } = useNetwork();
@@ -55,6 +64,56 @@ const GuideStepTwo = () => {
       setStepPhantomGuide(4);
     }
   }
+
+  const tokensepoliadata = [
+    {
+      name: "ETH-PEG Token",
+      icon: <ImportETHWhite className="w-full max-w-[16px]" />,
+      address: "0xdc36F92a63A9a78B0175677F926dA3B2d01D745D",
+      tokenSymbol: "ETH",
+      tokenDecimal: 18,
+    },
+    {
+      name: "BNB-PEG Token",
+      icon: <ImportBNBWhite className="w-full max-w-[16px]" />,
+      address: "0xB71Be8a3160E5B7B2a9919aa4b7059914601b785",
+      tokenSymbol: "BNB",
+      tokenDecimal: 18,
+    },
+    {
+      name: "USDT-PEG Token",
+      icon: <ImportUSDTWhite className="w-full max-w-[16px]" />,
+      address: "0xf8Fa70AD19566C2D3D8c25717CdCbb257F5b59Ce",
+      tokenSymbol: "USDT",
+      tokenDecimal: 18,
+    },
+  ];
+
+  const tokenbnbdata = [
+    {
+      name: "ETH-PEG Token",
+      icon: <ImportETHYellow className="w-full max-w-[16px]" />,
+      address: "0xc4B0605d23A4217b12aC4D5400cCBe5064d09EeF",
+      tokenSymbol: "ETH",
+      tokenDecimal: 18,
+    },
+
+    {
+      name: "BNB-PEG Token",
+      icon: <ImportBNBYellow className="w-full max-w-[16px]" />,
+      address: "0x4A232629A6e7Db30C70750ff572284617824e0DB",
+      tokenSymbol: "BNB",
+      tokenDecimal: 18,
+    },
+
+    {
+      name: "USDT-PEG Token",
+      icon: <ImportUSDTYellow className="w-full max-w-[16px]" />,
+      address: "0x09d6Ca1C9B51436a464F8241726e7FDCC713183b",
+      tokenSymbol: "USDT",
+      tokenDecimal: 18,
+    },
+  ];
 
   return (
     <>
@@ -103,6 +162,72 @@ const GuideStepTwo = () => {
                 Solana Devnet
               </span>
             </button>
+            <hr className="border border-white-16" />
+            <div className="flex flex-col gap-2">
+              <h1 className="subtext text-white-50">Tokens</h1>
+              <div className="rounded-2xl bg-black-100 p-2 gap-2 flex items-center">
+                {chains.map((x) => (
+                  <button
+                    key={x.id}
+                    onClick={() => switchNetwork?.(x.id)}
+                    className={`p-2 ${
+                      chain?.name === x.name ? "bg-white-8" : ""
+                    } flex justify-between hover:bg-white-8 items-center gap-2 rounded-lg group duration-150  descriptions w-full`}
+                  >
+                    {x.name === "Sepolia" && (
+                      <>
+                        <span className="flex items-center gap-2 text-white-100">
+                          <ETHIcon className="w-full max-w-[16px]" />
+                          ETH
+                        </span>
+                      </>
+                    )}
+                    {x.name === "Binance Smart Chain Testnet" && (
+                      <span className="flex items-center gap-2 text-primary-100">
+                        <BNBIcon />
+                        BSC
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {chain?.name === "Sepolia" && (
+              <>
+                {tokensepoliadata.map((data, index) => {
+                  return (
+                    <ImportToken
+                      key={index}
+                      name={data.name}
+                      icon={data.icon}
+                      address={data.address}
+                      symbols={data.tokenSymbol}
+                      decimal={18}
+                      className={"text-white-100"}
+                    />
+                  );
+                })}
+              </>
+            )}
+
+            {chain?.name === "Binance Smart Chain Testnet" && (
+              <>
+                {tokenbnbdata.map((data, index) => {
+                  return (
+                    <ImportToken
+                      key={index}
+                      name={data.name}
+                      icon={data.icon}
+                      address={data.address}
+                      symbols={data.tokenSymbol}
+                      decimal={18}
+                      className={"text-primary-100"}
+                    />
+                  );
+                })}
+              </>
+            )}
           </div>
           <div className="flex justify-between items-center">
             <button

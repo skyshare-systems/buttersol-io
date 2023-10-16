@@ -10,7 +10,6 @@ interface ITokenBalance {
 const TokenBalance = ({ dollars, balance, token }: ITokenBalance) => {
   return (
     <div className="flex flex-wrap justify-between items-center grow px-2">
-      {/* equivalent in dollars  */}
       <h1 className="subtitle text-white-50">~$ {dollars.toFixed(2)}</h1>
 
       <h1 className="subtitle flex items-center gap-1">
