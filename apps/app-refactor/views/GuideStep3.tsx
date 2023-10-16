@@ -10,61 +10,19 @@ import Link from "next/link";
 import USDTIcon from "public/icons/swap/token/usdt-icon.svg";
 import useMintToken from "@/hooks/useMintToken";
 
+import ETHWhiteIcon from "@/public/icons/guide-3/eth-white-icon.svg";
+import BNBWhiteIcon from "@/public/icons/guide-3/bnb-white-icon.svg";
+import USDTWhiteIcon from "@/public/icons/guide-3/usdt-white-icon.svg";
+
+import ETHYellowIcon from "@/public/icons/guide-3/eth-yellow-icon.svg";
+import BNBYellowIcon from "@/public/icons/guide-3/bnb-yellow-icon.svg";
+import USDTYellowIcon from "@/public/icons/guide-3/usdt-yellow-icon.svg";
+
 const GuideStepThree = () => {
   const { stepGuide, setStepGuide } = useGuideSwap((state) => state);
   const { chain } = useNetwork();
   const { chains, switchNetwork } = useSwitchNetwork();
   const { isConnected } = useAccount();
-
-  const tokensepoliadata = [
-    {
-      name: "ETH-PEG Token",
-      icon: <ETHIcon className="w-full max-w-[24px]" />,
-      address: "0xdc36F92a63A9a78B0175677F926dA3B2d01D745D",
-      tokenSymbol: "ETH",
-      tokenDecimal: 18,
-    },
-    {
-      name: "BNB-PEG Token",
-      icon: <BNBIcon className="w-full max-w-[24px]" />,
-      address: "0xB71Be8a3160E5B7B2a9919aa4b7059914601b785",
-      tokenSymbol: "BNB",
-      tokenDecimal: 18,
-    },
-    {
-      name: "USDT-PEG Token",
-      icon: <USDTIcon className="w-full max-w-[24px]" />,
-      address: "0xf8Fa70AD19566C2D3D8c25717CdCbb257F5b59Ce",
-      tokenSymbol: "USDT",
-      tokenDecimal: 18,
-    },
-  ];
-
-  const tokenbnbdata = [
-    {
-      name: "ETH-PEG Token",
-      icon: <ETHIcon className="w-full max-w-[24px]" />,
-      address: "0xc4B0605d23A4217b12aC4D5400cCBe5064d09EeF",
-      tokenSymbol: "ETH",
-      tokenDecimal: 18,
-    },
-
-    {
-      name: "BNB-PEG Token",
-      icon: <BNBIcon className="w-full max-w-[24px]" />,
-      address: "0x4A232629A6e7Db30C70750ff572284617824e0DB",
-      tokenSymbol: "BNB",
-      tokenDecimal: 18,
-    },
-
-    {
-      name: "USDT-PEG Token",
-      icon: <USDTIcon className="w-full max-w-[24px]" />,
-      address: "0x09d6Ca1C9B51436a464F8241726e7FDCC713183b",
-      tokenSymbol: "USDT",
-      tokenDecimal: 18,
-    },
-  ];
 
   const {
     mintETHSepolia,
@@ -144,7 +102,7 @@ const GuideStepThree = () => {
                   className={` p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 hover:bg-white-8 descriptions bg-white-4 group text-white-100`}
                 >
                   <span className="flex items-center gap-2">
-                    <ETHIcon className="w-full max-w-[16px]" />
+                    <ETHWhiteIcon className="w-full max-w-[16px]" />
                     1,000 ETH-PEG Tokens
                   </span>
                   <ArrowIcon className="rotate-90 w-full max-w-[12px] opacity-50 group-hover:opacity-100" />
@@ -155,7 +113,7 @@ const GuideStepThree = () => {
                   className={` p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 hover:bg-white-8 descriptions bg-white-4 group text-white-100`}
                 >
                   <span className="flex items-center gap-2">
-                    <BNBIcon className="w-full max-w-[16px]" />
+                    <BNBWhiteIcon className="w-full max-w-[16px]" />
                     1,000 BNB-PEG Tokens
                   </span>
                   <ArrowIcon className="rotate-90 w-full max-w-[12px] opacity-50 group-hover:opacity-100" />
@@ -166,7 +124,7 @@ const GuideStepThree = () => {
                   className={` p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 hover:bg-white-8 descriptions bg-white-4 group text-white-100`}
                 >
                   <span className="flex items-center gap-2">
-                    <USDTIcon className="w-full max-w-[16px]" />
+                    <USDTWhiteIcon className="w-full max-w-[16px]" />
                     1,000 USDT-PEG Tokens
                   </span>
                   <ArrowIcon className="rotate-90 w-full max-w-[12px] opacity-50 group-hover:opacity-100" />
@@ -181,7 +139,7 @@ const GuideStepThree = () => {
                   className={` p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 hover:bg-white-8 descriptions bg-white-4 group text-primary-100`}
                 >
                   <span className="flex items-center gap-2">
-                    <ETHIcon className="w-full max-w-[16px]" />
+                    <ETHYellowIcon className="w-full max-w-[16px]" />
                     1,000 ETH-PEG Tokens
                   </span>
                   <ArrowIcon className="rotate-90 w-full max-w-[12px] opacity-50 group-hover:opacity-100" />
@@ -192,7 +150,7 @@ const GuideStepThree = () => {
                   className={` p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 hover:bg-white-8 descriptions bg-white-4 group text-primary-100`}
                 >
                   <span className="flex items-center gap-2">
-                    <BNBIcon className="w-full max-w-[16px]" />
+                    <BNBYellowIcon className="w-full max-w-[16px]" />
                     1,000 BNB-PEG Tokens
                   </span>
                   <ArrowIcon className="rotate-90 w-full max-w-[12px] opacity-50 group-hover:opacity-100" />
@@ -203,7 +161,7 @@ const GuideStepThree = () => {
                   className={` p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 hover:bg-white-8 descriptions bg-white-4 group text-primary-100`}
                 >
                   <span className="flex items-center gap-2">
-                    <USDTIcon className="w-full max-w-[16px]" />
+                    <USDTYellowIcon className="w-full max-w-[16px]" />
                     1,000 USDT-PEG Tokens
                   </span>
                   <ArrowIcon className="rotate-90 w-full max-w-[12px] opacity-50 group-hover:opacity-100" />
