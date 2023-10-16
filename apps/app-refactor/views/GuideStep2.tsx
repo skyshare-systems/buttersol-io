@@ -120,9 +120,11 @@ const GuideStepTwo = () => {
       <div className="fixed top-0 left-0 w-full h-full bg-dark-50 backdrop-blur b z-[11] hidden lg:flex justify-center items-center ">
         <div className="flex flex-col p-4 gap-4 rounded-2xl border border-white-16 bg-white-4 max-w-[320px] w-screen backdrop-blur-[32px]">
           <TutorialStepIndicator
-            title={"Import testnet networks to your wallet."}
+            title={"Import testnet networks and tokens to your wallet."}
           />
           <div className="flex flex-col gap-2">
+            <h1 className="subtext text-white-50">Networks</h1>
+
             {chains.map((x) => (
               <button
                 key={x.id}
