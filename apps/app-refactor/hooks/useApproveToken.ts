@@ -21,12 +21,14 @@ const useApproveToken = () => {
     (state) => state
   );
   const { address: spenderInitAddress } = useInitialNetwork((state) => state);
+
   const { config: configApprove } = usePrepareContractWrite({
     address: tokenAddress0 ?? "",
     abi: TokenABI,
     functionName: "approve",
     args: [spenderInitAddress, BigInt(String(ethers.constants.MaxUint256))],
   });
+
   const { writeAsync: approveToken } = useContractWrite(configApprove);
 
   const { data: dataAllowance } = useContractRead({
