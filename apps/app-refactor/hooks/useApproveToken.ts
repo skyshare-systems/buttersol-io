@@ -1,17 +1,20 @@
 import { TokenABI } from "@/lib/abi";
+
 import {
   useApprove,
   useInitialData,
   useInitialNetwork,
 } from "@/lib/store/store";
+
 import {
   useAccount,
   useContractRead,
   useContractWrite,
   usePrepareContractWrite,
 } from "wagmi";
+
 import { ethers } from "ethers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const useApproveToken = () => {
   const { address: account } = useAccount();
@@ -56,10 +59,18 @@ const useApproveToken = () => {
     } else {
       setIsApprove(false);
       // console.log(allowance);
-
+      console.log("No Allowance");
       setAllowance(0);
     }
   }
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (tokeninput > 0) checkAllowance();
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [tokeninput]);
 
   return {
     approveSpender,

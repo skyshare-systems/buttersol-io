@@ -69,10 +69,10 @@ const ConfirmSwap = () => {
               className="cursor-pointer z-[12]"
             />
           </div>
-          <div className="flex flex-col w-full gap-4 p-4 border border-white-8 rounded-2xl">
-            <div className=" flex flex-col sm:flex-row justify-between items-center gap-2">
+          <div className="flex flex-col w-full gap-4 p-4 border border-white-8 rounded-2xl h-full">
+            <div className=" flex flex-col sm:flex-row justify-between items-center gap-2 h-full w-full">
               {/* init network  */}
-              <div className="flex flex-col gap-2 p-3 border border-white-4 rounded-lg w-full">
+              <div className="flex flex-col gap-2 p-3 border border-white-4 rounded-lg w-full min-w-[146px] h-full">
                 <h1 className="subtitle text-white-100 flex items-center gap-2">
                   {initNetworkIcon}
                   {initNetworkName}
@@ -84,7 +84,7 @@ const ConfirmSwap = () => {
                 </div>
               </div>
               {/* destination network  */}
-              <div className="flex flex-col gap-2 p-3 border border-white-4 rounded-lg w-full">
+              <div className="flex flex-col gap-2 p-3 border border-white-4 rounded-lg w-full min-w-[146px] h-full">
                 <h1 className="subtitle text-white-100 flex items-center gap-2">
                   {destinationNetworkIcon} {destinationNetworkName}
                 </h1>

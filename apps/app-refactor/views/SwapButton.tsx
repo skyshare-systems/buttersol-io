@@ -84,8 +84,6 @@ const SwapButton = () => {
   const { isErrorSwap, writeButterSwap } = useButterSwap();
 
   useEffect(() => {
-    console.log(tokenAddress + " Testing Not Cross");
-
     switch (tokenAddress) {
       case "0xdc36F92a63A9a78B0175677F926dA3B2d01D745D": // ETH - Sepolia
         return setCrossDesToken("0xc4B0605d23A4217b12aC4D5400cCBe5064d09EeF"); // ETH - BSC
@@ -101,12 +99,6 @@ const SwapButton = () => {
       case "0x09d6Ca1C9B51436a464F8241726e7FDCC713183b": // USDT - BSC
         return setCrossDesToken("0xf8Fa70AD19566C2D3D8c25717CdCbb257F5b59Ce"); // USDT - SEPOLIA
     }
-
-    const delayDebounceFn = setTimeout(() => {
-      if (tokeninput > 0) checkAllowance();
-    }, 1000);
-
-    return () => clearTimeout(delayDebounceFn);
   }, [tokeninput, tokenAddress]);
 
   if (!hasMounted) {
