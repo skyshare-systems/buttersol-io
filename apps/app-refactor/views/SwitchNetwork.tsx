@@ -13,24 +13,36 @@ const SwitchNetwork = () => {
     networkname: initNetworkName,
     networkicon: initNetworkIcon,
     setNetwork: setInitNetwork,
+    address: initAddress,
+    factoryAddress: initFactoryAddress,
+    routerV2Address: initRouterV2Address,
   } = useInitialNetwork((state) => state);
 
   const {
     networkname: tempInitNetworkName,
     networkicon: tempInitIcon,
     setNetwork: setTempInitNetwork,
+    address: tempInitAddress,
+    factoryAddress: tempFactoryAddress,
+    routerV2Address: tempRouterV2Address,
   } = useTempInitNetwork((state) => state);
 
   const {
     networkname: destinationNetworkName,
     setNetwork: setDestinationNetwork,
     networkicon: networkDestinationIcon,
+    address: destinationNetworkAddress,
+    factoryAddress: desNetworkFactoryAddress,
+    routerV2Address: desRouterV2Address,
   } = useDestinationNetwork((state) => state);
 
   const {
     networkname: tempSwitchNameNetwork,
     setNetwork: setTempSwitchNetwork,
     networkicon: tempSwitchIconNetwork,
+    address: tempSwitchAddress,
+    factoryAddress: tempSwitchFactoryAddress,
+    routerV2Address: tempSwitchRouterV2Address,
   } = useTempSwitchNetwork((state) => state);
 
   const { chain } = useNetwork();
@@ -40,22 +52,34 @@ const SwitchNetwork = () => {
       setTempInitNetwork(
         destinationNetworkName,
         networkDestinationIcon,
-        "",
-        "",
-        ""
+        destinationNetworkAddress,
+        desNetworkFactoryAddress,
+        desRouterV2Address
       );
-      setTempSwitchNetwork(initNetworkName, initNetworkIcon, "", "", "");
+      setTempSwitchNetwork(
+        initNetworkName,
+        initNetworkIcon,
+        initAddress,
+        initFactoryAddress,
+        initRouterV2Address
+      );
     }
   }
 
   useEffect(() => {
-    setInitNetwork(tempInitNetworkName, tempInitIcon, "", "", "");
+    setInitNetwork(
+      tempInitNetworkName,
+      tempInitIcon,
+      tempInitAddress,
+      tempFactoryAddress,
+      tempRouterV2Address
+    );
     setDestinationNetwork(
       tempSwitchNameNetwork,
       tempSwitchIconNetwork,
-      "",
-      "",
-      ""
+      tempSwitchAddress,
+      tempSwitchFactoryAddress,
+      tempSwitchRouterV2Address
     );
   }, [chain?.id]);
 

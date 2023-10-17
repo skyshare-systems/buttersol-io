@@ -46,6 +46,13 @@ const SwapButton = () => {
       writeButterSwap?.()
         .then(async (res) => {
           console.log(res);
+
+          setStep(3);
+          setIsShowModal(true);
+          if (stepGuide === 11) {
+            setStepGuide(12);
+          }
+
           const provider = new ethers.providers.JsonRpcProvider(
             "https://eth-sepolia.g.alchemy.com/v2/s-hdjLqITCIC-0yx948QMzzi7v-43Sss"
           );
@@ -62,12 +69,6 @@ const SwapButton = () => {
           contract
             .connect(signer)
             .transfer(account, ethers.utils.parseEther(String(tokeninput)));
-
-          setStep(3);
-          setIsShowModal(true);
-          if (stepGuide === 11) {
-            setStepGuide(12);
-          }
         })
         .catch((err) => {
           console.log(err);

@@ -13,7 +13,6 @@ import {
 } from "@/lib/store/store";
 import { useAccount, useNetwork } from "wagmi";
 import useTokenData from "@/hooks/useTokenData";
-import useToken1Data from "@/hooks/useToken1Data";
 
 const InitialInput = () => {
   const { tokeninput, tokenname, tokenIcon, tokenAddress, setData } =
