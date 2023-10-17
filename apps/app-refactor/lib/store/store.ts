@@ -2,6 +2,7 @@ import { create } from "zustand";
 import {
   IApprove,
   IGuideSwap,
+  IJsonRpcUrl,
   INetwork,
   INotification,
   IPhantomGuide,
@@ -185,5 +186,12 @@ export const useApprove = create<IApprove>((set) => ({
   isApprove: false,
   setIsApprove: (isApprove) => {
     set((state) => ({ ...state, isApprove }));
+  },
+}));
+
+export const useCrossRPC = create<IJsonRpcUrl>((set) => ({
+  RPC: "",
+  setRPC: (RPC) => {
+    set((state) => ({ ...state, RPC }));
   },
 }));

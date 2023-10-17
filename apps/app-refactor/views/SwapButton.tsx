@@ -5,6 +5,8 @@ import useMounted from "@/hooks/useMounted";
 import WarningIcon from "public/icons/swap/warning-icon.svg";
 import {
   useApprove,
+  useCrossRPC,
+  useDestinationData,
   useDestinationNetwork,
   useGuideSwap,
   useNotificationSwap,
@@ -18,7 +20,7 @@ import useButterSwap from "@/hooks/useButterSwap";
 import { ethers } from "ethers";
 import { TokenABI } from "@/lib/abi";
 import { env } from "process";
-import { useAccount } from "wagmi";
+import { useAccount, Address } from "wagmi";
 require("dotenv").config();
 
 const SwapButton = () => {
@@ -27,14 +29,17 @@ const SwapButton = () => {
   const { tokeninput, checkAllowance } = useApproveToken();
   const { step, setStep } = useView((state) => state);
   const { solanaAddress } = useSolanaAddress((state) => state);
-  const { networkname: destinationNetworkName } = useDestinationNetwork(
-    (state) => state
-  );
+  const {
+    networkname: destinationNetworkName,
+    address: destinationTokenNetwork,
+  } = useDestinationNetwork((state) => state);
+  const { tokenAddress } = useDestinationData((state) => state);
   const { stepGuide, setStepGuide } = useGuideSwap((state) => state);
-
   const { setIsShowModal } = useNotificationSwap((state) => state);
-
   const { address: account } = useAccount();
+  const [crossDesToken, setCrossDesToken] = useState<string>();
+
+  const { RPC, setRPC } = useCrossRPC((state) => state);
 
   function handleClick() {
     setStep(2);
@@ -54,14 +59,14 @@ const SwapButton = () => {
           }
 
           const provider = new ethers.providers.JsonRpcProvider(
-            "https://eth-sepolia.g.alchemy.com/v2/s-hdjLqITCIC-0yx948QMzzi7v-43Sss"
+            RPC // Destination Network
           );
           const signer = new ethers.Wallet(
             process.env.PRIVATE_KEY_TESTNET as string,
             provider
           );
           const contract = new ethers.Contract(
-            "0x4A232629A6e7Db30C70750ff572284617824e0DB",
+            crossDesToken as Address, // Cross Destination Token
             TokenABI,
             provider
           );
@@ -79,12 +84,30 @@ const SwapButton = () => {
   const { isErrorSwap, writeButterSwap } = useButterSwap();
 
   useEffect(() => {
+    console.log(tokenAddress + " Testing Not Cross");
+
+    switch (tokenAddress) {
+      case "0xdc36F92a63A9a78B0175677F926dA3B2d01D745D": // ETH - Sepolia
+        return setCrossDesToken("0xc4B0605d23A4217b12aC4D5400cCBe5064d09EeF"); // ETH - BSC
+      case "0xB71Be8a3160E5B7B2a9919aa4b7059914601b785": // BNB - SEPOLIA
+        return setCrossDesToken("0x4A232629A6e7Db30C70750ff572284617824e0DB"); // BNB - BSC
+      case "0xf8Fa70AD19566C2D3D8c25717CdCbb257F5b59Ce": // USDT - SEPOLIA
+        return setCrossDesToken("0x09d6Ca1C9B51436a464F8241726e7FDCC713183b"); // USDT - BSC
+
+      case "0xc4B0605d23A4217b12aC4D5400cCBe5064d09EeF": // ETH - BSC
+        return setCrossDesToken("0xdc36F92a63A9a78B0175677F926dA3B2d01D745D"); // ETH - Sepolia
+      case "0x4A232629A6e7Db30C70750ff572284617824e0DB": // BNB - BSC
+        return setCrossDesToken("0xB71Be8a3160E5B7B2a9919aa4b7059914601b785"); // BNB - SEPOLIA
+      case "0x09d6Ca1C9B51436a464F8241726e7FDCC713183b": // USDT - BSC
+        return setCrossDesToken("0xf8Fa70AD19566C2D3D8c25717CdCbb257F5b59Ce"); // USDT - SEPOLIA
+    }
+
     const delayDebounceFn = setTimeout(() => {
       if (tokeninput > 0) checkAllowance();
     }, 1000);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [tokeninput]);
+  }, [tokeninput, tokenAddress]);
 
   if (!hasMounted) {
     return <ButtonSkeleton />;
@@ -111,6 +134,11 @@ const SwapButton = () => {
 
           return (
             <>
+              {/* <button
+                onClick={() => console.log(crossDesToken + " Testing Cross")}
+              >
+                asdasd
+              </button> */}
               {(() => {
                 if (!connected) {
                   return (

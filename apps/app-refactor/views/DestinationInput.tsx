@@ -5,6 +5,7 @@ import TokenBalance from "@/components/TokenBalance";
 import React, { useEffect } from "react";
 
 import {
+  useCrossRPC,
   useDestinationData,
   useDestinationNetwork,
   useInitialNetwork,
@@ -30,15 +31,28 @@ const DestinationInput = () => {
 
   useToken1Data();
 
+  const { RPC, setRPC } = useCrossRPC((state) => state);
+
   useEffect(() => {
     setData("", 0.0, "", "");
-    // if (initNetworkName === destinationNetworkName) {
-    //   setDestinationNetwork("", "");
-    // }
+
+    switch (destinationNetworkName) {
+      case "Binance Smart Chain":
+        return setRPC("https://bsc-testnet.publicnode.com");
+      case "Sepolia":
+        return setRPC(
+          "https://eth-sepolia.g.alchemy.com/v2/s-hdjLqITCIC-0yx948QMzzi7v-43Sss"
+        );
+      case "Solana":
+        return setRPC("");
+      default:
+        return setRPC("");
+    }
   }, [destinationNetworkName, initNetworkName]);
 
   return (
     <div className="flex flex-col gap-4 rounded-2xl border border-white-8 bg-white-4 sm:bg-transparent p-4">
+      {/* <button onClick={() => console.log(RPC + " testing")}>asdasd</button> */}
       <div className="flex flex-col sm:flex-row items-center gap-2 p-2 bg-dark-32 rounded-lg">
         <DropdownReusable
           datadropdown={networkArray}
