@@ -13,6 +13,7 @@ import {
 import { useAccount } from "wagmi";
 import useTokenData from "@/hooks/useTokenData";
 import useToken1Data from "@/hooks/useToken1Data";
+import useBalanceOf from "@/hooks/useBalanceOf";
 
 const DestinationInput = () => {
   const { tokeninput, tokenname, tokenIcon, tokenAddress, setData } =
@@ -31,7 +32,9 @@ const DestinationInput = () => {
 
   useToken1Data();
 
-  const { RPC, setRPC } = useCrossRPC((state) => state);
+  const { setRPC } = useCrossRPC((state) => state);
+
+  const { balanceOf1 } = useBalanceOf();
 
   useEffect(() => {
     setData("", 0.0, "", "");
@@ -88,7 +91,7 @@ const DestinationInput = () => {
           ) => setData(tokenname, tokeninput, tokenIcon, tokenAddress)}
         />
       </div>
-      <TokenBalance dollars={0.0} balance={0.0} token={tokenname} />
+      <TokenBalance dollars={0.0} balance={balanceOf1 ?? 0} token={tokenname} />
     </div>
   );
 };

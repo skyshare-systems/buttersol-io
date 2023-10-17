@@ -29,7 +29,7 @@ const InitialInput = () => {
     useTempInitNetwork((state) => state);
   const { networkdata, TokenData } = useTokenData(tempInitNetworkName);
 
-  const { balanceOf } = useBalanceOf(tokenAddress);
+  const { balanceOf0 } = useBalanceOf();
 
   useEffect(() => {
     if (tempInitNetworkName === "Sepolia" || chain?.id === 11155111) {
@@ -98,7 +98,7 @@ const InitialInput = () => {
           max
         </button>
       </div>
-      <TokenBalance dollars={0.0} balance={balanceOf} token={tokenname} />
+      <TokenBalance dollars={0.0} balance={balanceOf0 ?? 0} token={tokenname} />
     </div>
   );
 };
