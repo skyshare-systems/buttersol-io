@@ -13,24 +13,23 @@ import {
 } from "@/lib/store/store";
 import { useAccount, useNetwork } from "wagmi";
 import useTokenData from "@/hooks/useTokenData";
-import useToken1Data from "@/hooks/useToken1Data";
+import useBalanceOf from "@/hooks/useBalanceOf";
 
 const InitialInput = () => {
   const { tokeninput, tokenname, tokenIcon, tokenAddress, setData } =
     useInitialData((state) => state);
   const { chain } = useNetwork();
   const { isConnected } = useAccount();
-
   const {
     networkname: initNetworkName,
     networkicon: initNetworkIcon,
     setNetwork: setInitNetwork,
   } = useInitialNetwork((state) => state);
-
   const { networkname: tempInitNetworkName, setNetwork: setTempInitNetwork } =
     useTempInitNetwork((state) => state);
-
   const { networkdata, TokenData } = useTokenData(tempInitNetworkName);
+
+  const { balanceOf0 } = useBalanceOf();
 
   useEffect(() => {
     if (tempInitNetworkName === "Sepolia" || chain?.id === 11155111) {
@@ -99,7 +98,7 @@ const InitialInput = () => {
           max
         </button>
       </div>
-      <TokenBalance dollars={0.0} balance={0.0} token={tokenname} />
+      <TokenBalance dollars={0.0} balance={balanceOf0 ?? 0} token={tokenname} />
     </div>
   );
 };

@@ -15,9 +15,7 @@ const TokenBalance = ({ dollars, balance, token }: ITokenBalance) => {
       <h1 className="subtitle flex items-center gap-1">
         <WalletIcon color={"#F7F8F052"} />
         <span className="hidden sm:block text-white-32">Balance:</span>
-        <span className="text-white-72">
-          {balance.toFixed(2) + " " + token ?? ""}
-        </span>
+        <span className="text-white-72">{balance + " " + token ?? ""}</span>
       </h1>
     </div>
   );

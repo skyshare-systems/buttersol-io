@@ -59,3 +59,8 @@ export interface IApprove {
   isApprove: boolean;
   setIsApprove: (isApprove: boolean) => void;
 }
+
+export interface IJsonRpcUrl {
+  RPC: string;
+  setRPC: (RPC: string) => void;
+}

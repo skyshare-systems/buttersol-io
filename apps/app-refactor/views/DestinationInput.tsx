@@ -5,6 +5,7 @@ import TokenBalance from "@/components/TokenBalance";
 import React, { useEffect } from "react";
 
 import {
+  useCrossRPC,
   useDestinationData,
   useDestinationNetwork,
   useInitialNetwork,
@@ -12,6 +13,7 @@ import {
 import { useAccount } from "wagmi";
 import useTokenData from "@/hooks/useTokenData";
 import useToken1Data from "@/hooks/useToken1Data";
+import useBalanceOf from "@/hooks/useBalanceOf";
 
 const DestinationInput = () => {
   const { tokeninput, tokenname, tokenIcon, tokenAddress, setData } =
@@ -30,15 +32,30 @@ const DestinationInput = () => {
 
   useToken1Data();
 
+  const { setRPC } = useCrossRPC((state) => state);
+
+  const { balanceOf1 } = useBalanceOf();
+
   useEffect(() => {
     setData("", 0.0, "", "");
-    // if (initNetworkName === destinationNetworkName) {
-    //   setDestinationNetwork("", "");
-    // }
+
+    switch (destinationNetworkName) {
+      case "Binance Smart Chain":
+        return setRPC("https://bsc-testnet.publicnode.com");
+      case "Sepolia":
+        return setRPC(
+          "https://eth-sepolia.g.alchemy.com/v2/s-hdjLqITCIC-0yx948QMzzi7v-43Sss"
+        );
+      case "Solana":
+        return setRPC("");
+      default:
+        return setRPC("");
+    }
   }, [destinationNetworkName, initNetworkName]);
 
   return (
     <div className="flex flex-col gap-4 rounded-2xl border border-white-8 bg-white-4 sm:bg-transparent p-4">
+      {/* <button onClick={() => console.log(RPC + " testing")}>asdasd</button> */}
       <div className="flex flex-col sm:flex-row items-center gap-2 p-2 bg-dark-32 rounded-lg">
         <DropdownReusable
           datadropdown={networkArray}
@@ -74,7 +91,7 @@ const DestinationInput = () => {
           ) => setData(tokenname, tokeninput, tokenIcon, tokenAddress)}
         />
       </div>
-      <TokenBalance dollars={0.0} balance={0.0} token={tokenname} />
+      <TokenBalance dollars={0.0} balance={balanceOf1 ?? 0} token={tokenname} />
     </div>
   );
 };
