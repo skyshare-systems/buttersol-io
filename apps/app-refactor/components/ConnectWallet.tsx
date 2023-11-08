@@ -111,7 +111,18 @@ export const ConnectWallet = () => {
                     type="button"
                     className="bg-primary-100 text-black-100 title flex items-center gap-2 px-3 py-2 rounded-lg font-bold hover:opacity-50 duration-150"
                   >
-                    <WalletIcon color={"#12202F"} /> {account.displayName}
+                    <WalletIcon color={"#12202F"} />{" "}
+                    {/* {account.hasPendingTransactions.toString()} */}
+                    {account.hasPendingTransactions ? (
+                      "Pending..."
+                    ) : (
+                      <>
+                        {" "}
+                        {account.ensName === undefined
+                          ? account.displayName
+                          : account.ensName}
+                      </>
+                    )}
                   </button>
                 </div>
               );

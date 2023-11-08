@@ -23,9 +23,12 @@ const useMintToken = () => {
     args: [account, BigInt(1000000000000000000000)],
   });
 
-  const { writeAsync: mintETHSepolia } = useContractWrite(configETHSepolia);
-  const { writeAsync: mintBNBSepolia } = useContractWrite(configBNBSepolia);
-  const { writeAsync: mintUSDTSepolia } = useContractWrite(configUSDTSepolia);
+  const { writeAsync: mintETHSepolia, isLoading: isLoadingETHSepolia } =
+    useContractWrite(configETHSepolia);
+  const { writeAsync: mintBNBSepolia, isLoading: isLoadingBNBSepolia } =
+    useContractWrite(configBNBSepolia);
+  const { writeAsync: mintUSDTSepolia, isLoading: isLoadingUSDTSepolia } =
+    useContractWrite(configUSDTSepolia);
 
   //Binance
 
@@ -48,9 +51,12 @@ const useMintToken = () => {
     args: [account, BigInt(1000000000000000000000)],
   });
 
-  const { writeAsync: mintETHBSC } = useContractWrite(configETHBSC);
-  const { writeAsync: mintBNBBSC } = useContractWrite(configBNBBSC);
-  const { writeAsync: mintUSDTBSC } = useContractWrite(configUSDTBSC);
+  const { writeAsync: mintETHBSC, isLoading: isLoadingETHBSC } =
+    useContractWrite(configETHBSC);
+  const { writeAsync: mintBNBBSC, isLoading: isLoadingBNBBSC } =
+    useContractWrite(configBNBBSC);
+  const { writeAsync: mintUSDTBSC, isLoading: isLoadingUSDTBSC } =
+    useContractWrite(configUSDTBSC);
 
   return {
     mintETHSepolia,
@@ -59,6 +65,14 @@ const useMintToken = () => {
     mintETHBSC,
     mintBNBBSC,
     mintUSDTBSC,
+
+    isLoadingETHSepolia,
+    isLoadingBNBSepolia,
+    isLoadingUSDTSepolia,
+
+    isLoadingETHBSC,
+    isLoadingBNBBSC,
+    isLoadingUSDTBSC,
   };
 };
 

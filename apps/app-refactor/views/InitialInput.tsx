@@ -94,7 +94,12 @@ const InitialInput = () => {
           ) => setData(tokenname, value, tokenIcon, tokenAddress)}
           disabled={tokenname !== "" ? false : true}
         />
-        <button className="subtitle uppercase text-secondary-100 px-4 py-2 rounded-lg border border-secondary-32 bg-secondary-12">
+        <button
+          onClick={() =>
+            setData(tokenname, balanceOf0, tokenIcon, tokenAddress)
+          }
+          className="subtitle uppercase text-secondary-100 px-4 py-2 rounded-lg border border-secondary-32 bg-secondary-12"
+        >
           max
         </button>
       </div>

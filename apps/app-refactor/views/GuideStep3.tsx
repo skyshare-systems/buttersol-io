@@ -1,13 +1,17 @@
 "use client";
 import React from "react";
 import { useGuideSwap } from "@/lib/store/store";
-import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
+import {
+  useAccount,
+  useNetwork,
+  useSwitchNetwork,
+  useWatchPendingTransactions,
+} from "wagmi";
 import ETHIcon from "public/icons/swap/network/eth-icon.svg";
 import BNBIcon from "public/icons/tutorial/binance-tutorial-icon.svg";
 import ArrowIcon from "public/icons/swap/arrow-icon.svg";
 import TutorialStepIndicator from "@/components/TutorialStepIndicator";
 import Link from "next/link";
-import USDTIcon from "public/icons/swap/token/usdt-icon.svg";
 import useMintToken from "@/hooks/useMintToken";
 
 import ETHWhiteIcon from "@/public/icons/guide-3/eth-white-icon.svg";
@@ -24,6 +28,10 @@ const GuideStepThree = () => {
   const { chains, switchNetwork } = useSwitchNetwork();
   const { isConnected } = useAccount();
 
+  // useWatchPendingTransactions({
+  //   listener: (hashes) => console.log(hashes + " Testing"),
+  // });
+
   const {
     mintETHSepolia,
     mintBNBSepolia,
@@ -31,6 +39,14 @@ const GuideStepThree = () => {
     mintETHBSC,
     mintBNBBSC,
     mintUSDTBSC,
+
+    isLoadingETHSepolia,
+    isLoadingUSDTSepolia,
+    isLoadingBNBSepolia,
+
+    isLoadingETHBSC,
+    isLoadingBNBBSC,
+    isLoadingUSDTBSC,
   } = useMintToken();
 
   return (
@@ -101,33 +117,78 @@ const GuideStepThree = () => {
               <>
                 <button
                   onClick={() => mintETHSepolia?.()}
-                  className={` p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 hover:bg-white-8 descriptions bg-white-4 group text-white-100`}
+                  disabled={
+                    isLoadingETHSepolia ||
+                    isLoadingBNBSepolia ||
+                    isLoadingUSDTSepolia
+                  }
+                  className={`${
+                    isLoadingETHSepolia ||
+                    isLoadingBNBSepolia ||
+                    isLoadingUSDTSepolia
+                      ? "opacity-25"
+                      : "hover:bg-white-8  bg-white-4"
+                  } p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 group text-white-100 descriptions`}
                 >
                   <span className="flex items-center gap-2">
                     <ETHWhiteIcon className="w-full max-w-[16px]" />
-                    1,000 ETH-PEG Tokens
+                    {isLoadingETHSepolia ||
+                    isLoadingBNBSepolia ||
+                    isLoadingUSDTSepolia
+                      ? "Claiming..."
+                      : "1,000 ETH-PEG Tokens"}
                   </span>
                   <ArrowIcon className="rotate-90 w-full max-w-[12px] opacity-50 group-hover:opacity-100" />
                 </button>
 
                 <button
                   onClick={() => mintBNBSepolia?.()}
-                  className={` p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 hover:bg-white-8 descriptions bg-white-4 group text-white-100`}
+                  disabled={
+                    isLoadingETHSepolia ||
+                    isLoadingBNBSepolia ||
+                    isLoadingUSDTSepolia
+                  }
+                  className={`${
+                    isLoadingETHSepolia ||
+                    isLoadingBNBSepolia ||
+                    isLoadingUSDTSepolia
+                      ? "opacity-25"
+                      : "hover:bg-white-8  bg-white-4"
+                  } p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 group text-white-100 descriptions`}
                 >
                   <span className="flex items-center gap-2">
                     <BNBWhiteIcon className="w-full max-w-[16px]" />
-                    1,000 BNB-PEG Tokens
+                    {isLoadingETHSepolia ||
+                    isLoadingBNBSepolia ||
+                    isLoadingUSDTSepolia
+                      ? "Claiming..."
+                      : "1,000 BNB-PEG Tokens"}
                   </span>
                   <ArrowIcon className="rotate-90 w-full max-w-[12px] opacity-50 group-hover:opacity-100" />
                 </button>
 
                 <button
                   onClick={() => mintUSDTSepolia?.()}
-                  className={` p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 hover:bg-white-8 descriptions bg-white-4 group text-white-100`}
+                  disabled={
+                    isLoadingETHSepolia ||
+                    isLoadingBNBSepolia ||
+                    isLoadingUSDTSepolia
+                  }
+                  className={`${
+                    isLoadingETHSepolia ||
+                    isLoadingBNBSepolia ||
+                    isLoadingUSDTSepolia
+                      ? "opacity-25"
+                      : "hover:bg-white-8  bg-white-4"
+                  } p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 group text-white-100 descriptions`}
                 >
                   <span className="flex items-center gap-2">
                     <USDTWhiteIcon className="w-full max-w-[16px]" />
-                    1,000 USDT-PEG Tokens
+                    {isLoadingETHSepolia ||
+                    isLoadingBNBSepolia ||
+                    isLoadingUSDTSepolia
+                      ? "Claiming..."
+                      : "1,000 USDT-PEG Tokens"}
                   </span>
                   <ArrowIcon className="rotate-90 w-full max-w-[12px] opacity-50 group-hover:opacity-100" />
                 </button>
@@ -138,33 +199,60 @@ const GuideStepThree = () => {
               <>
                 <button
                   onClick={() => mintETHBSC?.()}
-                  className={` p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 hover:bg-white-8 descriptions bg-white-4 group text-primary-100`}
+                  disabled={
+                    isLoadingETHBSC || isLoadingBNBBSC || isLoadingUSDTBSC
+                  }
+                  className={`${
+                    isLoadingETHBSC || isLoadingBNBBSC || isLoadingUSDTBSC
+                      ? "opacity-25"
+                      : "hover:bg-white-8  bg-white-4"
+                  } p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 group text-white-100 descriptions`}
                 >
                   <span className="flex items-center gap-2">
                     <ETHYellowIcon className="w-full max-w-[16px]" />
-                    1,000 ETH-PEG Tokens
+                    {isLoadingETHBSC || isLoadingBNBBSC || isLoadingUSDTBSC
+                      ? "Claiming..."
+                      : "1,000 ETH-PEG Tokens"}
                   </span>
                   <ArrowIcon className="rotate-90 w-full max-w-[12px] opacity-50 group-hover:opacity-100" />
                 </button>
 
                 <button
                   onClick={() => mintBNBBSC?.()}
-                  className={` p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 hover:bg-white-8 descriptions bg-white-4 group text-primary-100`}
+                  disabled={
+                    isLoadingETHBSC || isLoadingBNBBSC || isLoadingUSDTBSC
+                  }
+                  className={`${
+                    isLoadingETHBSC || isLoadingBNBBSC || isLoadingUSDTBSC
+                      ? "opacity-25"
+                      : "hover:bg-white-8  bg-white-4"
+                  } p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 group text-white-100 descriptions`}
                 >
                   <span className="flex items-center gap-2">
                     <BNBYellowIcon className="w-full max-w-[16px]" />
-                    1,000 BNB-PEG Tokens
+                    {isLoadingETHBSC || isLoadingBNBBSC || isLoadingUSDTBSC
+                      ? "Claiming..."
+                      : "1,000 BNB-PEG Tokens"}
                   </span>
                   <ArrowIcon className="rotate-90 w-full max-w-[12px] opacity-50 group-hover:opacity-100" />
                 </button>
 
                 <button
                   onClick={() => mintUSDTBSC?.()}
-                  className={` p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 hover:bg-white-8 descriptions bg-white-4 group text-primary-100`}
+                  disabled={
+                    isLoadingETHBSC || isLoadingBNBBSC || isLoadingUSDTBSC
+                  }
+                  className={`${
+                    isLoadingETHBSC || isLoadingBNBBSC || isLoadingUSDTBSC
+                      ? "opacity-25"
+                      : "hover:bg-white-8  bg-white-4"
+                  } p-2 flex justify-between items-center gap-2 rounded-lg group duration-150 group text-white-100 descriptions`}
                 >
                   <span className="flex items-center gap-2">
                     <USDTYellowIcon className="w-full max-w-[16px]" />
-                    1,000 USDT-PEG Tokens
+                    {isLoadingETHBSC || isLoadingBNBBSC || isLoadingUSDTBSC
+                      ? "Claiming..."
+                      : "1,000 USDT-PEG Tokens"}
                   </span>
                   <ArrowIcon className="rotate-90 w-full max-w-[12px] opacity-50 group-hover:opacity-100" />
                 </button>
