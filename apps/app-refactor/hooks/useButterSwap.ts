@@ -33,9 +33,10 @@ const useButterSwap = () => {
     ],
   });
 
-  const { writeAsync: writeButterSwap } = useContractWrite(configSwap);
+  const { writeAsync: writeButterSwap, isLoading: isLoadingSwap } =
+    useContractWrite(configSwap);
 
-  return { writeButterSwap, isErrorSwap };
+  return { writeButterSwap, isErrorSwap, isLoadingSwap };
 };
 
 export default useButterSwap;
