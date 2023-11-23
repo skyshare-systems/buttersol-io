@@ -1,6 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
 import { routerContract } from "../config/data";
 import { tokenInPrice, tokenOutPrice } from "../helpers/tokenPrice";
+import { ethers } from "ethers";
 
 export const GETamountIn = expressAsyncHandler(async (req, res) => {
   const { network, routerAddress, lpTokenAddress, amountOut } = req.body;
@@ -17,6 +18,8 @@ export const GETamountIn = expressAsyncHandler(async (req, res) => {
     res.status(400).send("Error" + e);
     return;
   }
+
+  price = String(ethers.parseEther(price));
 
   res.status(200).send(price);
 });
