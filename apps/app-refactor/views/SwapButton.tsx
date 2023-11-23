@@ -26,13 +26,15 @@ require("dotenv").config();
 const SwapButton = () => {
   const { isApprove } = useApprove((state) => state);
   const { hasMounted } = useMounted();
-  const { tokeninput, checkAllowance } = useApproveToken();
+  const { tokeninput } = useApproveToken();
   const { step, setStep } = useView((state) => state);
   const { solanaAddress } = useSolanaAddress((state) => state);
+
   const {
     networkname: destinationNetworkName,
     address: destinationTokenNetwork,
   } = useDestinationNetwork((state) => state);
+
   const { tokenAddress } = useDestinationData((state) => state);
   const { stepGuide, setStepGuide } = useGuideSwap((state) => state);
   const { setIsShowModal } = useNotificationSwap((state) => state);
@@ -81,7 +83,7 @@ const SwapButton = () => {
     }
   }
 
-  const { isErrorSwap, writeButterSwap } = useButterSwap();
+  const { isErrorSwap, writeButterSwap, isLoadingSwap } = useButterSwap();
 
   useEffect(() => {
     switch (tokenAddress) {
@@ -158,12 +160,13 @@ const SwapButton = () => {
                 }
                 return (
                   <>
-                    {isApprove ? (
+                    {isApprove === true ? (
                       <>
                         {step === 2 && (
                           <button
                             onClick={() => handleConfirm()}
                             disabled={
+                              isLoadingSwap ||
                               (destinationNetworkName === "Solana" &&
                                 solanaAddress === "") ||
                               isErrorSwap
@@ -171,14 +174,14 @@ const SwapButton = () => {
                                 : false
                             }
                             className={`px-[18px] py-[19px] rounded-lg ${
-                              (destinationNetworkName === "Solana" &&
-                                solanaAddress === "") ||
-                              isErrorSwap
+                              isLoadingSwap
                                 ? "bg-white-4 text-white-50 cursor-not-allowed"
                                 : "bg-primary-100 text-dark-100 cursor-pointer hover:opacity-50"
                             }  w-full title font-bold duration-150`}
                           >
-                            Continue Swapping
+                            {isLoadingSwap
+                              ? "Swapping..."
+                              : "Continue Swapping"}
                           </button>
                         )}
                         {step === 1 && (

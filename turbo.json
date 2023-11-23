@@ -5,7 +5,7 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
-      "env": ["PRIVATE_KEY_TESTNET"]
+      "env": ["PRIVATE_KEY_TESTNET", "BASE_URL"]
     },
     "lint": {},
     "dev": {
