@@ -7,19 +7,20 @@ import {
 } from "@/lib/store/store";
 
 import {
-  useAccount,
-  useContractRead,
   useContractWrite,
   usePrepareContractWrite,
+  useWaitForTransaction,
+  Address,
 } from "wagmi";
 
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const useApproveToken = () => {
-  const { address: account } = useAccount();
   const { isApprove, setIsApprove } = useApprove((state) => state);
-  const [allowance, setAllowance] = useState<number>(0);
+  const [allowance, setAllowance] = useState<any>();
+  const [hash, setHash] = useState("");
   const { tokeninput, tokenAddress: tokenAddress0 } = useInitialData(
     (state) => state
   );
@@ -32,53 +33,57 @@ const useApproveToken = () => {
     args: [spenderInitAddress, BigInt(String(ethers.constants.MaxUint256))],
   });
 
-  const { writeAsync: approveToken } = useContractWrite(configApprove);
-
-  const { data: dataAllowance } = useContractRead({
-    address: tokenAddress0,
-    abi: TokenABI,
-    functionName: "allowance",
-    args: [account, spenderInitAddress],
-  });
+  const { writeAsync: approveToken, isLoading: isLoadingApprove } =
+    useContractWrite(configApprove);
 
   const approveSpender = () => {
     approveToken?.()
       .then((res) => {
-        console.log(res);
+        setHash(res.hash);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  function checkAllowance() {
-    if (Number(ethers.utils.formatEther(String(dataAllowance))) ?? 0 > 0) {
-      setIsApprove(true);
-      console.log(Number(ethers.utils.formatEther(String(dataAllowance))) ?? 0);
-      //   setAllowance(Number(ethers.formatEther(String(dataAllowance))) ?? 0);
-    } else {
-      setIsApprove(false);
-      // console.log(allowance);
-      console.log("No Allowance");
-      setAllowance(0);
-    }
+  async function getAllowance(
+    id: any,
+    tokenAdd: any,
+    ownerAdd: any,
+    spenderAdd: any
+  ) {
+    await axios
+      .post(`https://quickraven-api.onrender.com/api/token/allowance`, {
+        network: id,
+        tokenAddress: tokenAdd,
+        owner: ownerAdd,
+        spender: spenderAdd,
+      })
+      .then((res) => {
+        setIsApprove(res.data);
+      })
+      .catch((err) => console.info(err));
   }
 
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      if (tokeninput > 0) checkAllowance();
-    }, 1000);
+  const { data, isError, isLoading, isSuccess } = useWaitForTransaction({
+    hash: hash as Address,
+  });
 
-    return () => clearTimeout(delayDebounceFn);
-  }, [tokeninput]);
+  useEffect(() => {
+    if (isSuccess) {
+      setIsApprove(true);
+    }
+  }, [data]);
 
   return {
     approveSpender,
     tokeninput,
-    checkAllowance,
     allowance,
     isApprove,
     setAllowance,
+    getAllowance,
+    isSuccess,
+    isLoadingApprove,
   };
 };
 

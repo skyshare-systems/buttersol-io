@@ -117,8 +117,12 @@ const GuideStepTwo = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-full h-full bg-dark-50 backdrop-blur b z-[11] hidden lg:flex justify-center items-center ">
-        <div className="flex flex-col p-4 gap-4 rounded-2xl border border-white-16 bg-white-4 max-w-[320px] w-screen backdrop-blur-[32px]">
+      <div className="hidden lg:flex justify-center items-center fixed top-0 left-0 w-full h-full">
+        <div
+          className="fixed top-0 left-0 w-full h-full bg-dark-50 backdrop-blur b z-[11] hidden lg:flex justify-center items-center"
+          onClick={() => setStepGuide(0)}
+        />
+        <div className="flex flex-col p-4 gap-4 rounded-2xl border border-white-16 bg-white-4 max-w-[320px] w-screen backdrop-blur-[32px] z-[12]">
           <TutorialStepIndicator
             title={"Import testnet networks and tokens to your wallet."}
           />

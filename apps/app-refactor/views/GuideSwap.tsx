@@ -31,7 +31,10 @@ const GuideSwap = () => {
     <>
       {stepGuide === 1 && (
         <>
-          <div className="fixed top-0 left-0 w-full h-full bg-dark-50 backdrop-blur  z-[11] hidden lg:block" />
+          <div
+            className="fixed top-0 left-0 w-full h-full bg-dark-50 backdrop-blur  z-[11] hidden lg:block"
+            onClick={() => setStepGuide(0)}
+          />
           <div className="absolute top-0 right-0 z-[13] glow-button hidden lg:block">
             <ConnectWallet />
           </div>
@@ -61,17 +64,19 @@ const GuideSwap = () => {
           </div>
         </>
       )}
-      {stepGuide === 2 && <GuideStepTwo />}
-      {stepGuide === 3 && <GuideStepThree />}
-      {stepGuide === 4 && <GuideStepFour />}
-      {stepGuide === 5 && <GuideStepFive />}
-      {stepGuide === 6 && <GuideStepSix />}
-      {stepGuide === 7 && <GuideStepSeven />}
-      {stepGuide === 8 && <GuideStepEight />}
-      {stepGuide === 9 && <GuideStepNine />}
-      {stepGuide === 10 && <GuideStepTen />}
-      {stepGuide === 11 && <GuideStepEleven />}
-      {stepGuide === 12 && <GuideStepTwelve />}
+      <div className="flex justify-center items-center">
+        {stepGuide === 2 && <GuideStepTwo />}
+        {stepGuide === 3 && <GuideStepThree />}
+        {stepGuide === 4 && <GuideStepFour />}
+        {stepGuide === 5 && <GuideStepFive />}
+        {stepGuide === 6 && <GuideStepSix />}
+        {stepGuide === 7 && <GuideStepSeven />}
+        {stepGuide === 8 && <GuideStepEight />}
+        {stepGuide === 9 && <GuideStepNine />}
+        {stepGuide === 10 && <GuideStepTen />}
+        {stepGuide === 11 && <GuideStepEleven />}
+        {stepGuide === 12 && <GuideStepTwelve />}
+      </div>
     </>
   );
 };

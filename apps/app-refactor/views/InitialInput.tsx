@@ -14,22 +14,26 @@ import {
 import { useAccount, useNetwork } from "wagmi";
 import useTokenData from "@/hooks/useTokenData";
 import useBalanceOf from "@/hooks/useBalanceOf";
+import useApproveToken from "@/hooks/useApproveToken";
 
 const InitialInput = () => {
   const { tokeninput, tokenname, tokenIcon, tokenAddress, setData } =
     useInitialData((state) => state);
   const { chain } = useNetwork();
-  const { isConnected } = useAccount();
+  const { isConnected, address: account } = useAccount();
   const {
     networkname: initNetworkName,
     networkicon: initNetworkIcon,
     setNetwork: setInitNetwork,
+    address: butterSwapAddress,
   } = useInitialNetwork((state) => state);
   const { networkname: tempInitNetworkName, setNetwork: setTempInitNetwork } =
     useTempInitNetwork((state) => state);
   const { networkdata, TokenData } = useTokenData(tempInitNetworkName);
 
   const { balanceOf0 } = useBalanceOf();
+
+  const { getAllowance, allowance } = useApproveToken();
 
   useEffect(() => {
     if (tempInitNetworkName === "Sepolia" || chain?.id === 11155111) {
@@ -57,7 +61,22 @@ const InitialInput = () => {
       setInitNetwork("", "", "", "", "");
       setTempInitNetwork("", "", "", "", "");
     }
-  }, [chain?.id, isConnected, tempInitNetworkName, initNetworkName]);
+
+    const delayDebounceFn = setTimeout(() => {
+      if (tokeninput > 0)
+        getAllowance(chain?.id, tokenAddress, account, butterSwapAddress);
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [
+    chain?.id,
+    isConnected,
+    tempInitNetworkName,
+    initNetworkName,
+    tokeninput,
+  ]);
+
+  console.log(allowance);
 
   return (
     <div className="flex flex-col gap-4 rounded-2xl border border-white-8 bg-white-4 sm:bg-transparent p-4">

@@ -26,7 +26,7 @@ require("dotenv").config();
 const SwapButton = () => {
   const { isApprove } = useApprove((state) => state);
   const { hasMounted } = useMounted();
-  const { tokeninput, checkAllowance } = useApproveToken();
+  const { tokeninput } = useApproveToken();
   const { step, setStep } = useView((state) => state);
   const { solanaAddress } = useSolanaAddress((state) => state);
   const {
@@ -158,7 +158,7 @@ const SwapButton = () => {
                 }
                 return (
                   <>
-                    {isApprove ? (
+                    {isApprove === true ? (
                       <>
                         {step === 2 && (
                           <button
