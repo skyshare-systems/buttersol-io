@@ -11,7 +11,7 @@ const lpRoutes_1 = __importDefault(require("./src/routes/lpRoutes"));
 const factoryRoutes_1 = __importDefault(require("./src/routes/factoryRoutes"));
 const routerRoutes_1 = __importDefault(require("./src/routes/routerRoutes"));
 // CONFIG
-const port = 3000;
+const port = 9001;
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)({

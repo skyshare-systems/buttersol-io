@@ -11,10 +11,24 @@ const blockchainKeys = (chainId) => {
             wss: "wss://polygon-mumbai.g.alchemy.com/v2/rLc98yWplzZqRlAZwg9RwiT-PMM0BKXi",
         };
     }
+    if (chainId === 11155111) {
+        return {
+            key: "",
+            https: "https://eth-sepolia.g.alchemy.com/v2/s-hdjLqITCIC-0yx948QMzzi7v-43Sss",
+            wss: "",
+        };
+    }
     if (chainId === 97) {
         return {
             key: "",
             https: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+            wss: "",
+        };
+    }
+    if (chainId === 43113) {
+        return {
+            key: "",
+            https: "https://ava-testnet.public.blastapi.io/ext/bc/C/rpc	",
             wss: "",
         };
     }

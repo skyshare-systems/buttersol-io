@@ -22,7 +22,8 @@ exports.GETpair = (0, express_async_handler_1.default)((req, res) => __awaiter(v
         pair = yield (0, data_1.factoryContract)(network, factoryAddress).getPair(tokenA, tokenB);
     }
     catch (e) {
-        res.status(400).send(e);
+        res.status(400).send("Error" + e);
+        return;
     }
     res.status(200).send(pair);
 }));

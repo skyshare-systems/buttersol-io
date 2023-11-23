@@ -22,7 +22,8 @@ exports.GETallowance = (0, express_async_handler_1.default)((req, res) => __awai
         currAllowance = yield (0, data_1.lpTokenContract)(network, tokenAddress).allowance(owner, spender);
     }
     catch (e) {
-        res.status(400).send(e);
+        res.status(400).send("Error" + e);
+        return;
     }
     res.status(200).send(currAllowance);
 }));
@@ -33,7 +34,8 @@ exports.GETbalanceOf = (0, express_async_handler_1.default)((req, res) => __awai
         balance = yield (0, data_1.lpTokenContract)(network, tokenAddress).balanceOf(userAddress);
     }
     catch (e) {
-        res.status(400).send(e);
+        res.status(400).send("Error" + e);
+        return;
     }
     res.send(balance);
 }));
@@ -44,7 +46,8 @@ exports.GETtotalSupply = (0, express_async_handler_1.default)((req, res) => __aw
         supply = yield (0, data_1.lpTokenContract)(network, tokenAddress).totalSupply();
     }
     catch (e) {
-        res.status(400).send(e);
+        res.status(400).send("Error" + e);
+        return;
     }
     res.send(supply);
 }));
@@ -55,7 +58,8 @@ exports.GETreserves = (0, express_async_handler_1.default)((req, res) => __await
         tokenReserves = yield (0, data_1.lpTokenContract)(network, tokenAddress).reserves();
     }
     catch (e) {
-        res.status(400).send(e);
+        res.status(400).send("Error" + e);
+        return;
     }
     res.status(200).send(tokenReserves);
 }));
