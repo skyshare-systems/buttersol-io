@@ -5,6 +5,7 @@ import { ethers } from "ethers";
 export const GETallowance = expressAsyncHandler(async (req, res) => {
   const { network, tokenAddress, owner, spender } = req.body;
   let allowance;
+  let isAllowed = false;
 
   try {
     allowance = await tokenContract(network, tokenAddress).allowance(
@@ -16,7 +17,9 @@ export const GETallowance = expressAsyncHandler(async (req, res) => {
     return;
   }
 
-  res.status(200).send(String(allowance));
+  if (BigInt(allowance) >= BigInt(Number.MAX_SAFE_INTEGER)) isAllowed = true;
+
+  res.status(200).send(isAllowed);
 });
 
 export const GETbalanceOf = expressAsyncHandler(async (req, res) => {
