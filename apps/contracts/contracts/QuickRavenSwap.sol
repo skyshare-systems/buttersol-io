@@ -3,10 +3,10 @@ pragma solidity 0.8.21;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "./interfaces/IButterSwap.sol";
+import "./interfaces/IQuickRavenSwap.sol";
 import "./interfaces/IUniswap.sol";
 
-contract ButterSwap is IButterSwap, OwnableUpgradeable {
+contract QuickRavenSwap is IQuickRavenSwap, OwnableUpgradeable {
     /**
      * Local Variables
      */

@@ -1,7 +1,7 @@
 import { ethers, upgrades } from "hardhat";
 
 async function main() {
-  const Swap = await ethers.getContractFactory("ButterSwap");
+  const Swap = await ethers.getContractFactory("QuickRavenSwap");
   const swap = await upgrades.deployProxy(Swap, []);
 
   console.info("\nDeploying Swap...");

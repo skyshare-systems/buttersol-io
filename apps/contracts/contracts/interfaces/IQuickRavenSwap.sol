@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.21;
 
-interface IButterSwap {
+interface IQuickRavenSwap {
     struct SwapParams {
         address dexRouter;
         address tokenIn;
