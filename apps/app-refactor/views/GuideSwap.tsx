@@ -64,7 +64,7 @@ const GuideSwap = () => {
           </div>
         </>
       )}
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center z-[13]">
         {stepGuide === 2 && <GuideStepTwo />}
         {stepGuide === 3 && <GuideStepThree />}
         {stepGuide === 4 && <GuideStepFour />}

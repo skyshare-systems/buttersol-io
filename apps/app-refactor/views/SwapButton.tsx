@@ -127,7 +127,7 @@ const SwapButton = () => {
             (!authenticationStatus || authenticationStatus === "authenticated");
 
           return (
-            <>
+            <div className="w-full relative z-[10]">
               {/* <button
                 onClick={() => console.log(crossDesToken + " Testing Cross")}
               >
@@ -208,7 +208,7 @@ const SwapButton = () => {
                   </>
                 );
               })()}
-            </>
+            </div>
           );
         }}
       </ConnectButton.Custom>

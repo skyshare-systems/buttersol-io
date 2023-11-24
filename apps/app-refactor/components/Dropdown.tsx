@@ -89,7 +89,7 @@ export default function DropdownReusable({
             aria-label="datadropdown"
             className={`flex flex-col w-full  
             ${placeholder === "Token" ? "max-w-[218px]" : "min-w-[218px]"} 
-            gap-1 p-2 description border border-white-16 rounded-xl bg-dark-100 `}
+            gap-1 p-2 description border border-white-16 rounded-xl bg-black-100 `}
             disabledKeys={[disableKeys]}
           >
             {datadropdown.map((data: any, index: any) => {
