@@ -3,8 +3,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 
 export const metadata = {
-  title: "ButterSOL",
-  description: "ButterSOL",
+  title: "Quick Raven",
+  description: "Quick Raven",
 };
 
 export default function RootLayout({

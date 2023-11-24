@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-// import { Sora } from "next/font/google";
 import { ConnectWallet } from "./ConnectWallet";
 
 import HomeIcon from "public/icons/navbar/home-icon.svg";
@@ -15,14 +14,11 @@ import AboutSolidIcon from "public/icons/navbar/about-solid-icon.svg";
 import ContactUsIcon from "public/icons/navbar/contact-us-icon.svg";
 import ContactUsSolidIcon from "public/icons/navbar/contact-us-solid-icon.svg";
 
-import ButterIcon from "public/icons/navbar/butter-logo.svg";
-import ButterText from "public/icons/navbar/butter-text-logo.svg";
+import QRIcon from "@/public/logo/quickraven-logo.svg";
+import QRText from "@/public/logo/quickraven-text.svg";
 
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-// const sora = Sora({
-//   subsets: ["latin"],
-// });
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -31,7 +27,7 @@ const Navbar = () => {
 
   const navigation = [
     {
-      name: "Home",
+      name: "Swap",
       icon: <>{selectedHeader === "/" ? <HomeIcon /> : <HomeStrokeIcon />}</>,
       linkUrl: "/",
       isLive: true,
@@ -84,13 +80,13 @@ const Navbar = () => {
       <div className="fixed top-0 flex justify-center items-center py-6 sm:py-8 w-full z-[11]">
         <div className="relative flex flex-row justify-between items-center max-w-[90rem] grow px-4 xl:px-0 ">
           <h1
-            className={`flex items-center font-semibold text-2xl relative z-[11]`}
+            className={`flex items-center gap-4 font-semibold text-2xl relative z-[11]`}
           >
-            <ButterIcon className="w-full max-w-[36px]" />
-            <ButterText className="w-full max-w-[90px] hidden sm:block" />
+            <QRIcon className="w-full max-w-[32px]" />
+            <QRText className="w-full max-w-[168px] hidden sm:block" />
           </h1>
 
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center gap-2 bg-dark-72 p-1 rounded z-[11]">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center gap-2 p-1 rounded z-[11]">
             {navigation.map((data, index) => {
               return (
                 <button

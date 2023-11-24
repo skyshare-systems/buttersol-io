@@ -70,8 +70,8 @@ const SuccessSwap = () => {
   };
 
   return (
-    <>
-      <div className="flex flex-col items-center justify-center gap-8 p-4 rounded-2xl bg-white-4 w-full max-w-[21rem]">
+    <div className="fixed top-0 left-0 h-full w-full flex justify-center items-center backdrop-blur">
+      <div className="flex flex-col items-center justify-center gap-8 p-4 rounded-2xl bg-black-100 border border-white-16 w-full max-w-[21rem]">
         <Lottie
           options={defaultOptions}
           height={72}
@@ -117,7 +117,7 @@ const SuccessSwap = () => {
           isClickToPauseDisabled={true}
         />
       </div>
-    </>
+    </div>
   );
 };
 

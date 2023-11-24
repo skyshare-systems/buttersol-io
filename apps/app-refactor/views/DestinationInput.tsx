@@ -54,9 +54,9 @@ const DestinationInput = () => {
   }, [destinationNetworkName, initNetworkName]);
 
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-white-8 bg-white-4 sm:bg-transparent p-4">
+    <div className="flex flex-col gap-4 rounded-2xl border border-white-8 bg-white-4 p-4">
       {/* <button onClick={() => console.log(RPC + " testing")}>asdasd</button> */}
-      <div className="flex flex-col sm:flex-row items-center gap-2 p-2 bg-dark-32 rounded-lg">
+      <div className="flex flex-col sm:flex-row items-center gap-2 p-2 rounded-lg">
         <DropdownReusable
           datadropdown={networkArray}
           selectData={destinationNetworkName}

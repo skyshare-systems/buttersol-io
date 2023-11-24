@@ -20,7 +20,7 @@ const SwapDetails = () => {
     <>
       {tokeninput > 0 && (
         <div
-          onClick={() => setShowDetails(!showDetails)}
+          // onClick={() => setShowDetails(!showDetails)}
           className={`flex flex-col w-full px-4 py-3 ${
             showDetails && "bg-white-4"
           } rounded-xl gap-3`}

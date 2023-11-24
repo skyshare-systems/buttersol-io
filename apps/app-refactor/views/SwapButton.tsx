@@ -127,7 +127,7 @@ const SwapButton = () => {
             (!authenticationStatus || authenticationStatus === "authenticated");
 
           return (
-            <>
+            <div className="w-full relative z-[10]">
               {/* <button
                 onClick={() => console.log(crossDesToken + " Testing Cross")}
               >
@@ -136,7 +136,7 @@ const SwapButton = () => {
               {(() => {
                 if (!connected) {
                   return (
-                    <div className="w-full px-4 sm:px-0">
+                    <div className="w-full px-4">
                       <button
                         onClick={openConnectModal}
                         className="px-[18px] py-[19px] rounded-lg bg-white-16 w-full title text-white-100 font-bold hover:opacity-50 duration-150"
@@ -148,7 +148,7 @@ const SwapButton = () => {
                 }
                 if (chain.unsupported) {
                   return (
-                    <div className="w-full px-4 sm:px-0">
+                    <div className="w-full px-4">
                       <button
                         onClick={openChainModal}
                         className="px-[18px] py-[19px] flex justify-center items-center gap-3 text-white-100 bg-error-100 rounded-lg w-full title hover:opacity-50 duration-150"
@@ -185,7 +185,7 @@ const SwapButton = () => {
                           </button>
                         )}
                         {step === 1 && (
-                          <div className="w-full px-4 sm:px-0">
+                          <div className="w-full px-4 ">
                             <button
                               onClick={handleClick}
                               disabled={isErrorSwap ? true : false}
@@ -201,14 +201,14 @@ const SwapButton = () => {
                         )}
                       </>
                     ) : (
-                      <div className="w-full px-4 sm:px-0">
+                      <div className="w-full px-4">
                         <SwapApproveButton />
                       </div>
                     )}
                   </>
                 );
               })()}
-            </>
+            </div>
           );
         }}
       </ConnectButton.Custom>
