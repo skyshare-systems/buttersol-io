@@ -87,19 +87,19 @@ const SwapButton = () => {
 
   useEffect(() => {
     switch (tokenAddress) {
-      case "0xdc36F92a63A9a78B0175677F926dA3B2d01D745D": // ETH - Sepolia
-        return setCrossDesToken("0xc4B0605d23A4217b12aC4D5400cCBe5064d09EeF"); // ETH - BSC
-      case "0xB71Be8a3160E5B7B2a9919aa4b7059914601b785": // BNB - SEPOLIA
-        return setCrossDesToken("0x4A232629A6e7Db30C70750ff572284617824e0DB"); // BNB - BSC
-      case "0xf8Fa70AD19566C2D3D8c25717CdCbb257F5b59Ce": // USDT - SEPOLIA
-        return setCrossDesToken("0x09d6Ca1C9B51436a464F8241726e7FDCC713183b"); // USDT - BSC
+      case "0x8a202Abd773F81f6C8CD22001F233B81BDD42328": // ETH - Sepolia
+        return setCrossDesToken("0xCECB2c7F146326FBe8aeCE155c3B4d52Adc4b5A5"); // ETH - BSC
+      case "0x70Af51cc35309a3ADd4D48e0e4632C6A7e1C5229": // BNB - SEPOLIA
+        return setCrossDesToken("0xD16211AF6954C5765157bc4c8382d69e009A595B"); // BNB - BSC
+      case "0x7a103E97298A3E628031498F9Ece2c9F8dfBcbeC": // USDT - SEPOLIA
+        return setCrossDesToken("0x4611DeF17D35d909d585c6494A187D467387a855"); // USDT - BSC
 
-      case "0xc4B0605d23A4217b12aC4D5400cCBe5064d09EeF": // ETH - BSC
-        return setCrossDesToken("0xdc36F92a63A9a78B0175677F926dA3B2d01D745D"); // ETH - Sepolia
-      case "0x4A232629A6e7Db30C70750ff572284617824e0DB": // BNB - BSC
-        return setCrossDesToken("0xB71Be8a3160E5B7B2a9919aa4b7059914601b785"); // BNB - SEPOLIA
-      case "0x09d6Ca1C9B51436a464F8241726e7FDCC713183b": // USDT - BSC
-        return setCrossDesToken("0xf8Fa70AD19566C2D3D8c25717CdCbb257F5b59Ce"); // USDT - SEPOLIA
+      case "0xCECB2c7F146326FBe8aeCE155c3B4d52Adc4b5A5": // ETH - BSC
+        return setCrossDesToken("0x8a202Abd773F81f6C8CD22001F233B81BDD42328"); // ETH - Sepolia
+      case "0xD16211AF6954C5765157bc4c8382d69e009A595B": // BNB - BSC
+        return setCrossDesToken("0x70Af51cc35309a3ADd4D48e0e4632C6A7e1C5229"); // BNB - SEPOLIA
+      case "0x4611DeF17D35d909d585c6494A187D467387a855": // USDT - BSC
+        return setCrossDesToken("0x7a103E97298A3E628031498F9Ece2c9F8dfBcbeC"); // USDT - SEPOLIA
     }
   }, [tokeninput, tokenAddress]);
 

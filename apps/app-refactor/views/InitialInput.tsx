@@ -25,7 +25,7 @@ const InitialInput = () => {
     networkname: initNetworkName,
     networkicon: initNetworkIcon,
     setNetwork: setInitNetwork,
-    address: butterSwapAddress,
+    address: quickRavenSwapAddress,
   } = useInitialNetwork((state) => state);
   const { networkname: tempInitNetworkName, setNetwork: setTempInitNetwork } =
     useTempInitNetwork((state) => state);
@@ -40,7 +40,7 @@ const InitialInput = () => {
       setInitNetwork(
         "Sepolia",
         <EthIcon className="w-full max-w-[24px]" />,
-        "0x28F491124FBd452dbcD2a5aA06d5985941d11dB0",
+        "0xE9e6fD5958703bc78900BA763302ca4042190FDa",
         "0x7E0987E5b3a30e3f2828572Bb659A548460a3003",
         "0xC532a74256D3Db42D0Bf7a0400fEFDbad7694008"
       );
@@ -52,7 +52,7 @@ const InitialInput = () => {
       setInitNetwork(
         "Binance Smart Chain",
         <BnbIcon className="w-full max-w-[24px]" />,
-        "0x144C2849e6eD7b0D9DC22485Fa1c54d830896021",
+        "0x6e697d7E5864E74011365419D91fB51798d0c781",
         "0x46E9aD48575d08072E9A05a9BDE4F22973628A8E",
         "0xDE2Db97D54a3c3B008a097B2260633E6cA7DB1AF"
       );
@@ -64,7 +64,7 @@ const InitialInput = () => {
 
     const delayDebounceFn = setTimeout(() => {
       if (tokeninput > 0)
-        getAllowance(chain?.id, tokenAddress, account, butterSwapAddress);
+        getAllowance(chain?.id, tokenAddress, account, quickRavenSwapAddress);
     }, 1000);
 
     return () => clearTimeout(delayDebounceFn);

@@ -9,7 +9,7 @@ import { ButterSwapABI } from "@/lib/abi";
 import { ethers } from "ethers";
 
 const useButterSwap = () => {
-  const { routerV2Address, address: butterSwapAddress } = useInitialNetwork(
+  const { routerV2Address, address: quickRavenSwapAddress } = useInitialNetwork(
     (state) => state
   );
   const { tokenAddress: tokenInAddress, tokeninput: tokenIn } = useInitialData(
@@ -19,7 +19,7 @@ const useButterSwap = () => {
     useDestinationData((state) => state);
 
   const { config: configSwap, isError: isErrorSwap } = usePrepareContractWrite({
-    address: butterSwapAddress ?? "",
+    address: quickRavenSwapAddress ?? "",
     abi: ButterSwapABI,
     functionName: "butterSwap",
     args: [
