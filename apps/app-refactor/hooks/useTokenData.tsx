@@ -77,10 +77,10 @@ const useTokenData = (tempInitNetworkName: string) => {
       factorySwapAddress: "0x46E9aD48575d08072E9A05a9BDE4F22973628A8E",
       routerV2Address: "0xDE2Db97D54a3c3B008a097B2260633E6cA7DB1AF",
     },
-    {
-      name: "Solana",
-      icon: <SolanaIcon className="w-full max-w-[24px]" />,
-    },
+    // {
+    //   name: "Solana",
+    //   icon: <SolanaIcon className="w-full max-w-[24px]" />,
+    // },
   ];
 
   const TokenData = (initNetworkName: string) => {
@@ -89,8 +89,8 @@ const useTokenData = (tempInitNetworkName: string) => {
         return tokensepoliadata;
       case "Binance Smart Chain":
         return tokenbnbdata;
-      case "Solana":
-        return tokensolanadata;
+      // case "Solana":
+      //   return tokensolanadata;
       default:
         return "";
     }

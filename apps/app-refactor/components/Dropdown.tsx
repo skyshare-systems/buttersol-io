@@ -53,9 +53,9 @@ export default function DropdownReusable({
       {disable === false ? (
         <Dropdown placement="bottom-start">
           <DropdownTrigger
-            className={`flex justify-start text-left w-full p-4 ${
+            className={`flex justify-start text-left w-full p-4 border border-white-8  ${
               placeholder === "Token"
-                ? "border border-white-8 rounded hover:bg-white-8"
+                ? "rounded hover:bg-white-8"
                 : "bg-white-4 hover:bg-white-8"
             } rounded outline-none duration-150 cursor-pointer`}
           >

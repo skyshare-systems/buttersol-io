@@ -4,37 +4,37 @@
 
 @layer base {
   .outline {
-    @apply font-normal text-[0.512rem] leading-3 font-[manrope];
+    @apply font-normal text-[0.512rem] leading-3 font-[readex];
   }
   .subtext {
-    @apply font-normal text-[0.64rem] leading-[14px] font-[manrope];
+    @apply font-normal text-[0.64rem] leading-[14px] font-[readex];
   }
   .subtitle {
-    @apply font-bold text-[0.8rem] leading-4 font-[manrope];
+    @apply font-bold text-[0.8rem] leading-4 font-[readex];
   }
   .descriptions {
-    @apply font-normal text-[1rem] leading-[18px] font-[manrope];
+    @apply font-normal text-[1rem] leading-[18px] font-[readex];
   }
   .title {
-    @apply font-bold text-[1rem] leading-[18px] font-[manrope];
+    @apply font-bold text-[1rem] leading-[18px] font-[readex];
   }
   .heading6 {
-    @apply font-semibold text-[1.25rem] leading-6 font-[manrope];
+    @apply font-semibold text-[1.25rem] leading-6 font-[readex];
   }
   .heading5 {
-    @apply font-semibold text-[1.563rem] leading-7 font-[manrope];
+    @apply font-semibold text-[1.563rem] leading-7 font-[readex];
   }
   .heading4 {
-    @apply font-medium text-[1.953rem] leading-9 font-[manrope];
+    @apply font-medium text-[1.953rem] leading-9 font-[readex];
   }
   .heading3 {
-    @apply font-medium text-[2.441rem] leading-[48px] font-[manrope];
+    @apply font-medium text-[2.441rem] leading-[48px] font-[readex];
   }
   .heading2 {
-    @apply font-medium text-[3.052rem] leading-[56px] font-[manrope];
+    @apply font-medium text-[3.052rem] leading-[56px] font-[readex];
   }
   .heading1 {
-    @apply font-medium text-[3.815rem] leading-[72px] font-[manrope];
+    @apply font-medium text-[3.815rem] leading-[72px] font-[readex];
   }
   body {
     @apply bg-black-100 overflow-x-hidden;
@@ -42,6 +42,11 @@
   .bg-transparent {
     background-color: "transparent";
   }
+}
+
+@font-face {
+  font-family: "readex";
+  src: url(../fonts/ReadexPro-Regular.ttf);
 }
 
 @font-face {

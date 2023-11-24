@@ -158,7 +158,7 @@ const GuideStepTwo = () => {
                 />
               </button>
             ))}
-            <hr className="border border-white-16" />
+            {/* <hr className="border border-white-16" />
             <button
               onClick={() => setStepPhantomGuide(1)}
               className={`p-2  flex justify-between items-center gap-2 rounded-lg group duration-150 hover:bg-white-8 descriptions`}
@@ -167,7 +167,7 @@ const GuideStepTwo = () => {
                 <SolanaIcon className="w-full max-w-[16px]" />
                 Solana Devnet
               </span>
-            </button>
+            </button> */}
             <hr className="border border-white-16" />
             <div className="flex flex-col gap-2">
               <h1 className="subtext text-white-50">Tokens</h1>

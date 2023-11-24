@@ -50,7 +50,7 @@ const ConfirmSwap = () => {
       {step === 1 ? (
         <>
           <div
-            className={`flex flex-col justify-center items-center p-4 gap-4 backdrop-blur-sm rounded-3xl bg-opacity-0 sm:bg-white-4 max-w-[404px] grow`}
+            className={`flex flex-col justify-center items-center p-4 gap-4 backdrop-blur-sm rounded-3xl bg-opacity-0  max-w-[404px] grow`}
           >
             <div className="relative flex flex-col gap-2 w-full">
               <SwitchNetwork />
