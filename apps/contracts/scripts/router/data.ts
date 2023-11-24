@@ -1,0 +1,8 @@
+export const liquidity = {
+  amountADesired: "1000000000000000000000000",
+  amountBDesired: "1000000000000000000000000",
+  amountAMin: "1000000000000000000000000",
+  amountBMin: "1000000000000000000000000",
+  to: "0x45bd0C806c3f0f443F7aBc44b8AA1795a20Fd165",
+  deadline: "1701835497",
+};
